@@ -1,0 +1,52 @@
+# Publica o site no GitHub Pages (branch gh-pages).
+#  - push na main        -> https://<usuario>.github.io/<repo>/
+#  - pull request aberto -> https://<usuario>.github.io/<repo>/pr-preview/pr-<N>/
+#    (o link é comentado automaticamente no PR e o preview é apagado quando o PR fecha)
+name: Deploy GitHub Pages
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    types: [opened, reopened, synchronize, closed]
+  workflow_dispatch:
+
+permissions:
+  contents: write        # escrever na branch gh-pages
+  pull-requests: write   # comentar o link do preview no PR
+
+concurrency:
+  group: pages-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      # Site estático, sem build: só separa o que é publicado.
+      - name: Montar pasta do site
+        if: github.event.action != 'closed'
+        run: |
+          mkdir -p _site
+          cp index.html _site/
+          cp -r assets _site/
+          touch _site/.nojekyll
+
+      - name: Deploy produção (main)
+        if: github.event_name != 'pull_request'
+        uses: JamesIves/github-pages-deploy-action@v4
+        with:
+          branch: gh-pages
+          folder: _site
+          clean-exclude: pr-preview/
+
+      - name: Deploy preview do PR
+        if: github.event_name == 'pull_request'
+        uses: rossjrw/pr-preview-action@v1
+        with:
+          source-dir: _site
+          preview-branch: gh-pages
+          umbrella-dir: pr-preview
+          action: auto
