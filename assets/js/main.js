@@ -81,7 +81,7 @@
       '<video muted loop playsinline preload="none" poster="' + posterSrc(v.arquivo) + '"></video>' +
       '<span class="reel-play" aria-hidden="true">▶</span>' +
       '<span class="reel-info"><span class="reel-artist"></span><span class="reel-title"></span></span>';
-    $(".reel-artist", item).textContent = v.artista ? nomeArtista(v.artista) : "Tanaton Fest";
+    $(".reel-artist", item).textContent = v.artista ? nomeArtista(v.artista) : "Thanaton Fest";
     $(".reel-title", item).textContent = v.titulo;
 
     var vid = $("video", item);

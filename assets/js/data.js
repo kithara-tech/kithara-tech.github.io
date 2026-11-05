@@ -3,7 +3,7 @@
  *
  * AGENCIA.nome      → nome da agência (aparece no topo, hero, rodapé e título da aba)
  * ARTISTAS          → cards da seção "Artistas". O `id` é usado para ligar vídeos ao artista.
- * VIDEOS            → clipes da grade do Tanaton Fest. Para associar um vídeo a um artista,
+ * VIDEOS            → clipes da grade do Thanaton Fest. Para associar um vídeo a um artista,
  *                     troque `artista: null` pelo `id` do artista (ex.: artista: "rina").
  *                     Os filtros da grade aparecem sozinhos quando houver artista definido.
  */
@@ -48,13 +48,13 @@ window.ARTISTAS = [
 ];
 
 window.VIDEOS = [
-  { arquivo: "IMG_0604", artista: "liz", titulo: "Tanaton Fest · IMG_0604" },
-  { arquivo: "IMG_0620", artista: "rina", titulo: "Tanaton Fest · IMG_0620" },
-  { arquivo: "IMG_0632", artista: "rina", titulo: "Tanaton Fest · IMG_0632" },
-  { arquivo: "IMG_0635", artista: "rina", titulo: "Tanaton Fest · IMG_0635" },
-  { arquivo: "IMG_0640", artista: "rina", titulo: "Tanaton Fest · IMG_0640" },
-  { arquivo: "IMG_0642", artista: "liz", titulo: "Tanaton Fest · IMG_0642" },
-  { arquivo: "IMG_0648", artista: "banda-instrumental", titulo: "Tanaton Fest · IMG_0648" },
-  { arquivo: "IMG_0652", artista: "banda-instrumental", titulo: "Tanaton Fest · IMG_0652" },
-  { arquivo: "IMG_0653", artista: "banda-instrumental", titulo: "Tanaton Fest · IMG_0653" },
+  { arquivo: "IMG_0604", artista: "liz", titulo: "Thanaton Fest · IMG_0604" },
+  { arquivo: "IMG_0620", artista: "rina", titulo: "Thanaton Fest · IMG_0620" },
+  { arquivo: "IMG_0632", artista: "rina", titulo: "Thanaton Fest · IMG_0632" },
+  { arquivo: "IMG_0635", artista: "rina", titulo: "Thanaton Fest · IMG_0635" },
+  { arquivo: "IMG_0640", artista: "rina", titulo: "Thanaton Fest · IMG_0640" },
+  { arquivo: "IMG_0642", artista: "liz", titulo: "Thanaton Fest · IMG_0642" },
+  { arquivo: "IMG_0648", artista: "banda-instrumental", titulo: "Thanaton Fest · IMG_0648" },
+  { arquivo: "IMG_0652", artista: "banda-instrumental", titulo: "Thanaton Fest · IMG_0652" },
+  { arquivo: "IMG_0653", artista: "banda-instrumental", titulo: "Thanaton Fest · IMG_0653" },
 ];
