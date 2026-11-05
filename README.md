@@ -1,56 +1,56 @@
 # proj-portfolio-agencia
 
-Portfólio da agência de música Pablo Carvalho: site estático (HTML + CSS + JS puro, sem build).
+Portfólio da agência de música **Pablo Carvalho**: artistas, vídeos do Thanaton Fest e contato.
+Site estático (HTML + CSS + JS puro), sem build e sem dependências.
 
 **🔗 Site no ar:** https://pablocarvalho0.github.io/proj-portfolio-agencia/
 
-## Publicação (GitHub Pages)
+## Como o site é publicado
 
-O site é publicado pelo GitHub Pages direto da branch `main`, pasta raiz (`/`). Todo merge na `main`
-atualiza o site em 1–2 minutos. O arquivo `.nojekyll` desliga o processamento Jekyll (o site é servido como está).
+O workflow [`.github/workflows/pages.yml`](.github/workflows/pages.yml) publica tudo na branch `gh-pages`,
+que é a origem do GitHub Pages (**Settings → Pages → Deploy from a branch → `gh-pages` / `(root)`**).
 
-## Ver o site (sem rodar nada localmente)
+| Evento | Resultado | Endereço |
+|---|---|---|
+| Merge na `main` | Atualiza o site em 1–2 min | https://pablocarvalho0.github.io/proj-portfolio-agencia/ |
+| PR aberto ou atualizado | Preview do PR (o link é comentado no PR) | `…/proj-portfolio-agencia/pr-preview/pr-N/` |
+| PR fechado | Preview removido | — |
 
-O workflow `.github/workflows/pages.yml` publica tudo no GitHub Pages:
+Não edite a branch `gh-pages` na mão: ela é gerada pelo workflow.
+O repositório é privado, mas **o site é público** (qualquer pessoa com o link abre).
 
-- **Produção (branch `main`):** https://pablocarvalho0.github.io/proj-portfolio-agencia/
-- **Cada PR:** https://pablocarvalho0.github.io/proj-portfolio-agencia/pr-preview/pr-N/ — o link é
-  comentado automaticamente no PR a cada push e o preview some quando o PR é fechado.
-
-Configuração única (só uma vez): em **Settings → Pages → Build and deployment**,
-*Source* = **Deploy from a branch**, branch **`gh-pages`**, pasta **`/ (root)`**. A branch `gh-pages` é criada
-pelo próprio workflow na primeira execução.
-
-## Rodar localmente (opcional)
+## Rodar localmente
 
 ```bash
 python3 -m http.server 8000
 ```
 
-Abra http://localhost:8000.
+Abra http://localhost:8000. Qualquer servidor estático serve.
 
 ## Estrutura
 
 ```
-index.html              # estrutura das seções
-assets/css/style.css    # visual (cores e fontes em :root)
-assets/js/data.js       # TODO o conteúdo editável: agência, artistas, vídeos
-assets/js/main.js       # renderização, filtros, hover-play e modal
-assets/videos/*.mp4     # clipes curtos (≈10 s, 720×1280, H.264, ~1–2 MB)
-assets/posters/*.jpg    # capa de cada clipe (primeiro frame)
+index.html                  # estrutura das seções
+assets/css/style.css        # visual: cores e fontes nos tokens de :root
+assets/js/data.js           # TODO o conteúdo editável: agência, artistas, vídeos
+assets/js/main.js           # renderização, filtros, hover-play e modal
+assets/videos/*.mp4         # clipes curtos (≈10 s, 720×1280, H.264, 1–2 MB)
+assets/posters/*.jpg        # capa de cada clipe (primeiro frame)
+.github/workflows/pages.yml # publicação e preview por PR
 ```
 
 ## Editar conteúdo (`assets/js/data.js`)
 
-- **Nome da agência, slogan, texto "Sobre", contatos:** objeto `AGENCIA`. O nome é trocado em um lugar só.
-- **Vídeo de fundo do hero:** `AGENCIA.heroVideo` (nome do arquivo sem extensão).
-- **Artistas:** array `ARTISTAS` (`id`, `nome`, `tipo`, `descricao`, `poster`).
-- **Vídeos:** array `VIDEOS`. Para ligar um vídeo a um artista, troque `artista: null` pelo `id` do artista
-  (ex.: `artista: "rina"`). Os botões de filtro e a contagem "Ver N vídeos" nos cards se atualizam sozinhos.
+Quase toda mudança de texto acontece só neste arquivo:
+
+- **`AGENCIA`:** nome, slogan (vazio = não aparece), texto "Sobre", contatos e vídeo de fundo do hero (`heroVideo`).
+- **`ARTISTAS`:** `id`, `nome`, `tipo`, `descricao`, `poster` (nome do clipe usado como capa do card).
+- **`VIDEOS`:** `{ arquivo, artista, titulo }`. `artista` é o `id` de um item de `ARTISTAS`.
+  Os filtros da grade e o "Ver N vídeos" dos cards se atualizam sozinhos.
 
 ## Adicionar ou trocar um clipe
 
-Gere um clipe curto e leve a partir do original e coloque em `assets/videos/` + capa em `assets/posters/`:
+Gere um clipe curto e leve a partir do original:
 
 ```bash
 ffmpeg -ss 00:01:00 -i ORIGINAL.MOV -t 10 -vf "scale=720:-2,fps=30" \
@@ -59,14 +59,18 @@ ffmpeg -ss 00:01:00 -i ORIGINAL.MOV -t 10 -vf "scale=720:-2,fps=30" \
 ffmpeg -i assets/videos/NOME.mp4 -frames:v 1 -q:v 4 assets/posters/NOME.jpg
 ```
 
-Depois adicione `{ arquivo: "NOME", artista: "...", titulo: "..." }` em `VIDEOS`.
-Não suba os `.MOV` originais (centenas de MB; o GitHub recusa arquivos > 100 MB).
+Depois adicione `{ arquivo: "NOME", artista: "...", titulo: "Thanaton Fest · NOME" }` em `VIDEOS`.
+Nunca suba os `.MOV` originais: têm centenas de MB e o GitHub recusa arquivos acima de 100 MB.
 
 ## Origem dos clipes
 
-Vídeos do Thanaton Fest, gravados na vertical no iPhone, na pasta do Google Drive
+Vídeos do Thanaton Fest (ITA, São José dos Campos), gravados na vertical no iPhone, na pasta do Google Drive
 `18xCejTvQUdF8wroHpZvkYkRtrAZe7Ptq`. Os clipes atuais são trechos de ~10 s a partir de ~30% de cada vídeo,
-só para referência visual — a curadoria final dos cortes ainda será feita.
+para referência visual. A curadoria final dos cortes ainda será feita.
+
+## Contribuir
+
+Veja [CONTRIBUTING.md](CONTRIBUTING.md).
 
 ## Licença
 
