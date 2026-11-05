@@ -44,7 +44,7 @@ assets/audio/*.mp3          # trechos das músicas (≈1 min, 128 kbps, < 1 MB)
 
 Quase toda mudança de texto acontece só neste arquivo:
 
-- **`AGENCIA`:** nome, slogan (vazio = não aparece), texto "Sobre", contatos e vídeo de fundo do hero (`heroVideo`).
+- **`AGENCIA`:** nome, slogan (vazio = não aparece), texto "Sobre", contatos (deixe vazio para esconder: o WhatsApp está vazio até existir o WhatsApp Business) e vídeo de fundo do hero (`heroVideo`).
 - **`ARTISTAS`:** `id`, `nome`, `tipo`, `descricao`, `poster` (nome do clipe usado como capa do card).
 - **`MUSICAS`:** `{ titulo, artista, status, arquivo, nota }`. `arquivo` é o MP3 em `assets/audio/` sem extensão.
 - **`VIDEOS`:** `{ arquivo, artista, titulo }`. `artista` é o `id` de um item de `ARTISTAS`.

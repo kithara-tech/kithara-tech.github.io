@@ -24,16 +24,19 @@
   $$("[data-agencia-sobre]").forEach(function (el) { el.textContent = A.sobre; });
   $("#ano").textContent = new Date().getFullYear();
 
+  // Contato vazio em data.js = a linha some do site.
   var c = A.contato;
-  var links = {
-    email: { text: c.email, href: "mailto:" + c.email },
-    instagram: { text: c.instagram, href: "https://instagram.com/" + c.instagram.replace("@", "") },
-    whatsapp: { text: c.whatsapp, href: "https://wa.me/" + c.whatsapp.replace(/\D/g, "") },
+  var hrefs = {
+    email: function (v) { return "mailto:" + v; },
+    instagram: function (v) { return "https://instagram.com/" + v.replace("@", ""); },
+    whatsapp: function (v) { return "https://wa.me/" + v.replace(/\D/g, ""); },
   };
   $$("[data-contato]").forEach(function (el) {
-    var l = links[el.dataset.contato];
-    el.textContent = l.text;
-    el.href = l.href;
+    var tipo = el.dataset.contato;
+    var valor = (c[tipo] || "").trim();
+    if (!valor) { el.closest("li").hidden = true; return; }
+    el.textContent = valor;
+    el.href = hrefs[tipo](valor);
   });
 
   // ---- Hero ----
