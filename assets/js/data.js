@@ -58,3 +58,17 @@ window.VIDEOS = [
   { arquivo: "IMG_0652", artista: "banda-instrumental", titulo: "Thanaton Fest · IMG_0652" },
   { arquivo: "IMG_0653", artista: "banda-instrumental", titulo: "Thanaton Fest · IMG_0653" },
 ];
+
+/*
+ * MUSICAS → seção "Música". O áudio toca direto do Google Drive (nada é copiado para o repo).
+ * Requisito: o arquivo no Drive precisa estar compartilhado como "Qualquer pessoa com o link".
+ * driveId = o trecho entre /d/ e /view no link do arquivo.
+ */
+window.MUSICAS = [
+  {
+    titulo: "Naquele Banco",
+    artista: "Pablo Carvalho",
+    status: "Em produção",
+    driveId: "1kGbZArYwWrEh1LQngXQDHmLsAyacRFzF",
+  },
+];
