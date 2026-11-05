@@ -36,7 +36,7 @@ assets/js/data.js           # TODO o conteúdo editável: agência, artistas, v�
 assets/js/main.js           # renderização, filtros, hover-play e modal
 assets/videos/*.mp4         # clipes curtos (≈10 s, 720×1280, H.264, 1–2 MB)
 assets/posters/*.jpg        # capa de cada clipe (primeiro frame)
-assets/audio/*.mp3          # trechos das músicas (≈40 s, 128 kbps, < 1 MB)
+assets/audio/*.mp3          # trechos das músicas (≈1 min, 128 kbps, < 1 MB)
 .github/workflows/pages.yml # publicação e preview por PR
 ```
 
@@ -66,15 +66,15 @@ Nunca suba os `.MOV` originais: têm centenas de MB e o GitHub recusa arquivos a
 
 ## Adicionar uma música (só trecho)
 
-O site publica **apenas um trecho** de cada faixa, nunca a música inteira. Corte ~40 s com fade:
+O site publica **apenas um trecho** de cada faixa, nunca a música inteira. Corte ~1 min com fade:
 
 ```bash
-ffmpeg -ss 168 -t 40 -i FAIXA_COMPLETA.mp3 -af "afade=t=in:st=0:d=1.5,afade=t=out:st=37:d=3" \
+ffmpeg -ss 66 -t 60 -i FAIXA_COMPLETA.mp3 -af "afade=t=in:st=0:d=1,afade=t=out:st=56:d=4" \
   -map_metadata -1 -c:a libmp3lame -b:a 128k assets/audio/NOME-trecho.mp3
 ```
 
 Depois adicione a faixa em `MUSICAS`. Nunca suba a faixa completa para o repositório.
-"Naquele Banco": trecho de 2:48 a 3:28 (a parte mais intensa da faixa).
+"Naquele Banco": trecho de 1:06 a 2:06 (pré-refrão a partir de ~1:08 e primeiro refrão de ~1:28 a 2:01).
 
 ## Origem dos clipes
 

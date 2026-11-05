@@ -69,6 +69,6 @@ window.MUSICAS = [
     artista: "Pablo Carvalho",
     status: "Em produção",
     arquivo: "naquele-banco-trecho",
-    nota: "Trecho de 40 s",
+    nota: "Trecho de 1 min · pré-refrão e refrão",
   },
 ];
