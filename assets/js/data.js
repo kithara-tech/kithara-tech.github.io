@@ -12,8 +12,9 @@ window.AGENCIA = {
   nome: "Pablo Carvalho",
   slogan: "", // vazio = não aparece no site
   sobre:
-    "Somos uma agência dedicada a conectar artistas independentes a palcos, festivais e eventos. " +
-    "Cuidamos da curadoria, da produção e da carreira de cantoras e bandas que fazem o público parar para ouvir.",
+    "Música é linguagem — a forma mais pura de comunicação humana. Nascemos no ITA, entre engenharia e palco, " +
+    "e levamos essa lente para cada show: técnica de quem estuda a fundo, sentimento de quem toca para encantar. " +
+    "Cuidamos da curadoria, da produção e do encontro entre os artistas certos e o seu evento.",
   contato: {
     email: "pablarmusica@gmail.com",
     instagram: "@pablocarvalhosm", // TODO: confirmar o @ exato
