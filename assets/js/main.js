@@ -24,16 +24,19 @@
   $$("[data-agencia-sobre]").forEach(function (el) { el.textContent = A.sobre; });
   $("#ano").textContent = new Date().getFullYear();
 
+  // Contato vazio em data.js = a linha some do site.
   var c = A.contato;
-  var links = {
-    email: { text: c.email, href: "mailto:" + c.email },
-    instagram: { text: c.instagram, href: "https://instagram.com/" + c.instagram.replace("@", "") },
-    whatsapp: { text: c.whatsapp, href: "https://wa.me/" + c.whatsapp.replace(/\D/g, "") },
+  var hrefs = {
+    email: function (v) { return "mailto:" + v; },
+    instagram: function (v) { return "https://instagram.com/" + v.replace("@", ""); },
+    whatsapp: function (v) { return "https://wa.me/" + v.replace(/\D/g, ""); },
   };
   $$("[data-contato]").forEach(function (el) {
-    var l = links[el.dataset.contato];
-    el.textContent = l.text;
-    el.href = l.href;
+    var tipo = el.dataset.contato;
+    var valor = (c[tipo] || "").trim();
+    if (!valor) { el.closest("li").hidden = true; return; }
+    el.textContent = valor;
+    el.href = hrefs[tipo](valor);
   });
 
   // ---- Hero ----
@@ -65,6 +68,36 @@
       $("#tanaton").scrollIntoView({ behavior: "smooth" });
     });
     artistGrid.appendChild(card);
+  });
+
+  // ---- Música (trechos em assets/audio) ----
+  var MUSICAS = window.MUSICAS || [];
+  var trackList = $("#track-list");
+  if (!MUSICAS.length) {
+    $("#musica").hidden = true;
+    $$('a[href="#musica"]').forEach(function (a) { a.hidden = true; });
+  }
+  MUSICAS.forEach(function (m) {
+    var card = document.createElement("article");
+    card.className = "track";
+    card.innerHTML =
+      '<div class="track-head">' +
+      '<span class="track-icon" aria-hidden="true">♪</span>' +
+      '<div class="track-text"><h3></h3><p class="track-meta"></p></div>' +
+      '<span class="track-status"></span>' +
+      "</div>" +
+      '<audio class="track-player" controls controlslist="nodownload" preload="metadata"></audio>' +
+      '<p class="track-note"></p>';
+    $("h3", card).textContent = m.titulo;
+    $(".track-meta", card).textContent = m.artista;
+    var st = $(".track-status", card);
+    if (m.status) st.textContent = m.status; else st.hidden = true;
+    var note = $(".track-note", card);
+    if (m.nota) note.textContent = m.nota; else note.hidden = true;
+    var audio = $("audio", card);
+    audio.setAttribute("aria-label", "Ouvir trecho de " + m.titulo);
+    audio.src = "assets/audio/" + m.arquivo + ".mp3";
+    trackList.appendChild(card);
   });
 
   // ---- Grade de vídeos (reels) ----
