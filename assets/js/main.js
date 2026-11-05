@@ -67,7 +67,7 @@
     artistGrid.appendChild(card);
   });
 
-  // ---- Música (player do Google Drive) ----
+  // ---- Música (trechos em assets/audio) ----
   var MUSICAS = window.MUSICAS || [];
   var trackList = $("#track-list");
   if (!MUSICAS.length) {
@@ -83,25 +83,17 @@
       '<div class="track-text"><h3></h3><p class="track-meta"></p></div>' +
       '<span class="track-status"></span>' +
       "</div>" +
-      '<audio class="track-player" controls preload="metadata"></audio>' +
-      '<a class="track-link" target="_blank" rel="noopener">Abrir no Google Drive ↗</a>';
+      '<audio class="track-player" controls controlslist="nodownload" preload="metadata"></audio>' +
+      '<p class="track-note"></p>';
     $("h3", card).textContent = m.titulo;
     $(".track-meta", card).textContent = m.artista;
     var st = $(".track-status", card);
     if (m.status) st.textContent = m.status; else st.hidden = true;
+    var note = $(".track-note", card);
+    if (m.nota) note.textContent = m.nota; else note.hidden = true;
     var audio = $("audio", card);
-    audio.setAttribute("aria-label", "Ouvir " + m.titulo);
-    // Link direto do arquivo no Drive: o navegador toca em streaming, sem cópia no repositório.
-    audio.src = "https://drive.usercontent.google.com/download?id=" + m.driveId + "&export=download";
-    var link = $(".track-link", card);
-    link.href = "https://drive.google.com/file/d/" + m.driveId + "/view";
-    // Se o navegador não conseguir tocar direto (ex.: arquivo deixou de ser público),
-    // esconde o player e destaca o link para ouvir no Drive.
-    audio.addEventListener("error", function () {
-      audio.hidden = true;
-      link.textContent = "Ouvir no Google Drive ↗";
-      link.classList.add("btn", "btn-primary");
-    });
+    audio.setAttribute("aria-label", "Ouvir trecho de " + m.titulo);
+    audio.src = "assets/audio/" + m.arquivo + ".mp3";
     trackList.appendChild(card);
   });
 
