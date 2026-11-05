@@ -2,7 +2,19 @@
 
 Portfólio da agência de música: site estático (HTML + CSS + JS puro, sem build).
 
-## Rodar localmente
+## Ver o site (sem rodar nada localmente)
+
+O workflow `.github/workflows/pages.yml` publica tudo no GitHub Pages:
+
+- **Produção (branch `main`):** https://pablocarvalho0.github.io/proj-portfolio-agencia/
+- **Cada PR:** https://pablocarvalho0.github.io/proj-portfolio-agencia/pr-preview/pr-N/ — o link é
+  comentado automaticamente no PR a cada push e o preview some quando o PR é fechado.
+
+Configuração única (só uma vez): em **Settings → Pages → Build and deployment**,
+*Source* = **Deploy from a branch**, branch **`gh-pages`**, pasta **`/ (root)`**. A branch `gh-pages` é criada
+pelo próprio workflow na primeira execução.
+
+## Rodar localmente (opcional)
 
 ```bash
 python3 -m http.server 8000
