@@ -9,15 +9,15 @@
  */
 
 window.AGENCIA = {
-  nome: "Nome da Agência",
-  slogan: "Música ao vivo com alma, técnica e presença de palco.",
+  nome: "Pablo Carvalho",
+  slogan: "", // vazio = não aparece no site
   sobre:
     "Somos uma agência dedicada a conectar artistas independentes a palcos, festivais e eventos. " +
     "Cuidamos da curadoria, da produção e da carreira de cantoras e bandas que fazem o público parar para ouvir.",
   contato: {
-    email: "contato@suaagencia.com.br",
-    instagram: "@suaagencia",
-    whatsapp: "+55 (00) 00000-0000",
+    email: "pablarmusica@gmail.com",
+    instagram: "@pablocarvalhosm", // TODO: confirmar o @ exato
+    whatsapp: "+55 (12) 99174-5185",
   },
   heroVideo: "IMG_0653",
 };
@@ -27,21 +27,21 @@ window.ARTISTAS = [
     id: "rina",
     nome: "Rina",
     tipo: "Voz · Jazz & MPB",
-    descricao: "Texto curto de apresentação da artista. Repertório, influências e formações disponíveis.",
+    descricao: "Cantora. Repertório, formações e agenda sob consulta.",
     poster: "IMG_0635",
   },
   {
     id: "liz",
     nome: "Liz",
     tipo: "Voz · Jazz & Soul",
-    descricao: "Texto curto de apresentação da artista. Repertório, influências e formações disponíveis.",
+    descricao: "Cantora. Repertório, formações e agenda sob consulta.",
     poster: "IMG_0642",
   },
   {
     id: "banda-instrumental",
     nome: "Banda Instrumental",
-    tipo: "Instrumental · Jazz",
-    descricao: "Texto curto de apresentação da banda. Formação, estilo e tipos de evento atendidos.",
+    tipo: "Trio · Jazz & Prog Metal",
+    descricao: "Guitarra, baixo e bateria. Do jazz ao prog metal, sem voz — para festivais, eventos e casas.",
     poster: "IMG_0652",
   },
 ];

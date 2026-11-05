@@ -17,7 +17,10 @@
   // ---- Textos da agência ----
   document.title = A.nome + " — Agência de Música";
   $$("[data-agencia-nome]").forEach(function (el) { el.textContent = A.nome; });
-  $$("[data-agencia-slogan]").forEach(function (el) { el.textContent = A.slogan; });
+  $$("[data-agencia-slogan]").forEach(function (el) {
+    if (A.slogan) el.textContent = A.slogan;
+    else el.hidden = true;
+  });
   $$("[data-agencia-sobre]").forEach(function (el) { el.textContent = A.sobre; });
   $("#ano").textContent = new Date().getFullYear();
 
