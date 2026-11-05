@@ -60,15 +60,15 @@ window.VIDEOS = [
 ];
 
 /*
- * MUSICAS → seção "Música". O áudio toca direto do Google Drive (nada é copiado para o repo).
- * Requisito: o arquivo no Drive precisa estar compartilhado como "Qualquer pessoa com o link".
- * driveId = o trecho entre /d/ e /view no link do arquivo.
+ * MUSICAS → seção "Música". Só TRECHOS das faixas ficam no site (a música inteira não é publicada).
+ * arquivo = nome do MP3 em assets/audio/ (sem extensão). Como gerar o trecho: veja o README.
  */
 window.MUSICAS = [
   {
     titulo: "Naquele Banco",
     artista: "Pablo Carvalho",
     status: "Em produção",
-    driveId: "1kGbZArYwWrEh1LQngXQDHmLsAyacRFzF",
+    arquivo: "naquele-banco-trecho",
+    nota: "Trecho de 40 s",
   },
 ];
