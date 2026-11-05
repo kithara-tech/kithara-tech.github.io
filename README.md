@@ -45,6 +45,6 @@ Não suba os `.MOV` originais (centenas de MB; o GitHub recusa arquivos > 100 MB
 
 ## Origem dos clipes
 
-Vídeos do Tanaton Fest, gravados na vertical no iPhone, na pasta do Google Drive
+Vídeos do Thanaton Fest, gravados na vertical no iPhone, na pasta do Google Drive
 `18xCejTvQUdF8wroHpZvkYkRtrAZe7Ptq`. Os clipes atuais são trechos de ~10 s a partir de ~30% de cada vídeo,
 só para referência visual — a curadoria final dos cortes ainda será feita.
