@@ -18,7 +18,8 @@ window.AGENCIA = {
   contato: {
     email: "pablarmusica@gmail.com",
     instagram: "@pablocarvalhosm", // TODO: confirmar o @ exato
-    whatsapp: "+55 (12) 99174-5185",
+    // Vazio = não aparece no site. Preencher quando houver o WhatsApp Business, ex.: "+55 (12) 90000-0000".
+    whatsapp: "",
   },
   heroVideo: "IMG_0653",
 };
