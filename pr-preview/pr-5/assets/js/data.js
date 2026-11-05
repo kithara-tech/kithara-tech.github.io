@@ -16,7 +16,7 @@ window.AGENCIA = {
     "e levamos essa lente para cada show: técnica de quem estuda a fundo, sentimento de quem toca para encantar. " +
     "Cuidamos da curadoria, da produção e do encontro entre os artistas certos e o seu evento.",
   contato: {
-    email: "pablarmusica@gmail.com",
+    email: "pablocnsantos2@gmail.com",
     instagram: "@pablocarvalhosm", // TODO: confirmar o @ exato
     // Vazio = não aparece no site. Preencher quando houver o WhatsApp Business, ex.: "+55 (12) 90000-0000".
     whatsapp: "",
