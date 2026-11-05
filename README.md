@@ -1,6 +1,13 @@
 # proj-portfolio-agencia
 
-Portfólio da agência de música: site estático (HTML + CSS + JS puro, sem build).
+Portfólio da agência de música Pablo Carvalho: site estático (HTML + CSS + JS puro, sem build).
+
+**🔗 Site no ar:** https://pablocarvalho0.github.io/proj-portfolio-agencia/
+
+## Publicação (GitHub Pages)
+
+O site é publicado pelo GitHub Pages direto da branch `main`, pasta raiz (`/`). Todo merge na `main`
+atualiza o site em 1–2 minutos. O arquivo `.nojekyll` desliga o processamento Jekyll (o site é servido como está).
 
 ## Rodar localmente
 
@@ -48,3 +55,9 @@ Não suba os `.MOV` originais (centenas de MB; o GitHub recusa arquivos > 100 MB
 Vídeos do Thanaton Fest, gravados na vertical no iPhone, na pasta do Google Drive
 `18xCejTvQUdF8wroHpZvkYkRtrAZe7Ptq`. Os clipes atuais são trechos de ~10 s a partir de ~30% de cada vídeo,
 só para referência visual — a curadoria final dos cortes ainda será feita.
+
+## Licença
+
+Código sob a [licença MIT](LICENSE).
+Os vídeos, imagens e nomes de artistas em `assets/` **não** estão cobertos pela MIT: pertencem aos respectivos
+artistas e só podem ser usados com autorização.
