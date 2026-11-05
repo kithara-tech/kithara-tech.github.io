@@ -16,9 +16,10 @@ window.AGENCIA = {
     "e levamos essa lente para cada show: técnica de quem estuda a fundo, sentimento de quem toca para encantar. " +
     "Cuidamos da curadoria, da produção e do encontro entre os artistas certos e o seu evento.",
   contato: {
-    email: "pablarmusica@gmail.com",
+    email: "pablocnsantos2@gmail.com",
     instagram: "@pablocarvalhosm", // TODO: confirmar o @ exato
-    whatsapp: "+55 (12) 99174-5185",
+    // Vazio = não aparece no site. Preencher quando houver o WhatsApp Business, ex.: "+55 (12) 90000-0000".
+    whatsapp: "",
   },
   heroVideo: "IMG_0653",
 };
@@ -57,4 +58,18 @@ window.VIDEOS = [
   { arquivo: "IMG_0648", artista: "banda-instrumental", titulo: "Thanaton Fest · IMG_0648" },
   { arquivo: "IMG_0652", artista: "banda-instrumental", titulo: "Thanaton Fest · IMG_0652" },
   { arquivo: "IMG_0653", artista: "banda-instrumental", titulo: "Thanaton Fest · IMG_0653" },
+];
+
+/*
+ * MUSICAS → seção "Música". Só TRECHOS das faixas ficam no site (a música inteira não é publicada).
+ * arquivo = nome do MP3 em assets/audio/ (sem extensão). Como gerar o trecho: veja o README.
+ */
+window.MUSICAS = [
+  {
+    titulo: "Naquele Banco",
+    artista: "Pablo Carvalho",
+    status: "Em produção",
+    arquivo: "naquele-banco-trecho",
+    nota: "Trecho de 1 min · pré-refrão e refrão",
+  },
 ];

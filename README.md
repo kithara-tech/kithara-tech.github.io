@@ -36,6 +36,7 @@ assets/js/data.js           # TODO o conteúdo editável: agência, artistas, v�
 assets/js/main.js           # renderização, filtros, hover-play e modal
 assets/videos/*.mp4         # clipes curtos (≈10 s, 720×1280, H.264, 1–2 MB)
 assets/posters/*.jpg        # capa de cada clipe (primeiro frame)
+assets/audio/*.mp3          # trechos das músicas (≈1 min, 128 kbps, < 1 MB)
 .github/workflows/pages.yml # publicação e preview por PR
 ```
 
@@ -43,8 +44,9 @@ assets/posters/*.jpg        # capa de cada clipe (primeiro frame)
 
 Quase toda mudança de texto acontece só neste arquivo:
 
-- **`AGENCIA`:** nome, slogan (vazio = não aparece), texto "Sobre", contatos e vídeo de fundo do hero (`heroVideo`).
+- **`AGENCIA`:** nome, slogan (vazio = não aparece), texto "Sobre", contatos (deixe vazio para esconder: o WhatsApp está vazio até existir o WhatsApp Business) e vídeo de fundo do hero (`heroVideo`).
 - **`ARTISTAS`:** `id`, `nome`, `tipo`, `descricao`, `poster` (nome do clipe usado como capa do card).
+- **`MUSICAS`:** `{ titulo, artista, status, arquivo, nota }`. `arquivo` é o MP3 em `assets/audio/` sem extensão.
 - **`VIDEOS`:** `{ arquivo, artista, titulo }`. `artista` é o `id` de um item de `ARTISTAS`.
   Os filtros da grade e o "Ver N vídeos" dos cards se atualizam sozinhos.
 
@@ -61,6 +63,18 @@ ffmpeg -i assets/videos/NOME.mp4 -frames:v 1 -q:v 4 assets/posters/NOME.jpg
 
 Depois adicione `{ arquivo: "NOME", artista: "...", titulo: "Thanaton Fest · NOME" }` em `VIDEOS`.
 Nunca suba os `.MOV` originais: têm centenas de MB e o GitHub recusa arquivos acima de 100 MB.
+
+## Adicionar uma música (só trecho)
+
+O site publica **apenas um trecho** de cada faixa, nunca a música inteira. Corte ~1 min com fade:
+
+```bash
+ffmpeg -ss 66 -t 60 -i FAIXA_COMPLETA.mp3 -af "afade=t=in:st=0:d=1,afade=t=out:st=56:d=4" \
+  -map_metadata -1 -c:a libmp3lame -b:a 128k assets/audio/NOME-trecho.mp3
+```
+
+Depois adicione a faixa em `MUSICAS`. Nunca suba a faixa completa para o repositório.
+"Naquele Banco": trecho de 1:06 a 2:06 (pré-refrão a partir de ~1:08 e primeiro refrão de ~1:28 a 2:01).
 
 ## Origem dos clipes
 

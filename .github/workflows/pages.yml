@@ -32,6 +32,11 @@ jobs:
           mkdir -p _site
           cp index.html _site/
           cp -r assets _site/
+          # Cache-busting: o GitHub Pages deixa CSS/JS em cache por 10 min no navegador.
+          # Acrescenta ?v=<commit> aos arquivos para cada deploy forçar a versão nova.
+          V="${GITHUB_SHA::7}"
+          sed -i -E "s#(assets/[^\"?]+\.(css|js))\"#\1?v=${V}\"#g" _site/index.html
+          grep -E '\?v=' _site/index.html
 
       # .nojekyll só na raiz da gh-pages. Dentro de pr-preview/pr-N ele não faz falta e,
       # por ser arquivo oculto, sobrava na pasta depois que o preview era removido.
