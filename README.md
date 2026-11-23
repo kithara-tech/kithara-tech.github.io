@@ -1,23 +1,16 @@
-# proj-portfolio-agencia
+# Kithara · site de Pablo Carvalho
 
-Portfólio da agência de música **Pablo Carvalho**: artistas, vídeos do Thanaton Fest e contato.
-Site estático (HTML + CSS + JS puro), sem build e sem dependências.
+Site principal da Kithara, o link da bio no Instagram. É um site estático em HTML, CSS e JS puros, sem framework e sem etapa de build.
 
-**🔗 Site no ar:** https://pablocarvalho0.github.io/proj-portfolio-agencia/
-
-## Como o site é publicado
-
-O workflow [`.github/workflows/pages.yml`](.github/workflows/pages.yml) publica tudo na branch `gh-pages`,
-que é a origem do GitHub Pages (**Settings → Pages → Deploy from a branch → `gh-pages` / `(root)`**).
-
-| Evento | Resultado | Endereço |
+| Rota | Arquivo | O que é |
 |---|---|---|
-| Merge na `main` | Atualiza o site em 1–2 min | https://pablocarvalho0.github.io/proj-portfolio-agencia/ |
-| PR aberto ou atualizado | Preview do PR (o link é comentado no PR) | `…/proj-portfolio-agencia/pr-preview/pr-N/` |
-| PR fechado | Preview removido | — |
+| `/` | `index.html` | Página principal: lira, "O que te traz aqui?", sobre, seções I–VII e contato |
+| `/portfolio/` | `portfolio/index.html` | Vídeos do ThanatoFest, artistas e trecho de "Naquele Banco" |
+| `/apresentacao/` | `apresentacao/index.html` | Apresentação completa (formação, voz, autorais, eventos, ITA) |
+| `/materiais/recorrencias/` | `materiais/recorrencias/index.html` | Trilha de recorrências lineares (MathJax) |
+| `/materiais/metodo-de-estudo/` | `materiais/metodo-de-estudo/index.html` | Pareto, curva ABC e ciclo de preparação |
 
-Não edite a branch `gh-pages` na mão: ela é gerada pelo workflow.
-O repositório é privado, mas **o site é público** (qualquer pessoa com o link abre).
+`_fontes/` guarda os protótipos aprovados (referência) e não é publicado.
 
 ## Rodar localmente
 
@@ -25,69 +18,33 @@ O repositório é privado, mas **o site é público** (qualquer pessoa com o lin
 python3 -m http.server 8000
 ```
 
-Abra http://localhost:8000. Qualquer servidor estático serve.
+Abra http://localhost:8000. Use um servidor; abrir o arquivo direto (`file://`) não resolve as rotas em pasta.
 
-## Estrutura
+## Onde editar
 
-```
-index.html                  # estrutura das seções
-assets/css/style.css        # visual: cores e fontes nos tokens de :root
-assets/js/data.js           # TODO o conteúdo editável: agência, artistas, vídeos
-assets/js/main.js           # renderização, filtros, hover-play e modal
-assets/videos/*.mp4         # clipes curtos (≈10 s, 720×1280, H.264, 1–2 MB)
-assets/posters/*.jpg        # capa de cada clipe (primeiro frame)
-assets/audio/*.mp3          # trechos das músicas (≈1 min, 128 kbps, < 1 MB)
-.github/workflows/pages.yml # publicação e preview por PR
-```
+- **Textos**: direto no `index.html` de cada rota. Cada seção tem um comentário (`<!-- I EVENTOS -->`, `<!-- II TOQUE -->` …).
+- **Contatos**: WhatsApp `5512991745185`, `pablocnsantos2@gmail.com`, `@pablocarvalhosm` e o LinkedIn aparecem na seção de contato de cada página e no rodapé (igual em todas). Para trocar algum, faça um "substituir em todos os arquivos" no editor.
+- **Mensagens do WhatsApp**: os links são `https://wa.me/5512991745185?text=<mensagem codificada>`. Para gerar uma mensagem nova, rode no console do navegador `encodeURIComponent("Oi Pablo! ...")`.
+- **Formulários Tally**: shows e patrocínio `tally.so/r/ArBAZB`, mentoria `tally.so/r/bZWKPe`, Tech Music `tally.so/r/kbNKq6`.
+- **YouTube**: na seção VII (`index.html`), troque o `<span>` marcado com `PENDENTE` por um link quando o canal existir.
+- **Visual**: `assets/css/kithara.css` (tokens do tema claro Musageta e do escuro Bronze no topo). O tema fica em `assets/js/tema.js`: segue o sistema na primeira visita e salva a escolha em `localStorage("kth-mode")`.
+- **Mídia**: `assets/videos/`, `assets/posters/` (um `.jpg` por vídeo, mesmo nome) e `assets/audio/`.
+- **Compartilhamento**: `assets/og.png` (1200×630) e `assets/favicon.svg`. As tags Open Graph usam a URL do GitHub Pages; se o site mudar de domínio, troque `https://pablocarvalho0.github.io/proj-portfolio-agencia/` nas tags `og:` e `twitter:` de cada página.
 
-## Editar conteúdo (`assets/js/data.js`)
+## Deploy
 
-Quase toda mudança de texto acontece só neste arquivo:
+O workflow `.github/workflows/pages.yml` publica no GitHub Pages (branch `gh-pages`):
 
-- **`AGENCIA`:** nome, slogan (vazio = não aparece), texto "Sobre", contatos (deixe vazio para esconder: o WhatsApp está vazio até existir o WhatsApp Business) e vídeo de fundo do hero (`heroVideo`).
-- **`ARTISTAS`:** `id`, `nome`, `tipo`, `descricao`, `poster` (nome do clipe usado como capa do card).
-- **`MUSICAS`:** `{ titulo, artista, status, arquivo, nota }`. `arquivo` é o MP3 em `assets/audio/` sem extensão.
-- **`VIDEOS`:** `{ arquivo, artista, titulo }`. `artista` é o `id` de um item de `ARTISTAS`.
-  Os filtros da grade e o "Ver N vídeos" dos cards se atualizam sozinhos.
+- **push na `main`** → https://pablocarvalho0.github.io/proj-portfolio-agencia/
+- **pull request** → preview em `…/proj-portfolio-agencia/pr-preview/pr-<N>/`. O link é comentado no PR, e o preview é apagado quando o PR fecha.
 
-## Adicionar ou trocar um clipe
+Em cada deploy, o workflow acrescenta `?v=<commit>` aos CSS e JS de todas as páginas para driblar o cache.
 
-Gere um clipe curto e leve a partir do original:
+### Alternativa: Vercel ou Netlify
 
-```bash
-ffmpeg -ss 00:01:00 -i ORIGINAL.MOV -t 10 -vf "scale=720:-2,fps=30" \
-  -c:v libx264 -crf 28 -preset veryfast -pix_fmt yuv420p -c:a aac -b:a 96k \
-  -movflags +faststart assets/videos/NOME.mp4
-ffmpeg -i assets/videos/NOME.mp4 -frames:v 1 -q:v 4 assets/posters/NOME.jpg
-```
+Como não há build, basta importar o repositório e publicar a raiz:
 
-Depois adicione `{ arquivo: "NOME", artista: "...", titulo: "Thanaton Fest · NOME" }` em `VIDEOS`.
-Nunca suba os `.MOV` originais: têm centenas de MB e o GitHub recusa arquivos acima de 100 MB.
+- **Vercel**: *Add New → Project*, escolha o repo, *Framework Preset: Other*, deixe *Build Command* vazio e *Output Directory* `.`.
+- **Netlify**: *Add new site → Import an existing project*, escolha o repo, deixe *Build command* vazio e *Publish directory* `.`.
 
-## Adicionar uma música (só trecho)
-
-O site publica **apenas um trecho** de cada faixa, nunca a música inteira. Corte ~1 min com fade:
-
-```bash
-ffmpeg -ss 66 -t 60 -i FAIXA_COMPLETA.mp3 -af "afade=t=in:st=0:d=1,afade=t=out:st=56:d=4" \
-  -map_metadata -1 -c:a libmp3lame -b:a 128k assets/audio/NOME-trecho.mp3
-```
-
-Depois adicione a faixa em `MUSICAS`. Nunca suba a faixa completa para o repositório.
-"Naquele Banco": trecho de 1:06 a 2:06 (pré-refrão a partir de ~1:08 e primeiro refrão de ~1:28 a 2:01).
-
-## Origem dos clipes
-
-Vídeos do Thanaton Fest (ITA, São José dos Campos), gravados na vertical no iPhone, na pasta do Google Drive
-`18xCejTvQUdF8wroHpZvkYkRtrAZe7Ptq`. Os clipes atuais são trechos de ~10 s a partir de ~30% de cada vídeo,
-para referência visual. A curadoria final dos cortes ainda será feita.
-
-## Contribuir
-
-Veja [CONTRIBUTING.md](CONTRIBUTING.md).
-
-## Licença
-
-Código sob a [licença MIT](LICENSE).
-Os vídeos, imagens e nomes de artistas em `assets/` **não** estão cobertos pela MIT: pertencem aos respectivos
-artistas e só podem ser usados com autorização.
+Publicando a raiz, a pasta `_fontes/` também vai junto; apague-a do repositório antes, se não quiser os protótipos no ar. Nos dois casos, o domínio próprio é configurado no painel do serviço. Se trocar de hospedagem, atualize as URLs `og:`/`twitter:` citadas acima.

@@ -26,17 +26,23 @@ jobs:
       - uses: actions/checkout@v4
 
       # Site estático, sem build: só separa o que é publicado.
+      # Rotas: /, /portfolio/, /apresentacao/, /materiais/recorrencias/, /materiais/metodo-de-estudo/
+      # _fontes/ (protótipos), README e LICENSE NÃO são publicados.
       - name: Montar pasta do site
         if: github.event.action != 'closed'
         run: |
           mkdir -p _site
           cp index.html _site/
-          cp -r assets _site/
+          cp -r portfolio apresentacao materiais assets _site/
           # Cache-busting: o GitHub Pages deixa CSS/JS em cache por 10 min no navegador.
-          # Acrescenta ?v=<commit> aos arquivos para cada deploy forçar a versão nova.
+          # Acrescenta ?v=<commit> aos arquivos de todas as páginas para cada deploy forçar a versão nova.
           V="${GITHUB_SHA::7}"
-          sed -i -E "s#(assets/[^\"?]+\.(css|js))\"#\1?v=${V}\"#g" _site/index.html
-          grep -E '\?v=' _site/index.html
+          find _site -name '*.html' -print0 | xargs -0 sed -i -E "s#(assets/[^\"?]+\.(css|js))\"#\1?v=${V}\"#g"
+          # Confere: toda página precisa ter o ?v= aplicado.
+          for f in $(find _site -name '*.html'); do
+            grep -q "kithara.css?v=${V}" "$f" || { echo "sem cache-busting: $f"; exit 1; }
+          done
+          find _site -name '*.html' | sort
 
       # .nojekyll só na raiz da gh-pages. Dentro de pr-preview/pr-N ele não faz falta e,
       # por ser arquivo oculto, sobrava na pasta depois que o preview era removido.
