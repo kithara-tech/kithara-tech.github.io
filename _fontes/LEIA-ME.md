@@ -1,5 +1,7 @@
 # Fontes do site Kithara (protótipos aprovados no Claude, 23/11/2026)
 
+Endereço final: https://kithara-tech.github.io/ (organização GitHub `kithara-tech`, repositório `kithara-tech.github.io`).
+
 Cada .html é um protótipo de página única, autocontido (CSS e JS inline). São a referência visual e de conteúdo; não são para copiar como estão.
 
 | Arquivo | O que é | Vira no site |
