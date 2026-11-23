@@ -1,0 +1,543 @@
+<!DOCTYPE html>
+<html lang="pt-BR" data-mode="light">
+<head>
+<meta charset="utf-8">
+<script>(function(){var m=null;try{m=localStorage.getItem("kth-mode")}catch(e){}if(m!=="dark"&&m!=="light"){m=(window.matchMedia&&matchMedia("(prefers-color-scheme: dark)").matches)?"dark":"light"}document.documentElement.setAttribute("data-mode",m)})();</script>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Pablo Carvalho · Kithara</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700;900&family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500;1,600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+/* Identidade Kithara: Musageta (claro, mármore e ouro) e Bronze (escuro), tokens da Rodada 3. */
+:root,html[data-mode="light"]{
+  --bg:#F4F0E8; --bg2:#EAE3D6; --card:#FBF9F5; --ink:#1C1A17; --muted:#5F584E; --line:#D6CEBF;
+  --gold:#8A6A2C; --gold2:#C9A35A; --goldtext:#8A6A2C; --deep:#1C1A17; --ondeep:#F4F0E8;
+  --marble:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='400'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.008 .02' numOctaves='4' seed='7'/%3E%3CfeColorMatrix values='0 0 0 0 .55 0 0 0 0 .52 0 0 0 0 .47 0 0 0 1.1 -.55'/%3E%3C/filter%3E%3Crect width='400' height='400' filter='url(%23n)' opacity='.35'/%3E%3C/svg%3E");
+  --display:"Cinzel", "Trajan Pro", Georgia, serif; --serif:"Cormorant Garamond", Georgia, serif; --body:"Inter", system-ui, sans-serif;
+  color-scheme:light;
+}
+html[data-mode="dark"]{
+  --bg:#17150F; --bg2:#1F1C16; --card:#1F1C16; --ink:#F2EDE3; --muted:#A79F92; --line:#35322C;
+  --gold:#B08A3E; --gold2:#E2C27F; --goldtext:#C9A35A; --deep:#0F0E0A; --ondeep:#F2EDE3;
+  --marble:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='400'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.012' numOctaves='3' seed='3'/%3E%3CfeColorMatrix values='0 0 0 0 .75 0 0 0 0 .52 0 0 0 0 .25 0 0 0 1 -.5'/%3E%3C/filter%3E%3Crect width='400' height='400' filter='url(%23n)' opacity='.18'/%3E%3C/svg%3E");
+  color-scheme:dark;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:70px}
+html,body{margin:0}
+body{background:var(--bg) var(--marble);color:var(--ink);font:16px/1.6 var(--body);-webkit-text-size-adjust:100%}
+a{color:inherit}
+:focus-visible{outline:3px solid var(--gold);outline-offset:3px}
+.wrap{max-width:720px;margin:0 auto;padding:0 20px}
+p{margin:0}
+h1,h2,h3{margin:0}
+
+/* Greek key band */
+.meander{height:18px;background-repeat:repeat-x;background-size:36px 18px;opacity:.9;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='36' height='18' viewBox='0 0 36 18'%3E%3Cpath d='M0 17H30V1H6V13H22V5H14V9' fill='none' stroke='%23a8782a' stroke-width='2'/%3E%3C/svg%3E")}
+html[data-mode="dark"] .meander{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='36' height='18' viewBox='0 0 36 18'%3E%3Cpath d='M0 17H30V1H6V13H22V5H14V9' fill='none' stroke='%23c08a3e' stroke-width='2'/%3E%3C/svg%3E")}
+
+.goldtext{background:linear-gradient(100deg,var(--goldtext),var(--gold2) 45%,var(--goldtext) 70%);-webkit-background-clip:text;background-clip:text;color:transparent}
+
+/* HERO */
+.hero{position:relative;overflow:hidden;padding:30px 0 34px;text-align:center}
+.hero .brand{font:700 12px/1 var(--display);letter-spacing:.42em;color:var(--goldtext);display:flex;align-items:center;justify-content:center;gap:10px}
+.hero .brand::before,.hero .brand::after{content:"";width:28px;height:1px;background:var(--gold)}
+.lyre{width:min(190px,48vw);height:auto;margin:18px auto 6px;display:block}
+.lyre .str{transform-origin:center;animation:pluck 3.2s ease-in-out infinite}
+.lyre .str:nth-of-type(2){animation-delay:.15s}.lyre .str:nth-of-type(3){animation-delay:.3s}.lyre .str:nth-of-type(4){animation-delay:.45s}.lyre .str:nth-of-type(5){animation-delay:.6s}
+@keyframes pluck{0%,82%,100%{transform:none}86%{transform:translateX(1.2px)}90%{transform:translateX(-1px)}94%{transform:translateX(.5px)}}
+@media (prefers-reduced-motion:reduce){.lyre .str{animation:none}}
+.hero h1{font:900 clamp(40px,11vw,76px)/.95 var(--display);letter-spacing:.02em;margin-top:6px}
+.hero .motto{font:italic 600 clamp(24px,6vw,34px)/1.2 var(--serif);margin-top:12px}
+.hero .sub{color:var(--muted);max-width:40ch;margin:14px auto 0;font-size:16px}
+
+/* intent picker */
+.intent{margin-top:26px;text-align:left}
+.intent .q{font:700 12px/1 var(--display);letter-spacing:.24em;color:var(--goldtext);text-align:center;margin-bottom:12px}
+.picks{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.pick{display:grid;gap:2px;padding:12px 12px 11px;border:1px solid var(--line);background:var(--card);text-decoration:none;color:var(--ink);border-radius:4px;position:relative;min-height:64px;transition:border-color .15s,transform .15s}
+.pick:hover{border-color:var(--gold);transform:translateY(-2px)}
+.pick .rn{font:700 11px/1 var(--display);color:var(--goldtext);letter-spacing:.1em}
+.pick b{font:600 15px/1.25 var(--body)}
+.pick.main{grid-column:1/-1;background:var(--deep);color:var(--ondeep);border-color:var(--deep)}
+.pick.main .rn{color:var(--gold2)}
+
+/* sticky jump bar */
+.jump{position:sticky;top:0;z-index:20;background:color-mix(in srgb,var(--bg) 92%,transparent);backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
+.jump .in{max-width:720px;margin:0 auto;display:flex;gap:6px;overflow-x:auto;padding:10px 16px;scrollbar-width:none}
+.jump .in::-webkit-scrollbar{display:none}
+.jump a{flex:0 0 auto;font:600 13px/1 var(--body);padding:10px 12px;border-radius:999px;border:1px solid var(--line);text-decoration:none;background:var(--card);white-space:nowrap}
+.jump a.on{background:var(--deep);color:var(--ondeep);border-color:var(--deep)}
+.jump a span{font-family:var(--display);color:var(--goldtext);margin-right:5px}
+.jump a.on span{color:var(--gold2)}
+
+/* ABOUT */
+.about{padding:44px 0 20px}
+.eyebrow{font:700 12px/1.3 var(--display);letter-spacing:.24em;color:var(--goldtext);text-transform:uppercase}
+.h2{font:700 clamp(30px,8vw,46px)/1.05 var(--serif);margin-top:8px;text-wrap:balance}
+.h2 em{font-style:italic;color:var(--goldtext)}
+.lead{font:500 19px/1.5 var(--serif);color:var(--muted);margin-top:14px}
+.stats{display:grid;grid-template-columns:repeat(2,1fr);gap:1px;background:var(--line);border:1px solid var(--line);margin-top:24px}
+.stat{background:var(--card);padding:16px;display:grid;gap:2px}
+.stat b{font:700 34px/1 var(--display)}
+.stat span{font-size:13px;color:var(--muted);line-height:1.35}
+.quote{margin:26px 0 0;padding:22px 20px;background:var(--deep);color:var(--ondeep);font:italic 600 22px/1.3 var(--serif);position:relative;border-radius:4px}
+.quote::before{content:"“";position:absolute;top:-18px;left:14px;font:700 70px/1 var(--serif);color:var(--gold2)}
+.quote small{display:block;margin-top:10px;font:500 12px var(--display);letter-spacing:.2em;font-style:normal;color:var(--gold2)}
+
+/* SECTIONS */
+.sec{padding:48px 0 30px;position:relative}
+.sec + .sec{border-top:1px solid var(--line)}
+.sechead{display:grid;grid-template-columns:auto 1fr;gap:14px;align-items:start}
+.numeral{font:900 54px/.85 var(--display);min-width:56px}
+.muse{font:italic 600 15px var(--serif);color:var(--muted);margin-top:6px}
+.muse b{font-style:normal;font-family:var(--display);font-size:12px;letter-spacing:.18em;color:var(--goldtext);margin-right:6px}
+.body{display:grid;gap:14px;margin-top:20px}
+.panel{background:var(--card);border:1px solid var(--line);border-radius:4px;padding:18px;display:grid;gap:10px;position:relative}
+.panel::after{content:"";position:absolute;inset:4px;border:1px solid var(--line);border-radius:2px;pointer-events:none;opacity:.6}
+.panel h3{font:700 22px/1.15 var(--serif)}
+.panel p,.panel li{color:var(--muted);font-size:15px}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.cell{background:var(--card);border:1px solid var(--line);border-radius:4px;padding:14px;display:grid;gap:4px}
+.cell b{font:700 17px/1.2 var(--serif)}
+.cell span{font-size:13px;color:var(--muted);line-height:1.4}
+.steps{list-style:none;margin:0;padding:0;display:grid;gap:12px;counter-reset:s}
+.steps li{display:grid;grid-template-columns:34px 1fr;gap:10px;align-items:start}
+.steps li::before{counter-increment:s;content:counter(s,upper-roman);font:700 13px/34px var(--display);text-align:center;width:34px;height:34px;border:1px solid var(--gold);border-radius:50%;color:var(--goldtext)}
+.steps b{display:block;color:var(--ink);font-size:15px}
+.steps span{font-size:14px}
+.chips{display:flex;flex-wrap:wrap;gap:6px}
+.chip{font-size:13px;padding:6px 11px;border:1px solid var(--line);border-radius:999px;background:var(--bg)}
+.tag{justify-self:start;font:700 10px/1 var(--display);letter-spacing:.18em;padding:6px 9px;border:1px solid var(--gold);color:var(--goldtext);border-radius:2px}
+.cta{display:grid;gap:8px;margin-top:6px}
+.btn{display:flex;align-items:center;justify-content:center;gap:10px;min-height:54px;padding:0 20px;border-radius:2px;text-decoration:none;font:700 13px/1 var(--display);letter-spacing:.14em;text-transform:uppercase;border:1px solid var(--deep)}
+.btn.solid{background:linear-gradient(135deg,var(--gold),var(--gold2) 50%,var(--gold));color:#1d1a16;border-color:var(--gold)}
+.btn.dark{background:var(--deep);color:var(--ondeep)}
+.btn.line{background:transparent;color:var(--ink);border-color:var(--line)}
+.mat{display:grid;grid-template-columns:1fr auto;gap:10px;align-items:center;padding:14px 16px;background:var(--card);border:1px solid var(--line);border-radius:4px;text-decoration:none}
+.mat b{display:block;font:700 17px/1.2 var(--serif)}
+.mat span{display:block;font-size:13px;color:var(--muted)}
+.seg{display:flex;border:1px solid var(--line);border-radius:2px;overflow:hidden}
+.seg button{flex:1;min-height:44px;border:0;background:var(--card);color:var(--ink);font:700 12px var(--display);letter-spacing:.14em;cursor:pointer}
+.seg button[aria-pressed="true"]{background:var(--deep);color:var(--ondeep)}
+.coin{width:min(260px,70vw);aspect-ratio:1;border-radius:50%;margin:6px auto 0;display:grid;place-items:center;text-align:center;padding:30px;
+  background:radial-gradient(circle at 35% 30%,var(--gold2),var(--gold) 55%,#6f4c17 100%);color:#2a1d08;box-shadow:inset 0 0 0 6px rgba(0,0,0,.12),inset 0 0 0 9px rgba(255,255,255,.25),0 18px 40px -20px rgba(0,0,0,.6)}
+.coin b{font:900 20px/1.1 var(--display);letter-spacing:.06em}
+.coin small{display:block;font:600 11px var(--display);letter-spacing:.24em;margin-top:8px}
+
+/* contact & footer */
+.contact{background:var(--deep);color:var(--ondeep);padding:40px 0 120px;margin-top:20px}
+.contact .h2{color:var(--ondeep)}
+.contact .rows{display:grid;gap:10px;margin-top:20px}
+.contact a.row{display:grid;grid-template-columns:1fr auto;align-items:center;padding:16px;border:1px solid rgba(255,255,255,.16);border-radius:2px;text-decoration:none}
+.contact a.row small{display:block;color:rgba(255,255,255,.6);font-size:13px;overflow-wrap:anywhere}
+.contact a.row b{font:700 18px var(--serif)}
+html[data-mode="dark"] .contact a.row small{color:var(--muted)}
+.fine{margin-top:26px;font:500 11px/1.6 var(--display);letter-spacing:.2em;color:var(--gold2);text-align:center}
+
+/* modo claro/escuro */
+.mode{position:fixed;right:14px;bottom:14px;z-index:30;display:flex;align-items:center;gap:8px;height:44px;padding:0 16px;border-radius:999px;border:1px solid var(--gold);background:var(--deep);color:var(--ondeep);font:700 11px var(--display);letter-spacing:.16em;cursor:pointer;box-shadow:0 10px 30px -12px #000}
+.mode svg{width:16px;height:16px}
+
+@media (min-width:640px){.stats{grid-template-columns:repeat(4,1fr)}.picks{grid-template-columns:repeat(3,1fr)}.pick.main{grid-column:span 3}}
+
+</style>
+</head>
+<body>
+
+<div class="meander" aria-hidden="true"></div>
+
+<header class="hero">
+  <div class="wrap">
+    <p class="brand">ΚΙΘΑΡΑ</p>
+    <svg class="lyre" viewBox="0 0 200 220" role="img" aria-label="Kithara, a lira grega que deu nome à guitarra">
+      <defs><linearGradient id="g" x1="0" y1="0" x2="1" y2="1"><stop offset="0" style="stop-color:var(--gold2)"/><stop offset=".5" style="stop-color:var(--gold)"/><stop offset="1" style="stop-color:var(--gold2)"/></linearGradient></defs>
+      <path d="M52 196c-30-40-36-104-14-150 6-12 16-22 30-24 12-2 18 8 12 18-10 16-12 46-6 80" fill="none" stroke="url(#g)" stroke-width="9" stroke-linecap="round"/>
+      <path d="M148 196c30-40 36-104 14-150-6-12-16-22-30-24-12-2-18 8-12 18 10 16 12 46 6 80" fill="none" stroke="url(#g)" stroke-width="9" stroke-linecap="round"/>
+      <rect x="44" y="48" width="112" height="9" rx="4" fill="url(#g)"/>
+      <path d="M40 196h120l-8 16H48z" fill="url(#g)"/>
+      <g style="stroke:var(--ink)" stroke-width="1.3" opacity=".75">
+        <line class="str" x1="78" y1="57" x2="78" y2="196"/>
+        <line class="str" x1="89" y1="57" x2="89" y2="196"/>
+        <line class="str" x1="100" y1="57" x2="100" y2="196"/>
+        <line class="str" x1="111" y1="57" x2="111" y2="196"/>
+        <line class="str" x1="122" y1="57" x2="122" y2="196"/>
+      </g>
+    </svg>
+    <h1>Pablo<br><span class="goldtext">Carvalho</span></h1>
+    <p class="motto">Música com proporção.</p>
+    <p class="sub">Músico há 13 anos e founder da <b>Kithara</b>, a empresa onde reuni tudo o que acredito e tudo o que ofereço na música. Engenheiro de computação pelo ITA.</p>
+
+    <nav class="intent" aria-label="O que você procura">
+      <p class="q">O QUE TE TRAZ AQUI?</p>
+      <div class="picks">
+        <a class="pick main" href="#eventos"><span class="rn">I</span><b>Quero música no meu evento ou patrocinar</b></a>
+        <a class="pick" href="#toque"><span class="rn">II</span><b>Preciso de um músico</b></a>
+        <a class="pick" href="#aprenda"><span class="rn">III</span><b>Quero aprender</b></a>
+        <a class="pick" href="#criacao"><span class="rn">IV</span><b>Tenho uma música para arranjar</b></a>
+        <a class="pick" href="#tech"><span class="rn">V</span><b>Tecnologia para meu negócio</b></a>
+        <a class="pick" href="#materiais"><span class="rn">VI</span><b>Materiais gratuitos</b></a>
+        <a class="pick" href="#escute"><span class="rn">VII</span><b>Ouvir minha música</b></a>
+      </div>
+    </nav>
+  </div>
+</header>
+
+<nav class="jump" aria-label="Seções">
+  <div class="in">
+    <a href="#sobre">Sobre</a>
+    <a href="#eventos"><span>I</span>Eventos</a>
+    <a href="#toque"><span>II</span>Toque comigo</a>
+    <a href="#aprenda"><span>III</span>Aprenda</a>
+    <a href="#criacao"><span>IV</span>Criação</a>
+    <a href="#tech"><span>V</span>Tech</a>
+    <a href="#materiais"><span>VI</span>Materiais</a>
+    <a href="#escute"><span>VII</span>Escute</a>
+    <a href="#contato">Contato</a>
+  </div>
+</nav>
+
+<main>
+<!-- SOBRE -->
+<section class="about" id="sobre">
+  <div class="wrap reveal">
+    <p class="eyebrow">Quem sou</p>
+    <h2 class="h2">Pablo Carvalho, <em>founder da Kithara</em></h2>
+    <p class="lead">Comecei aos 12 anos, sozinho, com apostilas esquecidas em casa. A teoria sempre veio na frente e foi ela que sustentou o resto. Hoje toco, canto, componho, dirijo banda e organizo eventos. No ITA, aprendi a construir as ferramentas que fazem tudo isso acontecer.</p>
+    <div class="stats">
+      <div class="stat"><b class="goldtext">XIII</b><span>anos de música</span></div>
+      <div class="stat"><b class="goldtext">VI</b><span>instrumentos em nível avançado, e voz</span></div>
+      <div class="stat"><b class="goldtext">~X</b><span>músicas autorais, letras minhas</span></div>
+      <div class="stat"><b class="goldtext">VII</b><span>atrações no festival que co-organizei</span></div>
+    </div>
+    <div class="panel" style="margin-top:24px">
+      <span class="tag">FOUNDER · KITHARA</span>
+      <h3>Por que Kithara</h3>
+      <p>A kithara era a lira dos gregos, o instrumento de Apolo, e é dela que vem a palavra "guitarra". Escolhi esse nome porque a empresa nasce do mesmo lugar que a minha música: técnica com sensibilidade, estrutura a serviço da arte.</p>
+      <p>Na Kithara está tudo o que eu faço na música, de eventos de ponta a ponta e shows a aulas, criação e tecnologia para quem vive de música. Os sete caminhos abaixo são as portas de entrada.</p>
+    </div>
+    <blockquote class="quote">Código e música são linguagens. A arte me dá inovação e comunicação; a lógica me dá estrutura e execução.<small>— PABLO CARVALHO</small></blockquote>
+    <div class="cta" style="margin-top:18px"><a class="btn line" href="https://claude.ai/artifact/Q7VCAaEbRH7KDqutAYWwus">Ver minha apresentação completa</a></div>
+  </div>
+</section>
+
+<!-- I EVENTOS -->
+<section class="sec" id="eventos">
+  <div class="wrap reveal">
+    <div class="sechead">
+      <span class="numeral goldtext">I</span>
+      <div>
+        <p class="eyebrow">Agência de eventos musicais · patrocínio</p>
+        <h2 class="h2">Seu evento musical, <em>de ponta a ponta</em></h2>
+        <p class="muse"><b>TERPSÍCORE</b>a musa da festa e da dança</p>
+      </div>
+    </div>
+    <div class="body">
+      <p class="lead">Você fala com uma pessoa só. A banda quer chegar e tocar, você quer que o evento aconteça sem pensar nisso. Meu trabalho é deixar os dois lados tranquilos.</p>
+      <div class="panel">
+        <h3>Do começo ao fim</h3>
+        <ol class="steps">
+          <li><div><b>Concepção</b><span>Formato, estilo e repertório para o seu público</span></div></li>
+          <li><div><b>Atrações</b><span>Minha banda, ou curadoria e contratação de outros artistas</span></div></li>
+          <li><div><b>Estrutura</b><span>Som, palco e fornecedores, com escopo por escrito</span></div></li>
+          <li><div><b>Divulgação</b><span>Marketing do evento quando fizer sentido</span></div></li>
+          <li><div><b>Operação do dia</b><span>Cronograma, passagem de som e gestão das bandas</span></div></li>
+        </ol>
+      </div>
+      <div class="grid2">
+        <div class="cell"><b>Pablo solo</b><span>Voz e instrumento, 3h de show em bar, restaurante ou evento</span></div>
+        <div class="cell"><b>Pablo + Rina · Pablo + Lis</b><span>Duo com cantora, vendido como pacote de 3h</span></div>
+        <div class="cell"><b>Banda completa</b><span>Ensaiada sob minha direção musical</span></div>
+        <div class="cell"><b>Repertório</b><span>Rock, metal, samba, pagode, forró, bossa, jazz</span></div>
+      </div>
+      <div class="panel">
+        <span class="tag">CASO REAL · OUT/2026</span>
+        <h3>ThanatoFest, no ITA</h3>
+        <p>Co-organizei um festival de 7 atrações para a comunidade do ITA. Fiquei com o marketing, a contratação e a logística do som, e toquei em dois sets.</p>
+        <a class="mat" href="https://claude.ai/artifact/SKSZrWBnA8v55PSxZAuK9F#tanaton"><div><b>Assistir aos vídeos do festival</b><span>Portfólio com as apresentações ao vivo</span></div><span aria-hidden="true">→</span></a>
+      </div>
+      <div class="panel">
+        <h3>Agenda</h3>
+        <p><b>Sexta à noite, sábado e domingo o dia todo.</b> Noites de semana sob consulta. Atendo São José dos Campos e São Paulo; transporte e logística são combinados à parte.</p>
+      </div>
+      <div class="panel">
+        <h3>Para marcas e patrocinadores</h3>
+        <p>Apoie um show, um evento ou o lançamento do meu primeiro single. As contrapartidas (presença de marca, conteúdo, ativação no evento) a gente desenha junto, a partir do seu objetivo.</p>
+      </div>
+      <div class="cta">
+        <a class="btn solid" href="https://tally.so/r/ArBAZB">Pedir proposta</a>
+        <a class="btn line" data-wa="eventos" href="#">Chamar no WhatsApp</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- II TOQUE -->
+<section class="sec" id="toque">
+  <div class="wrap reveal">
+    <div class="sechead">
+      <span class="numeral goldtext">II</span>
+      <div>
+        <p class="eyebrow">Para bandas e músicos</p>
+        <h2 class="h2">Precisa de um músico? <em>Eu topo.</em></h2>
+        <p class="muse"><b>EUTERPE</b>a musa da música</p>
+      </div>
+    </div>
+    <div class="body">
+      <p class="lead">Faltou alguém no show, quer reforçar a banda ou precisa de uma voz a mais na gravação? Me chama.</p>
+      <div class="panel">
+        <h3>Instrumentos</h3>
+        <div class="chips"><span class="chip">Violão</span><span class="chip">Guitarra</span><span class="chip">Baixo</span><span class="chip">Bateria</span><span class="chip">Teclado</span><span class="chip">Piano</span><span class="chip">Sax</span><span class="chip">Voz</span></div>
+        <p>Também me viro rápido em cavaquinho, ukulele, cajón e viola.</p>
+      </div>
+      <div class="grid2">
+        <div class="cell"><b>Show e freela</b><span>Substituição ou reforço na sua banda</span></div>
+        <div class="cell"><b>Segunda voz</b><span>Backing e harmonia vocal, timbre baixo-barítono</span></div>
+        <div class="cell"><b>Gravação</b><span>Instrumento ou voz para o seu som</span></div>
+        <div class="cell"><b>Direção musical</b><span>Organizo banda e repertório para soar junto</span></div>
+      </div>
+      <div class="panel"><h3>Para combinar rápido, me manda</h3><p>Data e cidade, repertório ou setlist, a função que você precisa e se tem ensaio.</p></div>
+      <a class="mat" href="https://claude.ai/artifact/Q7VCAaEbRH7KDqutAYWwus#musica"><div><b>Minha formação, instrumentos e extensão vocal</b><span>Na minha apresentação completa</span></div><span aria-hidden="true">→</span></a>
+      <a class="mat" href="https://claude.ai/artifact/SKSZrWBnA8v55PSxZAuK9F#tanaton"><div><b>Me ver tocando ao vivo</b><span>Vídeos do ThanatoFest</span></div><span aria-hidden="true">→</span></a>
+      <div class="cta"><a class="btn solid" data-wa="toque" href="#">Me chamar para tocar</a></div>
+    </div>
+  </div>
+</section>
+
+<!-- III APRENDA -->
+<section class="sec" id="aprenda">
+  <div class="wrap reveal">
+    <div class="sechead">
+      <span class="numeral goldtext">III</span>
+      <div>
+        <p class="eyebrow">Mentoria musical e workshops</p>
+        <h2 class="h2">Aprenda a tocar <em>entendendo</em> o porquê</h2>
+        <p class="muse"><b>MNEMÓSINE</b>a memória, mãe de todas as musas</p>
+      </div>
+    </div>
+    <div class="body">
+      <p class="lead">Ensino do jeito que eu aprendi: cada som explicado, nada decorado sem sentido. É o mesmo método que uso como professor de matemática no IMPA, com alunos de alto desempenho.</p>
+      <div class="panel">
+        <h3>O que dá para trabalhar</h3>
+        <div class="chips"><span class="chip">Harmonia funcional</span><span class="chip">Violão e guitarra</span><span class="chip">Baixo</span><span class="chip">Teclado e piano</span><span class="chip">Bateria</span><span class="chip">Voz</span><span class="chip">Composição e arranjo</span><span class="chip">Montar e dirigir banda</span></div>
+      </div>
+      <div class="panel">
+        <h3>Como funciona a mentoria</h3>
+        <ol class="steps">
+          <li><div><b>Diagnóstico</b><span>Onde você está, sua rotina de prática e aonde quer chegar</span></div></li>
+          <li><div><b>Plano sob medida</b><span>O que estudar primeiro, com metas por quinzena</span></div></li>
+          <li><div><b>Encontros semanais</b><span>50 minutos, online ou presencial</span></div></li>
+          <li><div><b>Acompanhamento</b><span>Material, repertório e evolução registrados</span></div></li>
+        </ol>
+        <p>Valores e pacotes apresentados depois do diagnóstico.</p>
+      </div>
+      <a class="mat" href="#materiais"><div><b>Quer sentir o método antes?</b><span>Veja os materiais gratuitos</span></div><span aria-hidden="true">↓</span></a>
+      <div class="cta"><a class="btn solid" href="https://tally.so/r/bZWKPe">Quero ser aluno</a></div>
+      <div class="panel">
+        <span class="tag">ESCOLAS · UNIVERSIDADES · EMPRESAS</span>
+        <h3>Workshops e palestras</h3>
+        <div class="grid2">
+          <div class="cell"><b>Harmonia funcional na prática</b><span>Por que os acordes soam como soam, com o instrumento na mão</span></div>
+          <div class="cell"><b>Música e engenharia</b><span>Estrutura, criatividade e execução nas duas linguagens</span></div>
+        </div>
+        <a class="btn line" data-wa="workshop" href="#">Levar um workshop</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- IV CRIAÇÃO -->
+<section class="sec" id="criacao">
+  <div class="wrap reveal">
+    <div class="sechead">
+      <span class="numeral goldtext">IV</span>
+      <div>
+        <p class="eyebrow">Criação musical</p>
+        <h2 class="h2">Da ideia à música <em>pronta para o estúdio</em></h2>
+        <p class="muse"><b>CALÍOPE</b>a musa da bela voz e da composição</p>
+      </div>
+    </div>
+    <div class="body">
+      <div class="panel">
+        <span class="tag">PARA CANTORES E COMPOSITORES</span>
+        <h3>Arranjo e pré-produção</h3>
+        <ol class="steps">
+          <li><div><b>Sua guia</b><span>Voz e violão gravados no celular já servem</span></div></li>
+          <li><div><b>Rascunhos de arranjo</b><span>Dois ou três caminhos para você ouvir e escolher</span></div></li>
+          <li><div><b>Demo final</b><span>Arranjo fechado, com harmonia e estrutura definidas</span></div></li>
+        </ol>
+      </div>
+      <div class="panel">
+        <span class="tag">PARA EVENTOS E MARCAS</span>
+        <h3>Música sob encomenda</h3>
+        <p>Uma canção para um casamento, uma homenagem, um evento ou uma marca, feita a partir da história que você me contar.</p>
+        <div class="chips"><span class="chip">Casamento</span><span class="chip">Homenagem</span><span class="chip">Evento</span><span class="chip">Jingle</span></div>
+      </div>
+      <div class="panel">
+        <span class="tag">NA PRÁTICA</span>
+        <h3>Como eu destrincho uma música</h3>
+        <p>Na minha autoral "Naquele Banco", mapeei os acordes compasso a compasso, os graus em Lá menor e a melodia da voz, com player e piano roll sincronizados. É o mesmo raio-x que faço antes de arranjar a música de alguém.</p>
+        <a class="mat" href="https://claude.ai/artifact/Xx3oiSUqLCLhRv2yJ5N18c"><div><b>Naquele Banco: acordes, graus e melodia</b><span>Abrir a análise interativa</span></div><span aria-hidden="true">→</span></a>
+      </div>
+      <div class="cta"><a class="btn solid" data-wa="criacao" href="#">Mandar minha ideia</a></div>
+    </div>
+  </div>
+</section>
+
+<!-- V TECH -->
+<section class="sec" id="tech">
+  <div class="wrap reveal">
+    <div class="sechead">
+      <span class="numeral goldtext">V</span>
+      <div>
+        <p class="eyebrow">Tech Music · Kithara Tech</p>
+        <h2 class="h2">Tecnologia para quem <em>vive de música</em></h2>
+        <p class="muse"><b>URÂNIA</b>a musa da ciência e dos astros</p>
+      </div>
+    </div>
+    <div class="body">
+      <p class="lead">Software sob medida para agências, casas de show, festivais, escolas e artistas, feito por quem está no palco.</p>
+      <div class="grid2">
+        <div class="cell"><b>Ensaios e escala</b><span>Confirmações e lembretes automáticos</span></div>
+        <div class="cell"><b>Painel do evento</b><span>Músicos, fornecedores e contratante num lugar só</span></div>
+        <div class="cell"><b>Passes e ingressos</b><span>Venda e controle sem planilha solta</span></div>
+        <div class="cell"><b>Bots de WhatsApp</b><span>Atendimento e avisos onde o público já está</span></div>
+      </div>
+      <div class="panel">
+        <span class="tag">JÁ RODA</span>
+        <h3>Bot de ensaios</h3>
+        <p>Um bot de WhatsApp ligado a uma planilha acompanha os ensaios das minhas bandas.</p>
+        <span class="tag">EM CONSTRUÇÃO</span>
+        <h3>Painel para a liderança do evento</h3>
+        <p>Para acompanhar músicos, agência e contratante em tempo real.</p>
+      </div>
+      <div class="cta"><a class="btn solid" href="https://tally.so/r/kbNKq6">Contar meu problema</a></div>
+    </div>
+  </div>
+</section>
+
+<!-- VI MATERIAIS -->
+<section class="sec" id="materiais">
+  <div class="wrap reveal">
+    <div class="sechead">
+      <span class="numeral goldtext">VI</span>
+      <div>
+        <p class="eyebrow">Materiais gratuitos</p>
+        <h2 class="h2">Para estudar <em>de graça</em></h2>
+        <p class="muse"><b>CLIO</b>a musa do saber guardado</p>
+      </div>
+    </div>
+    <div class="body">
+      <div class="seg" role="group" aria-label="Tipo de material">
+        <button type="button" data-mat="musica" aria-pressed="true">MÚSICA</button>
+        <button type="button" data-mat="estudo" aria-pressed="false">ESTUDO</button>
+      </div>
+      <div id="mat-musica" style="display:grid;gap:8px">
+        <a class="mat" href="https://claude.ai/artifact/Xx3oiSUqLCLhRv2yJ5N18c"><div><b>Naquele Banco, por dentro</b><span>Acordes, graus e melodia de uma autoral, com player</span></div><span aria-hidden="true">→</span></a>
+        <a class="mat" href="https://claude.ai/artifact/DxohsA6gbYTv26nF2r6wr6"><div><b>Sala de Piano e Sala de Música do ITA</b><span>Ficha de bem cultural que escrevi sobre os espaços de música do DepCult</span></div><span aria-hidden="true">→</span></a>
+        <div class="mat"><div><b>Guia de harmonia funcional</b><span>Leitura guiada do método do Alan Gomes, na minha voz</span></div><span class="tag">EM BREVE</span></div>
+        <div class="mat"><div><b>Série de harmonia no YouTube</b><span>47 episódios em 13 blocos</span></div><span class="tag">EM PRODUÇÃO</span></div>
+      </div>
+      <div id="mat-estudo" style="display:none;gap:8px">
+        <a class="mat" href="https://claude.ai/artifact/Va6zJKdufy8vPY6CESWxAS"><div><b>Método de estudo para provas difíceis</b><span>Pareto nos assuntos e curva ABC das questões</span></div><span aria-hidden="true">→</span></a>
+        <a class="mat" href="https://claude.ai/artifact/Wtb7RAJZ6izCv5ubX85yRF"><div><b>Recorrências lineares</b><span>Trilha com vídeos, teoria e roteiro</span></div><span aria-hidden="true">→</span></a>
+      </div>
+      <div class="cta"><a class="btn line" href="https://www.instagram.com/pablocarvalhosm/">Seguir para receber os próximos</a></div>
+    </div>
+  </div>
+</section>
+
+<!-- VII ESCUTE -->
+<section class="sec" id="escute">
+  <div class="wrap reveal">
+    <div class="sechead">
+      <span class="numeral goldtext">VII</span>
+      <div>
+        <p class="eyebrow">Escute minha música</p>
+        <h2 class="h2">O primeiro single <em>está sendo forjado</em></h2>
+        <p class="muse"><b>POLÍMNIA</b>a musa do canto</p>
+      </div>
+    </div>
+    <div class="body">
+      <div class="coin" role="img" aria-label="Moeda comemorativa do primeiro single"><div><b>NAQUELE BANCO</b><small>PABLO CARVALHO · MMXXVII</small></div></div>
+      <p class="lead" style="text-align:center">"Naquele Banco" é a primeira de cerca de dez autorais, letras minhas. Ela sai gravada em estúdio, com produtor parceiro. Trechos e bastidores saem antes no Instagram.</p>
+      <div class="cta">
+        <a class="btn solid" href="https://claude.ai/artifact/SKSZrWBnA8v55PSxZAuK9F#musica">Ouvir um trecho</a>
+        <a class="btn line" href="https://claude.ai/artifact/Xx3oiSUqLCLhRv2yJ5N18c">Ver acordes e melodia</a>
+        <a class="btn line" href="https://www.instagram.com/pablocarvalhosm/">Acompanhar o lançamento</a>
+        <a class="btn line" href="#">YouTube · [link do canal]</a>
+      </div>
+    </div>
+  </div>
+</section>
+</main>
+
+<!-- CONTATO -->
+<footer class="contact" id="contato">
+  <div class="meander" aria-hidden="true" style="margin-bottom:34px"></div>
+  <div class="wrap">
+    <p class="eyebrow" style="color:var(--gold2)">Contato</p>
+    <h2 class="h2">Vamos <em style="color:var(--gold2)">conversar</em></h2>
+    <div class="rows">
+      <a class="row" data-wa="geral" href="#"><span><b>WhatsApp</b><small>(12) 99174-5185</small></span><span aria-hidden="true">→</span></a>
+      <a class="row" href="mailto:pablocnsantos2@gmail.com"><span><b>E-mail</b><small>pablocnsantos2@gmail.com</small></span><span aria-hidden="true">→</span></a>
+      <a class="row" href="https://www.instagram.com/pablocarvalhosm/"><span><b>Instagram</b><small>@pablocarvalhosm</small></span><span aria-hidden="true">→</span></a>
+      <a class="row" href="https://www.linkedin.com/in/pablo-carvalho-pcns8896"><span><b>LinkedIn</b><small>pablo-carvalho-pcns8896</small></span><span aria-hidden="true">→</span></a>
+    </div>
+    <p class="fine">ΚΙΘΑΡΑ · MÚSICA COM PROPORÇÃO<br>PABLO CARVALHO · FOUNDER<br>SÃO JOSÉ DOS CAMPOS · SÃO PAULO<br><span style="opacity:.6">VERSÃO 23/11 · 10H20</span></p>
+  </div>
+</footer>
+
+<button class="mode" id="mode" type="button" aria-label="Alternar modo claro e escuro"></button>
+
+<script>
+(function(){
+  var WHATSAPP="5512991745185";
+  var MSG={
+    geral:"Oi Pablo! Vi seu site e queria conversar.",
+    eventos:"Oi Pablo! Vi seu site e quero conversar sobre um evento/patrocínio. Data/cidade: ___ | Público: ___",
+    toque:"Oi Pablo! Vi seu site. Tenho uma banda/projeto e queria te chamar para tocar com a gente. Data/cidade: ___ | Função: ___ | Repertório: ___",
+    criacao:"Oi Pablo! Vi seu site e quero conversar sobre criação musical (arranjo/pré-produção ou música sob encomenda). Minha ideia: ___",
+    workshop:"Oi Pablo! Vi seu site e queria levar um workshop/palestra seu. Instituição: ___ | Público: ___ | Data: ___"
+  };
+  document.querySelectorAll("[data-wa]").forEach(function(a){
+    a.href="https://wa.me/"+WHATSAPP+"?text="+encodeURIComponent(MSG[a.getAttribute("data-wa")]||MSG.geral);
+  });
+
+  /* materiais */
+  document.querySelectorAll("[data-mat]").forEach(function(b){
+    b.addEventListener("click",function(){
+      var k=b.dataset.mat;
+      document.querySelectorAll("[data-mat]").forEach(function(x){x.setAttribute("aria-pressed",x===b?"true":"false");});
+      document.getElementById("mat-musica").style.display=k==="musica"?"grid":"none";
+      document.getElementById("mat-estudo").style.display=k==="estudo"?"grid":"none";
+    });
+  });
+
+  /* barra de seções acende a seção atual */
+  var links=[].slice.call(document.querySelectorAll(".jump a"));
+  var secs=links.map(function(a){return document.querySelector(a.getAttribute("href"));});
+  if("IntersectionObserver" in window){
+    var io=new IntersectionObserver(function(es){
+      es.forEach(function(e){
+        if(e.isIntersecting){
+          var i=secs.indexOf(e.target);
+          links.forEach(function(l,j){l.classList.toggle("on",j===i);});
+          try{links[i].scrollIntoView({block:"nearest",inline:"center"});}catch(err){}
+        }
+      });
+    },{rootMargin:"-45% 0px -50% 0px"});
+    secs.forEach(function(s){if(s)io.observe(s);});
+  }
+
+  /* modo claro (Musageta) / escuro (Bronze) */
+  var root=document.documentElement, btn=document.getElementById("mode");
+  function paint(){var d=root.getAttribute("data-mode")==="dark";btn.innerHTML=d?'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg>MUSAGETA':'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg>BRONZE';}
+  paint();
+  btn.addEventListener("click",function(){var n=root.getAttribute("data-mode")==="dark"?"light":"dark";root.setAttribute("data-mode",n);try{localStorage.setItem("kth-mode",n)}catch(e){}paint();});
+})();
+</script>
+</body>
+</html>

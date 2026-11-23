@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<script>(function(){var m=null;try{m=localStorage.getItem("kth-mode")}catch(e){}if(m!=="dark"&&m!=="light"){m=(window.matchMedia&&matchMedia("(prefers-color-scheme: dark)").matches)?"dark":"light"}document.documentElement.setAttribute("data-mode",m)})();</script>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700;900&family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500;1,600&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="claude:viewport-fit-sides" content="cover">
+<title>Pareto, curva ABC e ciclo de preparação · Kithara</title>
+
+
+<style>
+:root{
+  --bg:#F3F5F8; --surface:#FFFFFF; --ink:#132033; --muted:#5B6B80; --line:#DCE2EA;
+  --accent:#1F5FD6; --accent-soft:#E3ECFC;
+  --a:#1F5FD6; --a-soft:#E3ECFC; --b:#16897A; --b-soft:#DDF2EE; --c:#7C8798; --c-soft:#ECEFF3; --warn:#B7791F; --warn-soft2:#FBF0DA;
+  --f-display:"Barlow Condensed","Arial Narrow",Arial,sans-serif;
+  --f-body:"Source Sans 3","Segoe UI",Roboto,Arial,sans-serif;
+  --f-mono:"IBM Plex Mono",ui-monospace,Menlo,Consolas,monospace;
+  color-scheme:light;
+}
+@media (prefers-color-scheme: dark){:root{
+  --bg:#0E1622; --surface:#16212F; --ink:#E6ECF4; --muted:#93A3B8; --line:#2A384A;
+  --accent:#6E9CF2; --accent-soft:#1D2D47;
+  --a:#6E9CF2; --a-soft:#1D2D47; --b:#3FBFA9; --b-soft:#14332E; --c:#93A3B8; --c-soft:#222E3D; --warn:#E3A846; --warn-soft2:#3A2C12;
+  color-scheme:dark}}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:calc(env(safe-area-inset-top,0px) + 64px)}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--f-body);font-size:17px;line-height:1.6;
+  padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:10;background:var(--bg)}
+a{color:var(--accent)}
+.page{max-width:1040px;margin:0 auto;padding:24px max(18px,env(safe-area-inset-right,0px)) 56px max(18px,env(safe-area-inset-left,0px))}
+header{display:grid;gap:12px;padding-bottom:8px}
+.eyebrow{font-family:var(--f-mono);font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+h1{font-family:var(--f-display);font-weight:700;font-size:clamp(38px,10vw,58px);line-height:.98;margin:0;text-wrap:balance}
+.lede{margin:0;max-width:60ch;font-size:19px;color:var(--muted)}
+
+/* sumário: barra no celular, coluna lateral no desktop */
+.layout{display:block}
+nav.toc{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background:var(--bg);border-bottom:1px solid var(--line);margin:18px -18px 0;padding:0 18px}
+.toc ol{list-style:none;margin:0;padding:0;display:flex;gap:4px;overflow-x:auto;scrollbar-width:none}
+.toc ol::-webkit-scrollbar{display:none}
+.toc a{display:block;white-space:nowrap;text-decoration:none;color:var(--muted);font-weight:600;font-size:15px;padding:12px 10px;border-bottom:3px solid transparent}
+.toc a.on{color:var(--ink);border-bottom-color:var(--accent)}
+.toc .n{font-family:var(--f-mono);font-size:12px;margin-right:6px;color:var(--accent)}
+@media (min-width:900px){
+  .layout{display:grid;grid-template-columns:220px 1fr;gap:48px;align-items:start}
+  nav.toc{top:24px;margin:28px 0 0;padding:0;border:0;background:none}
+  .toc ol{flex-direction:column;gap:2px;overflow:visible}
+  .toc a{border-bottom:0;border-left:3px solid transparent;padding:8px 12px;white-space:normal}
+  .toc a.on{border-left-color:var(--accent);background:var(--accent-soft);border-radius:0 8px 8px 0}
+}
+
+main{display:grid;gap:12px}
+section{padding-top:36px;display:grid;gap:16px}
+.step{font-family:var(--f-mono);font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--accent)}
+h2{font-family:var(--f-display);font-weight:700;font-size:clamp(30px,7vw,38px);line-height:1.05;margin:-8px 0 0}
+p{margin:0;max-width:62ch}
+.panel{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:18px}
+.big-idea{border-left:5px solid var(--accent);background:var(--surface);border-radius:0 14px 14px 0;padding:18px 20px;font-family:var(--f-display);font-size:clamp(24px,6vw,30px);font-weight:600;line-height:1.15}
+.ask{display:flex;gap:12px;align-items:flex-start;background:var(--accent-soft);border-radius:12px;padding:14px 16px}
+.ask b{font-family:var(--f-mono);font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:var(--accent);white-space:nowrap;padding-top:3px}
+.ask p{font-weight:600}
+figure{margin:0}
+figure svg{display:block;width:100%;height:auto}
+figcaption{font-size:14px;color:var(--muted);margin-top:8px}
+svg text{font-family:var(--f-mono);font-size:12px;fill:var(--muted)}
+
+.regions{display:grid;gap:12px}
+.region{display:grid;grid-template-columns:56px 1fr;gap:14px;align-items:start;background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:16px}
+.letter{width:56px;height:56px;border-radius:12px;display:grid;place-items:center;font:700 34px var(--f-display);color:#fff}
+.region h3{margin:0 0 4px;font-family:var(--f-display);font-size:24px;font-weight:600;line-height:1.1}
+.tag{display:inline-block;font:600 12px var(--f-mono);padding:3px 8px;border-radius:999px;margin-bottom:8px}
+.region ul{margin:8px 0 0;padding-left:18px}
+.region li{margin:2px 0}
+.ra .letter{background:var(--a)} .ra .tag{background:var(--a-soft);color:var(--a)} .ra{border-left:5px solid var(--a)}
+.rb .letter{background:var(--b)} .rb .tag{background:var(--b-soft);color:var(--b)} .rb{border-left:5px solid var(--b)}
+.rc .letter{background:var(--c)} .rc .tag{background:var(--c-soft);color:var(--c)} .rc{border-left:5px solid var(--c)}
+.ladder{display:grid;gap:6px}
+.ladder div{border-radius:8px;padding:10px 14px;font-weight:600;color:#fff;display:flex;justify-content:space-between;gap:12px}
+.ladder span{font-family:var(--f-mono);font-size:12px;font-weight:500;opacity:.9;align-self:center}
+
+.rules{list-style:none;margin:0;padding:0;display:grid;gap:12px;counter-reset:r}
+.rules li{display:grid;grid-template-columns:auto 1fr;gap:14px;background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:16px}
+.rules li::before{counter-increment:r;content:counter(r);font:700 20px var(--f-display);color:var(--accent);width:32px;height:32px;border:2px solid var(--accent);border-radius:50%;display:grid;place-items:center}
+.rules b{display:block;font-size:18px;margin-bottom:2px}
+.check{list-style:none;margin:0;padding:0;display:grid;gap:10px}
+.check li{display:flex;gap:10px;align-items:flex-start}
+.check li::before{content:"";flex:0 0 18px;height:18px;margin-top:4px;border-radius:5px;border:2px solid var(--accent)}
+
+.fig{background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:20px 18px 16px;display:grid;gap:14px}
+.fig-head{display:grid;gap:2px}
+.fig-head .eyebrow{color:var(--accent)}
+.fig-head h3{margin:0;font-family:var(--f-display);font-weight:700;font-size:26px;line-height:1.05}
+.fig svg{display:block;width:100%;height:auto}
+.fig svg text{font-family:var(--f-mono);font-size:14px;fill:var(--muted)}
+.fig .cap{font-size:13px;color:var(--muted);margin:0}
+.abc{display:grid;gap:16px}
+.abc-row{display:grid;grid-template-columns:44px 1fr;gap:12px;align-items:start}
+.abc-badge{width:44px;height:44px;border-radius:10px;display:grid;place-items:center;font:700 28px var(--f-display);color:#fff}
+.abc-bar{height:34px;border-radius:8px;display:flex;align-items:center;padding:0 12px;color:#fff;font:600 13px var(--f-mono);letter-spacing:.04em;text-transform:uppercase;white-space:nowrap;min-width:max-content}
+.abc-chips{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px}
+.abc-chips span{font-size:14px;font-weight:600;padding:3px 10px;border-radius:999px;border:1px solid var(--line);background:var(--bg)}
+.abc-axis{display:flex;align-items:center;gap:8px;margin-left:56px;font:500 12px var(--f-mono);color:var(--muted);text-transform:uppercase;letter-spacing:.06em}
+.abc-axis i{flex:1;height:2px;background:linear-gradient(90deg,var(--a),var(--b),var(--c))}
+
+.phases{list-style:none;margin:0;padding:0;display:grid;gap:10px}
+.phases li{background:var(--surface);border:1px solid var(--line);border-left:5px solid var(--c);border-radius:12px;padding:14px 16px}
+.phases b{display:block;font-family:var(--f-display);font-size:22px;font-weight:600;line-height:1.1;margin-bottom:4px}
+.phases .ph-b{border-left-color:var(--b)} .phases .ph-a{border-left-color:var(--a)} .phases .ph-w{border-left-color:var(--warn)}
+.here{display:inline-block;margin-top:6px;font:600 13px var(--f-body);color:#fff;background:var(--b);padding:2px 10px;border-radius:999px}
+.science{display:grid;gap:10px;border-left:5px solid var(--accent)}
+.science .eyebrow{color:var(--accent)}
+.refs{margin:0;padding-left:18px;display:grid;gap:8px;font-size:15px}
+footer{margin-top:40px;padding-top:18px;border-top:1px solid var(--line);font-size:14px;color:var(--muted)}
+</style>
+<style id="kithara-skin">
+html:root:root[data-mode="light"]{--k-bg:#F4F0E8;--k-card:#FBF9F5;--k-ink:#1C1A17;--k-line:#D6CEBF;--k-gold:#8A6A2C;--k-goldtext:#8A6A2C;--k-deep:#1C1A17;--k-ondeep:#F4F0E8;--bg:#F4F0E8;--surface:#FBF9F5;--ink:#1C1A17;--muted:#5F584E;--line:#D6CEBF;--accent:#8A6A2C;--accent-soft:#EFE4CC;--a:#8A6A2C;--a-soft:#EFE4CC;--b:#3E5A2E;--b-soft:#E6EAD9;--c:#5F584E;--c-soft:#EAE3D6;--warn:#8A3B12;--warn-soft2:#F3E6DA;--f-display:"Cormorant Garamond",Georgia,serif;--f-body:Inter,system-ui,sans-serif;--f-mono:"IBM Plex Mono",ui-monospace,monospace;color-scheme:light}
+html:root:root[data-mode="dark"]{--k-bg:#17150F;--k-card:#1F1C16;--k-ink:#F2EDE3;--k-line:#35322C;--k-gold:#B08A3E;--k-goldtext:#C9A35A;--k-deep:#0F0E0A;--k-ondeep:#F2EDE3;--bg:#17150F;--surface:#1F1C16;--ink:#F2EDE3;--muted:#A79F92;--line:#35322C;--accent:#C9A35A;--accent-soft:#2C2618;--a:#C9A35A;--a-soft:#2C2618;--b:#6F8C57;--b-soft:#20261A;--c:#A79F92;--c-soft:#2A251E;--warn:#E8B48A;--warn-soft2:#2E2117;--f-display:"Cormorant Garamond",Georgia,serif;--f-body:Inter,system-ui,sans-serif;--f-mono:"IBM Plex Mono",ui-monospace,monospace;color-scheme:dark}
+html[data-mode="light"] body{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='400'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.008 .02' numOctaves='4' seed='7'/%3E%3CfeColorMatrix values='0 0 0 0 .55 0 0 0 0 .52 0 0 0 0 .47 0 0 0 1.1 -.55'/%3E%3C/filter%3E%3Crect width='400' height='400' filter='url(%23n)' opacity='.35'/%3E%3C/svg%3E")}
+
+.kbar{position:sticky;top:0;z-index:40;background:color-mix(in srgb,var(--k-bg) 94%,transparent);backdrop-filter:blur(8px);border-bottom:1px solid var(--k-line);font-family:Inter,system-ui,sans-serif}
+.kbar .in{max-width:900px;margin:0 auto;display:flex;align-items:center;gap:10px;padding:8px 16px}
+.kbar .emb{width:34px;height:34px;flex:0 0 auto}
+.kbar .emb .i{stroke:var(--k-ink)} .kbar .emb .g{stroke:var(--k-gold)}
+.kbar .nm{display:grid;line-height:1.15;color:var(--k-ink)}
+.kbar .nm b{font:700 11px Cinzel,Georgia,serif;letter-spacing:.3em;color:var(--k-goldtext)}
+.kbar .nm span{font:600 14px "Cormorant Garamond",Georgia,serif}
+.kbar .home{margin-left:auto;font:700 10px Cinzel,Georgia,serif;letter-spacing:.16em;text-decoration:none;border:1px solid var(--k-line);padding:9px 11px;border-radius:999px;background:var(--k-card);color:var(--k-ink);white-space:nowrap}
+.kbar .mode{flex:0 0 auto;width:38px;height:38px;border-radius:50%;border:1px solid var(--k-gold);background:var(--k-deep);color:var(--k-ondeep);display:grid;place-items:center;cursor:pointer;padding:0}
+.kbar .mode svg{width:16px;height:16px}
+.kmeander{height:14px;background-repeat:repeat-x;background-size:28px 14px;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='36' height='18' viewBox='0 0 36 18'%3E%3Cpath d='M0 17H30V1H6V13H22V5H14V9' fill='none' stroke='%23b08a3e' stroke-width='2'/%3E%3C/svg%3E")}
+
+.kbar{position:relative!important} h1{font-family:Cinzel,Georgia,serif!important;letter-spacing:.02em} .panel,.big-idea{border-radius:4px!important}
+</style>
+</head>
+<body>
+<header class="kbar"><div class="in">
+<svg class="emb" viewBox="0 0 100 100" aria-hidden="true"><g fill="none" stroke-linecap="round" stroke-linejoin="round">
+<circle class="g" cx="50" cy="50" r="46" stroke-width="3"/>
+<path class="i" d="M36 74 C26 60 25 42 31 28 M64 74 C74 60 75 42 69 28" stroke-width="5"/>
+<path class="g" d="M26 30 H74" stroke-width="5"/><path class="i" d="M33 76 H67" stroke-width="5"/>
+<path class="i" d="M44 33 V73 M50 33 V73 M56 33 V73" stroke-width="2.6"/></g></svg>
+<div class="nm"><b>ΚΙΘΑΡΑ</b><span>Materiais · Método de estudo</span></div>
+<a class="home" href="https://claude.ai/artifact/GsCCcF8oeWUEb3uuTE5xst">SITE</a>
+<button class="mode" id="mode" type="button" aria-label="Alternar tema"></button>
+</div></header>
+<div class="kmeander" aria-hidden="true"></div>
+
+<div class="page">
+  <header>
+    <div class="eyebrow">Método de estudo · provas difíceis</div>
+    <h1>Pareto, curva ABC e ciclo de preparação</h1>
+    <p class="lede">Os temas do encontro: como escolher o que estudar e quais questões fazer, e como organizar os meses até a prova do jeito que atletas de alto rendimento se preparam para uma competição.</p>
+  </header>
+
+  <div class="layout">
+    <nav class="toc" aria-label="Sumário"><ol>
+      <li><a href="#ideia"><span class="n">01</span>A ideia</a></li>
+      <li><a href="#pareto"><span class="n">02</span>Regra de Pareto</a></li>
+      <li><a href="#assuntos"><span class="n">03</span>Quais assuntos primeiro</a></li>
+      <li><a href="#abc"><span class="n">04</span>Curva ABC</a></li>
+      <li><a href="#ciclo"><span class="n">05</span>Ciclo de preparação</a></li>
+      <li><a href="#pratica"><span class="n">06</span>Na prática</a></li>
+      <li><a href="#resumo"><span class="n">07</span>Resumo</a></li>
+      <li><a href="#fontes"><span class="n">08</span>Fontes</a></li>
+    </ol></nav>
+
+    <main>
+      <section id="ideia">
+        <div class="step">Passo 1</div>
+        <h2>A ideia em uma frase</h2>
+        <div class="big-idea">Estudar para o ITA é como se preparar para uma competição: escolher bem onde pôr o esforço e organizar o tempo em fases até o dia da prova.</div>
+        <p>O tempo até a prova é fixo e o conteúdo não cabe inteiro nele com a mesma profundidade. Duas ideias ajudam. A regra de Pareto e a curva ABC dizem <b>onde</b> pôr o esforço: no que mais aumenta a nota. O ciclo de preparação diz <b>quando</b>: cada fase dos meses até a prova tem um objetivo diferente.</p>
+      </section>
+
+      <section id="pareto">
+        <div class="step">Passo 2</div>
+        <h2>Regra de Pareto (80/20)</h2>
+        <p>O princípio de Pareto diz que, em muitas situações, cerca de 80% dos resultados vêm de cerca de 20% das causas. Os números são uma aproximação, não uma lei. O que importa é o formato: poucas coisas respondem pela maior parte do resultado.</p>
+        <figure class="fig" id="fig-pareto">
+          <div class="fig-head"><div class="eyebrow">Regra de Pareto</div><h3>Poucas causas, a maior parte do resultado</h3></div>
+          <svg viewBox="0 0 640 312" role="img" aria-label="Gráfico de Pareto ilustrativo: 2 de 10 causas somam 80% do resultado"><rect x="48" y="24" width="108.0" height="260" rx="8" fill="var(--accent-soft)"/><line x1="48" x2="588" y1="284.0" y2="284.0" stroke="var(--line)" stroke-width="1"/><text x="40" y="288.0" text-anchor="end">0%</text><line x1="48" x2="588" y1="232.0" y2="232.0" stroke="var(--line)" stroke-width="1"/><text x="40" y="236.0" text-anchor="end">20%</text><line x1="48" x2="588" y1="180.0" y2="180.0" stroke="var(--line)" stroke-width="1"/><text x="40" y="184.0" text-anchor="end">40%</text><line x1="48" x2="588" y1="128.0" y2="128.0" stroke="var(--line)" stroke-width="1"/><text x="40" y="132.0" text-anchor="end">60%</text><line x1="48" x2="588" y1="76.0" y2="76.0" stroke="var(--line)" stroke-width="1"/><text x="40" y="80.0" text-anchor="end">80%</text><line x1="48" x2="588" y1="24.0" y2="24.0" stroke="var(--line)" stroke-width="1"/><text x="40" y="28.0" text-anchor="end">100%</text><rect x="58.3" y="174.8" width="33.5" height="109.2" rx="4" fill="var(--accent)" fill-opacity="1"/><rect x="112.3" y="185.2" width="33.5" height="98.8" rx="4" fill="var(--accent)" fill-opacity="1"/><rect x="166.3" y="268.4" width="33.5" height="15.6" rx="4" fill="var(--c)" fill-opacity=".45"/><rect x="220.3" y="273.6" width="33.5" height="10.4" rx="4" fill="var(--c)" fill-opacity=".45"/><rect x="274.3" y="276.2" width="33.5" height="7.8" rx="4" fill="var(--c)" fill-opacity=".45"/><rect x="328.3" y="278.8" width="33.5" height="5.2" rx="4" fill="var(--c)" fill-opacity=".45"/><rect x="382.3" y="278.8" width="33.5" height="5.2" rx="4" fill="var(--c)" fill-opacity=".45"/><rect x="436.3" y="281.4" width="33.5" height="2.6" rx="4" fill="var(--c)" fill-opacity=".45"/><rect x="490.3" y="281.4" width="33.5" height="2.6" rx="4" fill="var(--c)" fill-opacity=".45"/><rect x="544.3" y="281.4" width="33.5" height="2.6" rx="4" fill="var(--c)" fill-opacity=".45"/><line x1="48" x2="588" y1="76.0" y2="76.0" stroke="var(--ink)" stroke-width="1.5" stroke-dasharray="6 5" opacity=".55"/><path d="M75.0 174.8 L129.0 76.0 L183.0 60.4 L237.0 50.0 L291.0 42.2 L345.0 37.0 L399.0 31.8 L453.0 29.2 L507.0 26.6 L561.0 24.0" fill="none" stroke="var(--ink)" stroke-width="2.5" stroke-linejoin="round"/><circle cx="75.0" cy="174.8" r="3.5" fill="var(--ink)"/><circle cx="129.0" cy="76.0" r="7" fill="var(--surface)" stroke="var(--accent)" stroke-width="3.5"/><circle cx="183.0" cy="60.4" r="3.5" fill="var(--ink)"/><circle cx="237.0" cy="50.0" r="3.5" fill="var(--ink)"/><circle cx="291.0" cy="42.2" r="3.5" fill="var(--ink)"/><circle cx="345.0" cy="37.0" r="3.5" fill="var(--ink)"/><circle cx="399.0" cy="31.8" r="3.5" fill="var(--ink)"/><circle cx="453.0" cy="29.2" r="3.5" fill="var(--ink)"/><circle cx="507.0" cy="26.6" r="3.5" fill="var(--ink)"/><circle cx="561.0" cy="24.0" r="3.5" fill="var(--ink)"/><text x="143.0" y="100.0" style="fill:var(--ink);font-size:17px;font-weight:600;font-family:var(--f-body)">80% do resultado</text><text x="143.0" y="118.0" style="font-size:15px">vem de 2 das 10 causas</text><text x="102.0" y="306" text-anchor="middle" style="fill:var(--accent);font-weight:600">20% das causas</text><text x="372.0" y="306" text-anchor="middle">os outros 80% das causas</text></svg>
+          <div style="display:flex;flex-wrap:wrap;gap:6px 18px;font-size:13px;color:var(--muted)"><span><i style="display:inline-block;width:12px;height:12px;border-radius:3px;background:var(--accent);vertical-align:-1px;margin-right:6px"></i>contribuição de cada causa, da maior para a menor</span><span><i style="display:inline-block;width:16px;height:3px;background:var(--ink);vertical-align:3px;margin-right:6px"></i>resultado acumulado</span></div>
+          <p class="cap">Ilustração com números redondos para mostrar o formato. Não são dados de um aluno real.</p>
+        </figure>
+        <div class="ask"><b>Pergunta-guia</b><p>Antes de cada decisão de estudo: isso está nos 20% que mais dão resultado?</p></div>
+        <p><a href="https://pt.wikipedia.org/wiki/Princ%C3%ADpio_de_Pareto">Princípio de Pareto na Wikipédia</a></p>
+      </section>
+
+      <section id="assuntos">
+        <div class="step">Passo 3</div>
+        <h2>Quais assuntos primeiro</h2>
+        <p>Aplicada ao conteúdo, a regra põe na frente os assuntos que mais caem no ITA. Um assunto que aparece em quase toda prova vale mais horas do que um que aparece de vez em quando, mesmo que os dois tenham o mesmo número de aulas.</p>
+        <div class="panel">
+          <p><b>Onde isso aparece:</b> na aba Prioridades da planilha. A ordem das aulas passa a seguir dois critérios juntos: o quanto o assunto cai no ITA e a urgência que você sente naquele conteúdo.</p>
+        </div>
+        <div class="ask"><b>Pergunta-guia</b><p>Esse assunto cai muito no ITA? Se cai, ele sobe na fila.</p></div>
+      </section>
+
+      <section id="abc">
+        <div class="step">Passo 4</div>
+        <h2>Curva ABC das questões</h2>
+        <p>A mesma lógica vale para as questões. Cada fonte de exercício entra em uma região, de acordo com o retorno que dá, por hora de estudo, para passar no ITA.</p>
+        <figure class="fig" id="fig-abc">
+          <div class="fig-head"><div class="eyebrow">Curva ABC das questões</div><h3>Onde cada hora de exercício rende mais</h3></div>
+          <div class="abc">
+            <div class="abc-row"><div class="abc-badge" style="background:var(--a)">A</div><div>
+              <div class="abc-bar" style="background:var(--a);width:100%">Maior retorno</div>
+              <div class="abc-chips"><span>ITA recente</span><span>IME recente</span><span>objetivas e discursivas</span></div></div></div>
+            <div class="abc-row"><div class="abc-badge" style="background:var(--b)">B</div><div>
+              <div class="abc-bar" style="background:var(--b);width:64%">Complemento</div>
+              <div class="abc-chips"><span>AFA · EFOMM · Escola Naval · EsPCEx</span><span>Unicamp e Fuvest 2ª fase</span><span>Olimpíada, fases iniciais</span><span>ITA e IME antigos</span></div></div></div>
+            <div class="abc-row"><div class="abc-badge" style="background:var(--c)">C</div><div>
+              <div class="abc-bar" style="background:var(--c);width:32%">Pouco retorno</div>
+              <div class="abc-chips"><span>ENEM e nível básico</span><span>Olimpíada, fases finais</span><span>Livro didático genérico</span></div></div></div>
+          </div>
+          <div class="abc-axis">mais retorno<i></i>menos retorno</div>
+        </figure>
+        <div class="regions">
+          <div class="region ra"><div class="letter">A</div><div>
+            <span class="tag">Maior retorno</span>
+            <h3>O que mais se parece com a prova</h3>
+            <p>Mostra o estilo e o nível atuais da banca. Fica com a maior parte do tempo de exercício.</p>
+            <ul><li>ITA dos últimos 10 a 15 anos, objetivas e discursivas</li><li>IME dos últimos 10 a 15 anos, objetivas e discursivas</li></ul>
+          </div></div>
+          <div class="region rb"><div class="letter">B</div><div>
+            <span class="tag">Complemento</span>
+            <h3>Conteúdo e formato um nível abaixo</h3>
+            <p>Treina o mesmo conteúdo com outras bancas e outros formatos.</p>
+            <ul><li>Vestibulares militares: AFA, EFOMM, Escola Naval, EsPCEx</li><li>Unicamp e Fuvest, 2ª fase de exatas</li><li>Fases iniciais de olimpíada: OBF, OBM, OBQ</li><li>ITA e IME mais antigos, depois de esgotar os recentes do assunto</li></ul>
+          </div></div>
+          <div class="region rc"><div class="letter">C</div><div>
+            <span class="tag">Pouco retorno</span>
+            <h3>Fora do foco</h3>
+            <p>Fácil demais para gerar ganho, ou caro demais em tempo.</p>
+            <ul><li>ENEM e vestibulares de nível básico</li><li>Fases finais de olimpíada: muito tempo e conteúdo fora do edital</li><li>Exercícios genéricos de livro didático, só para fixar um conceito em que você travou</li></ul>
+          </div></div>
+        </div>
+      </section>
+
+      <section id="ciclo">
+        <div class="step">Passo 5</div>
+        <h2>Ciclo de preparação</h2>
+        <p>Atletas que precisam render no máximo num dia ou num período específico, como no powerlifting, na maratona ou no vôlei, não treinam igual o ano todo. Eles dividem a preparação em fases. A ciência do esporte chama isso de periodização, e o modelo clássico, de Matveev, separa a temporada em período preparatório, competitivo e de transição. A mesma lógica vale para quem se prepara para o ITA.</p>
+        <figure class="fig" id="fig-ciclo">
+          <div class="fig-head"><div class="eyebrow">Ciclo de preparação</div><h3>Quatro fases até o dia da prova</h3></div>
+          <svg viewBox="0 0 640 330" role="img" aria-label="Ciclo de preparação em quatro fases, com a curva de volume e a de intensidade"><rect x="20.0" y="40" width="75.0" height="230" rx="8" fill="var(--c-soft)"/><text x="59.0" y="26" text-anchor="middle" style="fill:var(--ink);font-family:var(--f-body);font-weight:700;font-size:15px">Pós-competição</text><rect x="98.0" y="40" width="147.0" height="230" rx="8" fill="var(--b-soft)"/><text x="173.0" y="26" text-anchor="middle" style="fill:var(--ink);font-family:var(--f-body);font-weight:700;font-size:15px">Pré-treino</text><rect x="248.0" y="40" width="249.0" height="230" rx="8" fill="var(--a-soft)"/><text x="374.0" y="26" text-anchor="middle" style="fill:var(--ink);font-family:var(--f-body);font-weight:700;font-size:15px">Execução</text><rect x="500.0" y="40" width="117.0" height="230" rx="8" fill="var(--warn-soft2)"/><text x="560.0" y="26" text-anchor="middle" style="fill:var(--ink);font-family:var(--f-body);font-weight:700;font-size:15px">Polimento</text><path d="M20.0 228.6 C32.0 227.8,54.0 240.1,92.0 224.0 C130.0 207.9,198.0 157.3,248.0 132.0 C298.0 106.7,350.0 83.7,392.0 72.2 C434.0 60.7,472.0 53.8,500.0 63.0 C528.0 72.2,540.0 110.5,560.0 127.4 C580.0 144.3,610.0 158.1,620.0 164.2" fill="none" stroke="var(--accent)" stroke-width="4" stroke-linecap="round"/><path d="M20.0 237.8 C32.0 236.7,54.0 243.9,92.0 230.9 C130.0 217.9,198.0 180.7,248.0 159.6 C298.0 138.5,350.0 117.4,392.0 104.4 C434.0 91.4,472.0 87.2,500.0 81.4 C528.0 75.7,540.0 72.6,560.0 69.9 C580.0 67.2,610.0 66.1,620.0 65.3" fill="none" stroke="var(--ink)" stroke-width="2.5" stroke-dasharray="7 6" stroke-linecap="round"/><line x1="140.0" x2="140.0" y1="50" y2="270" stroke="var(--b)" stroke-width="2"/><rect x="96.0" y="280" width="88" height="26" rx="13" fill="var(--b)"/><text x="140.0" y="298" text-anchor="middle" style="fill:#fff;font-family:var(--f-body);font-weight:700;font-size:14px">Exemplo</text><text x="620.0" y="298" text-anchor="end" style="font-size:13px">prova →</text><text x="578.0" y="194.2" text-anchor="middle" style="fill:var(--accent);font-weight:600;font-size:13px">volume cai</text><text x="560.0" y="53.0" text-anchor="middle" style="fill:var(--ink);font-weight:600;font-size:13px">ritmo fica</text></svg>
+          <div style="display:flex;flex-wrap:wrap;gap:6px 18px;font-size:13px;color:var(--muted)"><span><i style="display:inline-block;width:16px;height:4px;border-radius:2px;background:var(--accent);vertical-align:3px;margin-right:6px"></i>volume (quanto se estuda)</span><span><i style="display:inline-block;width:16px;height:0;border-top:3px dashed var(--ink);vertical-align:3px;margin-right:6px"></i>intensidade (nível de prova)</span></div>
+          <p class="cap">Desenho do formato do ciclo. A duração de cada fase é definida para cada aluno.</p>
+        </figure>
+        <ol class="phases">
+          <li class="ph-c"><b>Pós-competição</b>Analisar o que aconteceu na última prova e descansar. É o que fecha um ciclo e prepara o próximo.</li>
+          <li class="ph-b"><b>Pré-treino</b>Construir a base para não se machucar depois e criar ritmo. Tem vários nomes, como pré-temporada ou preparação geral.</li>
+          <li class="ph-a"><b>Execução</b>A fase de volume, que ocupa a maior parte do tempo e onde o Pareto da preparação se aplica. Não dá para chegar nela sem ter feito as fases anteriores.</li>
+          <li class="ph-w"><b>Polimento</b>A reta final antes da prova. Não dá para parar de treinar, senão você chega sem prática, nem manter a mesma carga, senão você chega cansado. O equilíbrio é difícil e pede estratégia.</li>
+        </ol>
+        <div class="panel science">
+          <div class="eyebrow">O que a pesquisa diz sobre o polimento</div>
+          <p>Uma meta-análise de 27 estudos com atletas de competição (Bosquet e colegas, 2007) concluiu que a estratégia mais eficiente é um polimento de cerca de duas semanas, em que o volume de treino cai entre 41% e 60% e a intensidade e a frequência se mantêm.</p>
+          <p>Com powerlifters de elite da Nova Zelândia (Pritchard e colegas, 2016), o padrão foi parecido: o volume caiu cerca de 59%, a intensidade foi mantida, e os atletas relataram que o polimento dava errado quando eles ficavam uma semana ou mais sem treinar.</p>
+          <p class="note">Ou seja: cortar quantidade, manter o nível. Como isso vira dias e listas depende de cada aluno.</p>
+        </div>
+      </section>
+
+      <section id="pratica">
+        <div class="step">Passo 6</div>
+        <h2>Na prática</h2>
+        <ol class="rules">
+          <li><div><b>Comece pela A</b>Em cada assunto, as primeiras questões depois da teoria vêm do ITA e do IME recentes.</div></li>
+          <li><div><b>B quando a A do assunto acabar</b>Esgotou as recentes? Aí entram as provas mais antigas e as outras bancas da Região B.</div></li>
+          <li><div><b>Se o tempo apertar, corte de baixo para cima</b>Primeiro sai a C, depois a B. A Região A é a última coisa a ser cortada.</div></li>
+          <li><div><b>C só com motivo</b>Questão fácil de livro serve para destravar um conceito específico, não para fazer volume.</div></li>
+        </ol>
+      </section>
+
+      <section id="resumo">
+        <div class="step">Passo 7</div>
+        <h2>Resumo</h2>
+        <div class="panel">
+          <ul class="check">
+            <li>Decida pelo que gera mais resultado no prazo mais curto.</li>
+            <li>Assunto que cai muito no ITA sobe na fila da aba Prioridades.</li>
+            <li>Questão de ITA e IME recentes vem antes de qualquer outra.</li>
+            <li>B complementa, C só para destravar conceito.</li>
+            <li>A preparação tem fases. Agora é pré-treino: base e ritmo antes do volume.</li>
+          </ul>
+        </div>
+      </section>
+
+      <section id="fontes">
+        <div class="step">Passo 8</div>
+        <h2>Fontes</h2>
+        <ul class="refs">
+          <li><a href="https://pt.wikipedia.org/wiki/Princ%C3%ADpio_de_Pareto">Princípio de Pareto</a>, Wikipédia</li>
+          <li>Bosquet, Montpetit, Arvisais e Mujika (2007). <a href="https://pubmed.ncbi.nlm.nih.gov/17762369/">Effects of tapering on performance: a meta-analysis</a>. Medicine &amp; Science in Sports &amp; Exercise.</li>
+          <li>Pritchard, Tod, Barnes, Keogh e McGuigan (2016). <a href="https://pubmed.ncbi.nlm.nih.gov/26670988/">Tapering practices of New Zealand's elite raw powerlifters</a>. Journal of Strength and Conditioning Research.</li>
+          <li>Travis, Mujika, Gentles, Stone e Bazyler (2020). <a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC7552788/">Tapering and peaking maximal strength for powerlifting performance: a review</a>. Sports.</li>
+          <li>Wang e colegas (2023). <a href="https://pubmed.ncbi.nlm.nih.gov/37163550/">Effects of tapering on performance in endurance athletes: a systematic review and meta-analysis</a>. PLOS ONE.</li>
+          <li><a href="https://revistas.ut.edu.co/index.php/edufisica/article/download/2501/2334/9377">Períodos da periodização esportiva de Matveev</a>, revisão na revista Edu-física.</li>
+        </ul>
+      </section>
+
+      <footer>Material de método de estudo de Pablo Carvalho, usado nas mentorias.</footer>
+    </main>
+  </div>
+</div>
+<script>
+const links=[...document.querySelectorAll(".toc a")];
+const secs=links.map(a=>document.querySelector(a.getAttribute("href")));
+function mark(){
+  const y=window.scrollY+120; let cur=0;
+  secs.forEach((s,i)=>{ if(s.offsetTop<=y) cur=i; });
+  if(window.innerHeight+window.scrollY>=document.body.scrollHeight-4) cur=secs.length-1;
+  links.forEach((a,i)=>a.classList.toggle("on",i===cur));
+  const on=links[cur]; if(on && window.innerWidth<900){ const bar=on.closest("ol"); bar.scrollTo({left:on.offsetLeft-16,behavior:"smooth"}); }
+}
+let t; window.addEventListener("scroll",()=>{clearTimeout(t);t=setTimeout(mark,60)},{passive:true});
+mark();
+</script>
+<script>(function(){var r=document.documentElement,b=document.getElementById("mode");if(!b)return;
+var sun='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg>';
+var moon='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg>';
+function p(){var d=r.getAttribute("data-mode")==="dark";b.innerHTML=d?sun:moon;b.setAttribute("aria-label",d?"Mudar para o tema claro (Musageta)":"Mudar para o tema escuro (Bronze)");}
+p();b.addEventListener("click",function(){var n=r.getAttribute("data-mode")==="dark"?"light":"dark";r.setAttribute("data-mode",n);try{localStorage.setItem("kth-mode",n)}catch(e){}p();if(window.onKthMode)window.onKthMode(n);});})();</script></body>
+</html>

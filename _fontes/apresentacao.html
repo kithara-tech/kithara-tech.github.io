@@ -1,0 +1,513 @@
+<!DOCTYPE html>
+<html lang="pt-BR" data-look="kithara">
+<head>
+<script>(function(){var m=null;try{m=localStorage.getItem("kth-mode")}catch(e){}if(m!=="dark"&&m!=="light"){m=(window.matchMedia&&matchMedia("(prefers-color-scheme: dark)").matches)?"dark":"light"}document.documentElement.setAttribute("data-mode",m)})();</script>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700;900&family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500;1,600&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Pablo Carvalho · Música e Engenharia · Kithara</title>
+
+
+
+<style>
+/* Duas direções na mesma página, trocadas por data-look.
+   Palco: cartaz de show, cores primárias quentes, bordas de tinta, tipografia grotesca grande.
+   Kithara solar: mármore claro, ouro + lápis-lazúli + coral, display clássico.
+   Layout: coluna única mobile first, hero com arte de cordas vibrando, abas em pílula coloridas. */
+:root{
+  --bg:#fdfbf6; --surface:#ffffff; --ink:#16120f; --muted:#5b554d; --line:#16120f;
+  --c1:#ff4b2b; --c2:#2d5bff; --c3:#ffc531; --c4:#16b386; --soft:#fff1c4;
+  --display:"Bricolage Grotesque", "Arial Black", system-ui, sans-serif;
+  --body:"Outfit", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --mono:"IBM Plex Mono", ui-monospace, Menlo, monospace;
+  --radius:20px; --bw:2px; --shadow:4px 4px 0 var(--ink);
+  --h1:clamp(52px,15vw,96px); --h1w:800; --h1track:-.03em; --h2w:800;
+  color-scheme: light;
+}
+html[data-look="kithara"]{
+  --bg:#f5f3ee; --surface:#ffffff; --ink:#1a2240; --muted:#5a6076; --line:#e1dccf;
+  --c1:#c08a2a; --c2:#2a4aa8; --c3:#e2684f; --c4:#2e8f86; --soft:#f4e8cd;
+  --display:"Cormorant Garamond", Garamond, "Times New Roman", serif;
+  --radius:14px; --bw:1px; --shadow:0 10px 30px -18px rgba(26,34,64,.45);
+  --h1:clamp(50px,14vw,88px); --h1w:700; --h1track:-.01em; --h2w:700;
+}
+*{box-sizing:border-box}
+html,body{margin:0}
+body{background:var(--bg);color:var(--ink);font-family:var(--body);font-size:16px;line-height:1.6;-webkit-text-size-adjust:100%}
+a{color:inherit}
+:focus-visible{outline:3px solid var(--c2);outline-offset:2px;border-radius:6px}
+
+/* HERO */
+.hero{position:relative;overflow:hidden;border-bottom:var(--bw) solid var(--line)}
+.hero canvas{position:absolute;inset:0;width:100%;height:100%;display:block}
+.hero .inner{position:relative;max-width:760px;margin:0 auto;padding:34px 20px 30px;display:grid;gap:12px}
+.tagrow{display:flex;flex-wrap:wrap;gap:6px}
+.tag{font:500 12px/1 var(--mono);letter-spacing:.04em;padding:7px 10px;border-radius:999px;background:var(--surface);border:var(--bw) solid var(--line)}
+.tag.a{background:var(--c3)}
+html[data-look="kithara"] .tag.a{background:var(--soft);color:var(--ink)}
+h1{font-family:var(--display);font-weight:var(--h1w);font-size:var(--h1);line-height:.9;letter-spacing:var(--h1track);margin:6px 0 0;text-wrap:balance}
+h1 .two{display:block;color:var(--c1)}
+html[data-look="palco"] h1 .two{-webkit-text-stroke:0}
+.lead{font-size:18px;max-width:34ch;margin:0;background:var(--surface);border:var(--bw) solid var(--line);border-radius:var(--radius);padding:12px 14px;box-shadow:var(--shadow)}
+html[data-look="kithara"] .lead{background:rgba(255,255,255,.82);backdrop-filter:blur(4px)}
+
+/* TABS */
+nav.tabs{position:sticky;top:0;z-index:5;background:var(--bg);border-bottom:var(--bw) solid var(--line)}
+nav.tabs .inner{max-width:760px;margin:0 auto;display:flex;gap:8px;overflow-x:auto;padding:10px 16px;scrollbar-width:none}
+nav.tabs .inner::-webkit-scrollbar{display:none}
+nav.tabs button{flex:0 0 auto;font:600 14px/1 var(--body);color:var(--ink);background:var(--surface);border:var(--bw) solid var(--line);border-radius:999px;padding:10px 14px;cursor:pointer;white-space:nowrap}
+nav.tabs button[aria-selected="true"]{background:var(--sec);color:#fff;border-color:var(--sec)}
+html[data-look="palco"] nav.tabs button[aria-selected="true"]{border-color:var(--ink);box-shadow:2px 2px 0 var(--ink)}
+nav.tabs button[data-sec="c3"][aria-selected="true"]{color:var(--ink)}
+
+[data-sec="c1"]{--sec:var(--c1)} [data-sec="c2"]{--sec:var(--c2)} [data-sec="c3"]{--sec:var(--c3)} [data-sec="c4"]{--sec:var(--c4)} [data-sec="ink"]{--sec:var(--ink)}
+
+main{max-width:760px;margin:0 auto;padding:26px 20px 60px}
+section.panel{display:none;gap:22px}
+section.panel.active{display:grid}
+.eyebrow{font:500 12px/1.2 var(--mono);letter-spacing:.06em;text-transform:uppercase;color:var(--sec,var(--muted))}
+h2{font-family:var(--display);font-weight:var(--h2w);font-size:clamp(32px,8vw,46px);line-height:1;letter-spacing:-.02em;margin:0;text-wrap:balance}
+html[data-look="kithara"] h2{letter-spacing:0}
+h2 em{font-style:normal;color:var(--sec)}
+html[data-look="kithara"] h2 em{font-style:italic}
+h3{font-family:var(--body);font-weight:600;font-size:17px;margin:0}
+p{margin:0;max-width:62ch}
+.block{display:grid;gap:10px}
+.muted{color:var(--muted)}
+.small{font-size:15px}
+
+.quote{margin:0;font-family:var(--display);font-weight:var(--h2w);font-size:clamp(24px,6vw,32px);line-height:1.15;text-wrap:balance;padding:20px;border-radius:var(--radius);background:var(--c2);color:#fff;border:var(--bw) solid var(--line);box-shadow:var(--shadow);position:relative}
+html[data-look="kithara"] .quote{background:var(--ink);font-style:italic;border:0}
+.quote span{color:var(--c3)}
+html[data-look="kithara"] .quote span{color:var(--soft)}
+
+.facts{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}
+.fact{border:var(--bw) solid var(--line);border-radius:var(--radius);padding:14px;display:grid;gap:4px;box-shadow:var(--shadow);background:var(--surface)}
+.fact:nth-child(1){background:var(--c3)} .fact:nth-child(2){background:var(--c4);color:#fff} .fact:nth-child(3){background:var(--c1);color:#fff} .fact:nth-child(4){background:var(--surface)}
+html[data-look="kithara"] .fact{background:var(--surface)!important;color:var(--ink)!important;border-top:4px solid var(--c1)}
+html[data-look="kithara"] .fact:nth-child(2){border-top-color:var(--c2)} html[data-look="kithara"] .fact:nth-child(3){border-top-color:var(--c3)} html[data-look="kithara"] .fact:nth-child(4){border-top-color:var(--c4)}
+.fact b{font-family:var(--display);font-size:34px;font-weight:var(--h1w);line-height:1;font-variant-numeric:tabular-nums}
+.fact span{font-size:14px;line-height:1.3;opacity:.92}
+
+.paths{display:grid;gap:10px}
+.path{display:grid;grid-template-columns:auto 1fr auto;align-items:center;gap:14px;text-align:left;background:var(--surface);border:var(--bw) solid var(--line);border-radius:var(--radius);padding:14px 16px;font:inherit;color:inherit;cursor:pointer;box-shadow:var(--shadow);transition:transform .15s ease}
+.path:hover{transform:translate(-1px,-2px)}
+.path .dot{width:38px;height:38px;border-radius:50%;background:var(--sec);display:grid;place-items:center;color:#fff;font-weight:700;font-family:var(--display);font-size:18px}
+.path[data-sec="c3"] .dot{color:var(--ink)}
+.path b{display:block;font-weight:600}
+.path small{display:block;color:var(--muted);font-size:14px;line-height:1.4;margin-top:2px}
+.path .arrow{font-size:22px;color:var(--sec)}
+
+.chips{display:flex;flex-wrap:wrap;gap:8px}
+.chip{font-size:14px;font-weight:500;padding:6px 12px;border:var(--bw) solid var(--line);border-radius:999px;background:var(--surface)}
+.chip.strong{background:var(--sec);color:#fff;border-color:var(--line)}
+html[data-look="kithara"] .chip.strong{border-color:var(--sec)}
+.chip:nth-child(3n+2).strong{background:var(--c1)} .chip:nth-child(3n).strong{background:var(--c4)}
+
+.card{background:var(--surface);border:var(--bw) solid var(--line);border-radius:var(--radius);padding:18px;display:grid;gap:10px;box-shadow:var(--shadow);position:relative}
+.card.tint{background:var(--soft)}
+html[data-look="kithara"] .card{border-left:4px solid var(--sec,var(--c1))}
+.kv{display:grid;grid-template-columns:auto 1fr;gap:8px 14px;font-size:15px;margin:0}
+.kv dt{font:500 11px/1.6 var(--mono);color:var(--muted);padding-top:3px;text-transform:uppercase;letter-spacing:.05em}
+.kv dd{margin:0}
+
+.steps{list-style:none;margin:0;padding:0;display:grid;gap:12px;counter-reset:s}
+.steps li{display:grid;grid-template-columns:32px 1fr;gap:10px;align-items:start}
+.steps li::before{content:counter(s);counter-increment:s;font:700 14px/1 var(--body);background:var(--sec,var(--c2));color:#fff;border-radius:50%;width:28px;height:28px;display:grid;place-items:center}
+
+.status{font:500 11px/1 var(--mono);text-transform:uppercase;letter-spacing:.06em;padding:6px 9px;border-radius:999px;justify-self:start;background:var(--c4);color:#fff}
+.status.wip{background:var(--c3);color:var(--ink)}
+
+.range{display:grid;gap:8px}
+.keys{width:100%;height:auto;display:block}
+.legend{display:flex;flex-wrap:wrap;gap:14px;font-size:14px;color:var(--muted)}
+.legend i{display:inline-block;width:14px;height:14px;border-radius:4px;vertical-align:-2px;margin-right:6px;border:1px solid var(--ink)}
+
+.sticker{position:absolute;top:-12px;right:14px;transform:rotate(4deg);font:700 12px/1 var(--body);padding:7px 10px;border-radius:8px;background:var(--c3);color:var(--ink);border:var(--bw) solid var(--line)}
+html[data-look="kithara"] .sticker{background:var(--ink);color:var(--soft);border:0;transform:none}
+
+.contact{display:grid;gap:12px}
+.contact a{display:grid;grid-template-columns:auto 1fr auto;align-items:center;gap:14px;padding:16px;background:var(--surface);border:var(--bw) solid var(--line);border-radius:var(--radius);text-decoration:none;box-shadow:var(--shadow)}
+.contact .ic{width:42px;height:42px;border-radius:12px;display:grid;place-items:center;color:#fff;font-weight:700}
+.contact b{display:block}
+.contact small{color:var(--muted);overflow-wrap:anywhere}
+
+/* Seletor de visual (temporário, para comparar) */
+.look{position:fixed;right:12px;bottom:12px;z-index:9;display:flex;gap:4px;padding:4px;border-radius:999px;background:var(--ink);box-shadow:0 8px 24px -10px rgba(0,0,0,.5)}
+.look span{font:500 11px/1 var(--mono);color:#fff;opacity:.7;align-self:center;padding:0 6px 0 10px}
+.look button{font:600 13px/1 var(--body);border:0;border-radius:999px;padding:9px 12px;background:transparent;color:#fff;cursor:pointer}
+.look button[aria-pressed="true"]{background:#fff;color:var(--ink)}
+
+footer{max-width:760px;margin:0 auto;padding:0 20px 80px;color:var(--muted);font-size:13px}
+@media (min-width:640px){ .facts{grid-template-columns:repeat(4,1fr)} }
+@media (prefers-reduced-motion:no-preference){
+  section.panel.active{animation:pop .3s ease}
+  @keyframes pop{from{opacity:.3;transform:translateY(6px)}to{opacity:1;transform:none}}
+}
+</style>
+<style id="kithara-skin">
+html:root:root[data-mode="light"]{--k-bg:#F4F0E8;--k-card:#FBF9F5;--k-ink:#1C1A17;--k-line:#D6CEBF;--k-gold:#8A6A2C;--k-goldtext:#8A6A2C;--k-deep:#1C1A17;--k-ondeep:#F4F0E8;--bg:#F4F0E8;--surface:#FBF9F5;--ink:#1C1A17;--muted:#5F584E;--line:#D6CEBF;--c1:#8A6A2C;--c2:#1C1A17;--c3:#C9A35A;--c4:#3E5A2E;--soft:#EFE4CC;--display:"Cormorant Garamond",Georgia,serif;--body:Inter,system-ui,sans-serif;--mono:"IBM Plex Mono",ui-monospace,monospace;--radius:4px;--bw:1px;--shadow:none;--h1w:700;--h1track:.01em;--h2w:700;color-scheme:light}
+html:root:root[data-mode="dark"]{--k-bg:#17150F;--k-card:#1F1C16;--k-ink:#F2EDE3;--k-line:#35322C;--k-gold:#B08A3E;--k-goldtext:#C9A35A;--k-deep:#0F0E0A;--k-ondeep:#F2EDE3;--bg:#17150F;--surface:#1F1C16;--ink:#F2EDE3;--muted:#A79F92;--line:#35322C;--c1:#B08A3E;--c2:#6B5527;--c3:#E2C27F;--c4:#4B6A3A;--soft:#2C2618;--display:"Cormorant Garamond",Georgia,serif;--body:Inter,system-ui,sans-serif;--mono:"IBM Plex Mono",ui-monospace,monospace;--radius:4px;--bw:1px;--shadow:none;--h1w:700;--h1track:.01em;--h2w:700;color-scheme:dark}
+html[data-mode="light"] body{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='400'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.008 .02' numOctaves='4' seed='7'/%3E%3CfeColorMatrix values='0 0 0 0 .55 0 0 0 0 .52 0 0 0 0 .47 0 0 0 1.1 -.55'/%3E%3C/filter%3E%3Crect width='400' height='400' filter='url(%23n)' opacity='.35'/%3E%3C/svg%3E")}
+
+.kbar{position:sticky;top:0;z-index:40;background:color-mix(in srgb,var(--k-bg) 94%,transparent);backdrop-filter:blur(8px);border-bottom:1px solid var(--k-line);font-family:Inter,system-ui,sans-serif}
+.kbar .in{max-width:900px;margin:0 auto;display:flex;align-items:center;gap:10px;padding:8px 16px}
+.kbar .emb{width:34px;height:34px;flex:0 0 auto}
+.kbar .emb .i{stroke:var(--k-ink)} .kbar .emb .g{stroke:var(--k-gold)}
+.kbar .nm{display:grid;line-height:1.15;color:var(--k-ink)}
+.kbar .nm b{font:700 11px Cinzel,Georgia,serif;letter-spacing:.3em;color:var(--k-goldtext)}
+.kbar .nm span{font:600 14px "Cormorant Garamond",Georgia,serif}
+.kbar .home{margin-left:auto;font:700 10px Cinzel,Georgia,serif;letter-spacing:.16em;text-decoration:none;border:1px solid var(--k-line);padding:9px 11px;border-radius:999px;background:var(--k-card);color:var(--k-ink);white-space:nowrap}
+.kbar .mode{flex:0 0 auto;width:38px;height:38px;border-radius:50%;border:1px solid var(--k-gold);background:var(--k-deep);color:var(--k-ondeep);display:grid;place-items:center;cursor:pointer;padding:0}
+.kbar .mode svg{width:16px;height:16px}
+.kmeander{height:14px;background-repeat:repeat-x;background-size:28px 14px;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='36' height='18' viewBox='0 0 36 18'%3E%3Cpath d='M0 17H30V1H6V13H22V5H14V9' fill='none' stroke='%23b08a3e' stroke-width='2'/%3E%3C/svg%3E")}
+
+.kbar{position:relative!important} .look{display:none!important} h1{font-family:Cinzel,Georgia,serif!important;letter-spacing:.02em!important} html[data-mode="dark"] .quote{background:#0F0E0A!important;color:#F2EDE3!important;border:1px solid #6B5527!important} html[data-mode="light"] .quote{background:#1C1A17!important;color:#F4F0E8!important} html[data-mode="dark"] [data-sec="ink"]{--sec:#6B5527} .fact b{font-family:Cinzel,Georgia,serif!important} .lead{background:var(--surface)!important;color:var(--ink)!important;backdrop-filter:none!important} .quote span{color:#E2C27F!important}
+</style>
+</head>
+<body>
+<header class="kbar"><div class="in">
+<svg class="emb" viewBox="0 0 100 100" aria-hidden="true"><g fill="none" stroke-linecap="round" stroke-linejoin="round">
+<circle class="g" cx="50" cy="50" r="46" stroke-width="3"/>
+<path class="i" d="M36 74 C26 60 25 42 31 28 M64 74 C74 60 75 42 69 28" stroke-width="5"/>
+<path class="g" d="M26 30 H74" stroke-width="5"/><path class="i" d="M33 76 H67" stroke-width="5"/>
+<path class="i" d="M44 33 V73 M50 33 V73 M56 33 V73" stroke-width="2.6"/></g></svg>
+<div class="nm"><b>ΚΙΘΑΡΑ</b><span>Apresentação</span></div>
+<a class="home" href="https://claude.ai/artifact/GsCCcF8oeWUEb3uuTE5xst">SITE</a>
+<button class="mode" id="mode" type="button" aria-label="Alternar tema"></button>
+</div></header>
+<div class="kmeander" aria-hidden="true"></div>
+
+
+<header class="hero">
+  <canvas id="art" aria-hidden="true"></canvas>
+  <div class="inner">
+    <div class="tagrow">
+      <span class="tag a">Músico</span>
+      <span class="tag">Eng. Computação · ITA · T27</span>
+    </div>
+    <h1>Pablo<span class="two">Carvalho</span></h1>
+    <p class="lead">Toco, canto, componho e dirijo bandas. No ITA, aprendi a construir as ferramentas que fazem um evento acontecer.</p>
+  </div>
+</header>
+
+<nav class="tabs" aria-label="Seções">
+  <div class="inner" role="tablist">
+    <button role="tab" id="tab-resumo" aria-controls="resumo" data-tab="resumo" data-sec="ink">Resumo</button>
+    <button role="tab" id="tab-musica" aria-controls="musica" data-tab="musica" data-sec="c2">Músico</button>
+    <button role="tab" id="tab-autorais" aria-controls="autorais" data-tab="autorais" data-sec="c1">Autorais</button>
+    <button role="tab" id="tab-palco" aria-controls="palco" data-tab="palco" data-sec="c4">Eventos e agência</button>
+    <button role="tab" id="tab-ita" aria-controls="ita" data-tab="ita" data-sec="c2">ITA e engenharia</button>
+    <button role="tab" id="tab-contato" aria-controls="contato" data-tab="contato" data-sec="c1">Contato</button>
+  </div>
+</nav>
+
+<main>
+
+<!-- RESUMO -->
+<section class="panel" id="resumo" role="tabpanel" aria-labelledby="tab-resumo" data-sec="c2">
+  <blockquote class="quote">Código e música são linguagens. A arte me dá <span>inovação e comunicação</span>; a lógica me dá <span>estrutura e execução</span>.</blockquote>
+
+  <div class="facts">
+    <div class="fact"><b>13 anos</b><span>estudando música por conta própria, desde os 12</span></div>
+    <div class="fact"><b>6</b><span>instrumentos em nível avançado, e voz</span></div>
+    <div class="fact"><b>~10</b><span>músicas autorais, letras minhas</span></div>
+    <div class="fact"><b>T27</b><span>Engenharia da Computação no ITA</span></div>
+  </div>
+
+  <div class="block">
+    <div class="eyebrow">Comece por aqui</div>
+    <div class="paths">
+      <button class="path" data-go="palco" data-sec="c4">
+        <span class="dot">♪</span>
+        <span><b>Vai contratar música para um evento</b><small>Banda ensaiada sob minha direção, som e logística</small></span>
+        <span class="arrow">→</span>
+      </button>
+      <button class="path" data-go="musica" data-sec="c1">
+        <span class="dot">𝄞</span>
+        <span><b>É músico, cantora ou produtor</b><small>Formação, instrumentos, voz e como eu arranjo</small></span>
+        <span class="arrow">→</span>
+      </button>
+      <button class="path" data-go="ita" data-sec="c2">
+        <span class="dot">{ }</span>
+        <span><b>Me conhece pela rede ITA, MIT ou tech</b><small>Onde música e engenharia se cruzam na minha rotina</small></span>
+        <span class="arrow">→</span>
+      </button>
+    </div>
+  </div>
+</section>
+
+<!-- MÚSICO -->
+<section class="panel" id="musica" role="tabpanel" aria-labelledby="tab-musica" data-sec="c2">
+  <div class="block">
+    <div class="eyebrow">Formação</div>
+    <h2>Autodidata, com a <em>teoria</em> na frente</h2>
+    <p>Comecei aos 12 anos com apostilas que estavam encostadas em casa e com o que achava na internet. A teoria sempre foi meu ponto forte e foi ela que sustentou o resto: aprendi a tocar entendendo por que as coisas soam como soam.</p>
+    <p>Há 7 anos estudo harmonia funcional de forma estruturada, pelo método em dois volumes do Alan Gomes. Hoje meu interesse central é harmonia funcional e produção musical.</p>
+  </div>
+
+  <div class="card">
+    <div class="eyebrow">Instrumentos</div>
+    <h3>Nível avançado</h3>
+    <div class="chips">
+      <span class="chip strong">Violão</span><span class="chip strong">Guitarra</span><span class="chip strong">Baixo</span>
+      <span class="chip strong">Bateria</span><span class="chip strong">Teclado</span><span class="chip strong">Piano</span>
+    </div>
+    <h3 style="margin-top:6px">Adaptação rápida</h3>
+    <div class="chips">
+      <span class="chip">Cavaquinho</span><span class="chip">Ukulele</span><span class="chip">Cajón</span><span class="chip">Viola</span>
+    </div>
+  </div>
+
+  <div class="card tint">
+    <div class="eyebrow">Voz</div>
+    <h3>Baixo-barítono</h3>
+    <div class="range">
+      <svg class="keys" id="keys" viewBox="0 0 440 92" role="img" aria-label="Teclado de Dó2 a Dó5 com a extensão vocal de Ré2 a Sol4 e a região de conforto de Mi2 a Mi4 destacadas"></svg>
+      <div class="legend">
+        <span><i style="background:var(--c1)"></i>Conforto Mi2–Mi4</span>
+        <span><i style="background:var(--c3)"></i>Extensão Ré2–Sol4</span>
+      </div>
+    </div>
+    <p class="small muted">Estou retomando o treino vocal. No projeto com as cantoras, faço segunda voz, priorizando a harmonia uma oitava abaixo delas.</p>
+  </div>
+</section>
+
+<!-- AUTORAIS -->
+<section class="panel" id="autorais" role="tabpanel" aria-labelledby="tab-autorais" data-sec="c1">
+  <div class="block">
+    <div class="eyebrow">Carreira solo</div>
+    <h2>Cerca de <em>10 músicas</em> no papel</h2>
+    <p>As letras são minhas, e algumas já têm áudio-guia. Uma delas é <strong>Naquele Banco</strong>. O projeto solo é sobre mim como artista, separado das bandas.</p>
+  </div>
+
+  <div class="card">
+    <h3>Como eu componho e arranjo</h3>
+    <ol class="steps">
+      <li><span>Gravo uma guia minha de violão e voz.</span></li>
+      <li><span>Uso o Suno como banda de rascunho: subo a guia e dou direção musical detalhada para testar caminhos de arranjo.</span></li>
+      <li><span>A versão definitiva é tocada de verdade, com arranjo, execução e músicos meus.</span></li>
+    </ol>
+  </div>
+
+  <div class="card tint">
+    <span class="sticker">vem aí</span>
+    <span class="status wip">Em andamento</span>
+    <h3>Primeiro single</h3>
+    <p class="small">Um produtor topou a parceria: ele me grava e trabalhamos juntos no estúdio. O lançamento está sendo planejado com minha social media. Antes do single, a ideia é soltar trechos curtos; as versões de rascunho entram depois, como bastidor.</p>
+  </div>
+</section>
+
+<!-- EVENTOS E AGÊNCIA -->
+<section class="panel" id="palco" role="tabpanel" aria-labelledby="tab-palco" data-sec="c4">
+  <div class="block">
+    <div class="eyebrow">Kithara · eventos musicais de ponta a ponta</div>
+    <h2>Você contrata uma pessoa e recebe a <em>banda pronta</em></h2>
+    <p>Fico no meio: a banda quer chegar e tocar, o contratante quer que o evento aconteça sem ter que pensar nisso. Meu trabalho é deixar os dois lados tranquilos.</p>
+  </div>
+
+  <div class="card">
+    <h3>O que eu entrego</h3>
+    <ol class="steps">
+      <li><span>Banda completa e ensaiada, sob minha direção musical. As cantoras do projeto já estão definidas.</span></li>
+      <li><span>Estrutura de som completa.</span></li>
+      <li><span>Logística do dia, do ensaio à desmontagem.</span></li>
+    </ol>
+    <p class="small muted">Cobrança: a taxa da agência é minha e os músicos recebem direto do contratante. Se preferir que tudo passe por mim, faço um preço único.</p>
+  </div>
+
+  <div class="card tint">
+    <span class="sticker">rock + churrasco</span>
+    <div class="eyebrow">Caso · 24/10/2026</div>
+    <h3>ThanatoFest, no Feijão (ITA)</h3>
+    <dl class="kv">
+      <dt>O quê</dt><dd>Festival para a comunidade do ITA e do IME, durante o TAD</dd>
+      <dt>Quem</dt><dd>Thanatology e eu, com Pomba Gira Project, Herman Lee e Tarado, BONE, Hz e convidados</dd>
+      <dt>Meu papel</dt><dd>Co-organizador: marketing, contratação e logística do som. E dois sets no palco</dd>
+    </dl>
+    <p class="small">Foi meu laboratório para provar que consigo fazer um evento bom de ponta a ponta, e virou o checklist da próxima edição.</p>
+  </div>
+</section>
+
+<!-- ITA E ENGENHARIA -->
+<section class="panel" id="ita" role="tabpanel" aria-labelledby="tab-ita" data-sec="c2">
+  <div class="block">
+    <div class="eyebrow">ITA · Eng. Computação · T27</div>
+    <h2>Onde as duas coisas <em>se encontram</em></h2>
+    <p>No ITA me chamam de PG. Escolhi o instituto para estar perto de gente de altíssimo nível, e a música foi junto.</p>
+  </div>
+
+  <div class="card" data-sec="c1">
+    <h3>Música dentro do campus</h3>
+    <p class="small">Toco em duo de sax e piano com o Grilo (T28). Em Cultura Brasileira (HUM-78), fiz com Gustavo Mônaco uma ficha de bem cultural sobre a Sala de Piano e a Sala de Música do DepCult. E o ThanatoFest aconteceu no Feijão, para a própria comunidade.</p>
+  </div>
+
+  <div class="card tint" data-sec="c3">
+    <span class="status">Ativo</span>
+    <h3>Kithara: o braço musical da minha empresa</h3>
+    <p class="small">Kithara é o instrumento grego que deu origem à palavra "guitarra". É o meu CNPJ para os projetos de música: dela nascem a agência e os softwares que uso para operar eventos.</p>
+    <dl class="kv">
+      <dt>Já roda</dt><dd>Bot de WhatsApp ligado a uma planilha que acompanha os ensaios das bandas</dd>
+      <dt>Em construção</dt><dd>Painel web para a liderança do evento acompanhar músicos, agência e contratante</dd>
+    </dl>
+  </div>
+
+  <div class="card" data-sec="c4">
+    <h3>Música como ensino</h3>
+    <p class="small">Escrevi um guia de leitura, em primeira pessoa, sobre harmonia funcional a partir do método do Alan Gomes, e planejei uma playlist de 47 episódios em 13 blocos para o YouTube. Ensinar não é novo para mim: dou aula de matemática no IMPA (PIC/POTI) para alunos de alto desempenho.</p>
+  </div>
+
+  <div class="card" data-sec="c2">
+    <h3>A parte de engenharia</h3>
+    <p class="small">Sou dev PJ na Doutor Consulta e meu TG é sobre falhas metaestáveis em sistemas distribuídos. O mesmo raciocínio que uso para achar o gargalo de um sistema eu uso para achar o que vai dar errado num show.</p>
+  </div>
+</section>
+
+<!-- CONTATO -->
+<section class="panel" id="contato" role="tabpanel" aria-labelledby="tab-contato" data-sec="c1">
+  <div class="block">
+    <h2>Bora <em>conversar</em></h2>
+    <p class="muted">Para show, parceria ou só para trocar ideia.</p>
+  </div>
+  <div class="contact">
+    <a href="https://wa.me/5512991745185?text=Oi%20Pablo%21%20Vi%20sua%20apresenta%C3%A7%C3%A3o%20e%20queria%20conversar%20sobre%20m%C3%BAsica."><span class="ic" style="background:var(--c4)">WA</span><span><b>WhatsApp</b><small>(12) 99174-5185</small></span><span>→</span></a>
+    <a href="mailto:pablocnsantos2@gmail.com"><span class="ic" style="background:var(--c3);color:#1C1A17">@</span><span><b>E-mail</b><small>pablocnsantos2@gmail.com</small></span><span>→</span></a>
+    <a href="https://www.instagram.com/pablocarvalhosm/"><span class="ic" style="background:var(--c1)">IG</span><span><b>Instagram</b><small>@pablocarvalhosm</small></span><span>→</span></a>
+    <a href="https://www.linkedin.com/in/pablo-carvalho-pcns8896"><span class="ic" style="background:var(--c2)">in</span><span><b>LinkedIn</b><small>linkedin.com/in/pablo-carvalho-pcns8896</small></span><span>→</span></a>
+  </div>
+</section>
+
+</main>
+<footer>Pablo Carvalho · São José dos Campos, SP</footer>
+
+<div class="look" role="group" aria-label="Escolher visual">
+  <span>visual</span>
+  <button type="button" data-look="palco">Palco</button>
+  <button type="button" data-look="kithara">Kithara</button>
+</div>
+
+<script>
+(function(){
+  var root=document.documentElement;
+  function css(v){ return getComputedStyle(root).getPropertyValue(v).trim(); }
+
+  /* Abas */
+  var ids=["resumo","musica","autorais","palco","ita","contato"];
+  function show(id){
+    if(ids.indexOf(id)<0) id="resumo";
+    ids.forEach(function(x){
+      var p=document.getElementById(x), b=document.getElementById("tab-"+x), on=x===id;
+      p.classList.toggle("active",on);
+      b.setAttribute("aria-selected",on?"true":"false");
+      if(on){ try{ b.scrollIntoView({block:"nearest",inline:"nearest"}); }catch(e){} }
+    });
+  }
+  function go(id){
+    if(location.hash!=="#"+id){ try{ location.hash=id; }catch(e){ show(id); } } else show(id);
+    var nav=document.querySelector("nav.tabs");
+    if(window.scrollY>nav.offsetTop) window.scrollTo(0,nav.offsetTop);
+  }
+  document.querySelectorAll("[data-tab]").forEach(function(b){ b.addEventListener("click",function(){ go(b.dataset.tab); }); });
+  document.querySelectorAll("[data-go]").forEach(function(b){ b.addEventListener("click",function(){ go(b.dataset.go); }); });
+  window.addEventListener("hashchange",function(){ show(location.hash.slice(1)); });
+  show(location.hash.slice(1));
+
+  /* Teclado Dó2–Dó5 */
+  var svg=document.getElementById("keys"), ns="http://www.w3.org/2000/svg";
+  var names=["C","D","E","F","G","A","B"], whites=[];
+  for(var o=2;o<=4;o++) names.forEach(function(n){ whites.push(n+o); });
+  whites.push("C5");
+  var pt={C:"Dó",D:"Ré",E:"Mi",F:"Fá",G:"Sol",A:"Lá",B:"Si"};
+  function drawKeys(){
+    while(svg.firstChild) svg.removeChild(svg.firstChild);
+    var W=440/whites.length, H=64, top=24;
+    var rS=whites.indexOf("D2"), rE=whites.indexOf("G4"), cS=whites.indexOf("E2"), cE=whites.indexOf("E4");
+    function el(t,a){ var e=document.createElementNS(ns,t); for(var k in a) e.setAttribute(k,a[k]); svg.appendChild(e); return e; }
+    whites.forEach(function(k,i){
+      var fill="#ffffff";
+      if(i>=rS&&i<=rE) fill=css("--c3");
+      if(i>=cS&&i<=cE) fill=css("--c1");
+      el("rect",{x:i*W+0.5,y:top,width:W-1,height:H,rx:3,fill:fill,stroke:css("--ink"),"stroke-width":"1"});
+    });
+    whites.forEach(function(k,i){
+      var n=k[0];
+      if(i<whites.length-1&&n!=="E"&&n!=="B") el("rect",{x:(i+1)*W-W*0.3,y:top,width:W*0.6,height:H*0.58,rx:2,fill:css("--ink")});
+    });
+    [["D2",rS],["E2",cS],["E4",cE],["G4",rE]].forEach(function(m,j){
+      var t=el("text",{x:m[1]*W+W/2,y:j%2?20:9,"text-anchor":"middle","font-size":"10","font-family":"IBM Plex Mono, monospace","font-weight":"500",fill:css("--ink")});
+      t.textContent=pt[m[0][0]]+m[0].slice(1);
+    });
+  }
+
+  /* Arte do topo: cordas vibrando em harmônicos */
+  var cv=document.getElementById("art"), ctx=cv.getContext("2d");
+  var reduce=window.matchMedia&&window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  var t0=performance.now(), raf=null;
+  function size(){
+    var r=cv.getBoundingClientRect(), d=window.devicePixelRatio||1;
+    cv.width=Math.round(r.width*d); cv.height=Math.round(r.height*d);
+    ctx.setTransform(d,0,0,d,0,0);
+  }
+  function frame(now){
+    var w=cv.clientWidth, h=cv.clientHeight, t=(now-t0)/1000;
+    var look=root.getAttribute("data-look");
+    var cols=[css("--c1"),css("--c2"),css("--c3"),css("--c4")];
+    ctx.clearRect(0,0,w,h);
+    if(look==="palco"){
+      // discos/círculos de som
+      [[w*0.86,h*0.22,Math.min(w,h)*0.42,cols[2]],[w*0.98,h*0.8,Math.min(w,h)*0.34,cols[0]],[w*0.66,h*1.02,Math.min(w,h)*0.22,cols[3]]].forEach(function(c){
+        ctx.beginPath(); ctx.arc(c[0],c[1],c[2],0,Math.PI*2); ctx.fillStyle=c[3]; ctx.fill();
+        ctx.lineWidth=2; ctx.strokeStyle=css("--ink"); ctx.stroke();
+      });
+      ctx.lineWidth=1.5; ctx.strokeStyle=css("--ink");
+      for(var k=1;k<5;k++){ ctx.beginPath(); ctx.arc(w*0.86,h*0.22,Math.min(w,h)*0.42*k/5,0,Math.PI*2); ctx.stroke(); }
+    } else {
+      var g=ctx.createRadialGradient(w*0.85,h*0.15,0,w*0.85,h*0.15,Math.max(w,h)*0.7);
+      g.addColorStop(0,css("--soft")); g.addColorStop(1,"rgba(255,255,255,0)");
+      ctx.fillStyle=g; ctx.fillRect(0,0,w,h);
+    }
+    // cordas: cada uma vibra num harmônico diferente
+    var n=6, narrow=w<640, x0=narrow?-20:w*0.42, x1=w+20, fade=narrow?(look==="palco"?0.22:0.35):1;
+    for(var i=0;i<n;i++){
+      var y=h*0.12+i*(h*0.76/(n-1)), harm=i+1;
+      var amp=(look==="palco"?10:7)*(1-i*0.08)*Math.sin(t*(1.6+i*0.35));
+      ctx.beginPath();
+      for(var s=0;s<=80;s++){
+        var u=s/80, x=x0+(x1-x0)*u;
+        var yy=y+amp*Math.sin(Math.PI*harm*u);
+        s?ctx.lineTo(x,yy):ctx.moveTo(x,yy);
+      }
+      ctx.strokeStyle=look==="palco"?css("--ink"):cols[i%4];
+      ctx.lineWidth=look==="palco"?2.5:1.6;
+      ctx.globalAlpha=(look==="palco"?1:0.85)*fade;
+      ctx.stroke(); ctx.globalAlpha=1;
+      if(narrow) continue;
+      ctx.beginPath(); ctx.arc(x0,y,look==="palco"?5:3.5,0,Math.PI*2);
+      ctx.fillStyle=cols[i%4]; ctx.fill();
+      if(look==="palco"){ ctx.lineWidth=1.5; ctx.strokeStyle=css("--ink"); ctx.stroke(); }
+    }
+    if(!reduce) raf=requestAnimationFrame(frame);
+  }
+  function restart(){ if(raf) cancelAnimationFrame(raf); size(); frame(performance.now()); }
+  window.addEventListener("resize",restart);
+
+  /* Visual */
+  function setLook(l){
+    root.setAttribute("data-look",l);
+    document.querySelectorAll(".look button").forEach(function(b){ b.setAttribute("aria-pressed",b.dataset.look===l?"true":"false"); });
+    try{ localStorage.setItem("pc-look",l); }catch(e){}
+    drawKeys(); restart();
+  }
+  document.querySelectorAll(".look button").forEach(function(b){ b.addEventListener("click",function(){ setLook(b.dataset.look); }); });
+  var saved="kithara";
+  if(document.fonts&&document.fonts.ready){ setLook(saved); document.fonts.ready.then(function(){ drawKeys(); restart(); }); } else setLook(saved);
+})();
+</script>
+<script>window.onKthMode=function(){var b=document.querySelector('.look button[data-look="kithara"]');if(b)b.click();};</script><script>(function(){var r=document.documentElement,b=document.getElementById("mode");if(!b)return;
+var sun='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg>';
+var moon='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg>';
+function p(){var d=r.getAttribute("data-mode")==="dark";b.innerHTML=d?sun:moon;b.setAttribute("aria-label",d?"Mudar para o tema claro (Musageta)":"Mudar para o tema escuro (Bronze)");}
+p();b.addEventListener("click",function(){var n=r.getAttribute("data-mode")==="dark"?"light":"dark";r.setAttribute("data-mode",n);try{localStorage.setItem("kth-mode",n)}catch(e){}p();if(window.onKthMode)window.onKthMode(n);});})();</script></body>
+</html>
