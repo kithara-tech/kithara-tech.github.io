@@ -1,5 +1,6 @@
 # Publica o site no GitHub Pages (branch gh-pages).
-#  - push na main        -> https://<usuario>.github.io/<repo>/
+#  - push na main        -> https://kithara-tech.github.io/ (repo kithara-tech/kithara-tech.github.io)
+#                           antes da mudança para a org: https://<usuario>.github.io/<repo>/
 #  - pull request aberto -> https://<usuario>.github.io/<repo>/pr-preview/pr-<N>/
 #    (o link é comentado automaticamente no PR e o preview é apagado quando o PR fecha)
 name: Deploy GitHub Pages

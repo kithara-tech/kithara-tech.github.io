@@ -29,14 +29,16 @@ Abra http://localhost:8000. Use um servidor; abrir o arquivo direto (`file://`) 
 - **YouTube**: na seção VII (`index.html`), troque o `<span>` marcado com `PENDENTE` por um link quando o canal existir.
 - **Visual**: `assets/css/kithara.css` (tokens do tema claro Musageta e do escuro Bronze no topo). O tema fica em `assets/js/tema.js`: segue o sistema na primeira visita e salva a escolha em `localStorage("kth-mode")`.
 - **Mídia**: `assets/videos/`, `assets/posters/` (um `.jpg` por vídeo, mesmo nome) e `assets/audio/`.
-- **Compartilhamento**: `assets/og.png` (1200×630) e `assets/favicon.svg`. As tags Open Graph usam a URL do GitHub Pages; se o site mudar de domínio, troque `https://pablocarvalho0.github.io/proj-portfolio-agencia/` nas tags `og:` e `twitter:` de cada página.
+- **Compartilhamento**: `assets/og.png` (1200×630) e `assets/favicon.svg`. As tags Open Graph usam a URL do GitHub Pages; se o site mudar de domínio, troque `https://kithara-tech.github.io/` nas tags `og:` e `twitter:` de cada página.
 
 ## Deploy
 
 O workflow `.github/workflows/pages.yml` publica no GitHub Pages (branch `gh-pages`):
 
-- **push na `main`** → https://pablocarvalho0.github.io/proj-portfolio-agencia/
-- **pull request** → preview em `…/proj-portfolio-agencia/pr-preview/pr-<N>/`. O link é comentado no PR, e o preview é apagado quando o PR fecha.
+- **push na `main`** → https://kithara-tech.github.io/ (repositório `kithara-tech/kithara-tech.github.io`; enquanto o repo não for movido para a organização, o endereço é `https://<usuario>.github.io/<repo>/`)
+- **pull request** → preview em `…/pr-preview/pr-<N>/`. O link é comentado no PR, e o preview é apagado quando o PR fecha.
+
+Como todos os caminhos são relativos, o site funciona tanto na raiz quanto em subpasta.
 
 Em cada deploy, o workflow acrescenta `?v=<commit>` aos CSS e JS de todas as páginas para driblar o cache.
 
