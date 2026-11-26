@@ -467,3 +467,16 @@ details[open]{padding-bottom:10px}
 @media (min-width:1280px){
   .reels{grid-template-columns:repeat(5,1fr)}
 }
+
+/* ---------- 12. Musas na coluna do cabeçalho (só desktop) ----------
+   Relevos do Sarcófago das Musas (Louvre) e o mosaico de Mnemósine; créditos em
+   assets/img/musas/CREDITOS.md. Abaixo de 1024px a seção é uma coluna só e a
+   imagem empurraria o conteúdo ~400px para baixo em cada seção: fica escondida.
+   Com display:none e loading="lazy", o navegador nem baixa o arquivo. */
+.muse-img{display:none}
+@media (min-width:1024px){
+  .sechead .muse-img{display:block;grid-column:1 / -1;justify-self:start;margin:22px 0 0 2px;
+    height:clamp(220px,calc(100vh - var(--bar) - 380px),400px);width:auto;aspect-ratio:480 / 840;object-fit:cover;
+    border-radius:2px;outline:1px solid var(--gold);outline-offset:5px;filter:sepia(.12) saturate(.95)}
+  html[data-mode="dark"] .sechead .muse-img{filter:sepia(.3) brightness(.82) contrast(1.05)}
+}
