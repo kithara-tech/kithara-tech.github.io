@@ -226,6 +226,7 @@ html[data-mode="dark"] .seg button[aria-pressed="true"]{box-shadow:inset 0 -2px 
 .artist{display:grid;grid-template-columns:110px 1fr;background:var(--card);border:1px solid var(--line);border-radius:4px;overflow:hidden}
 .artist .ph{position:relative;background:#0F0E0A;min-height:146px}
 .artist .ph img{width:100%;height:100%;object-fit:cover;display:block;aspect-ratio:3/4}
+.artist .ph img.foco-dir{object-position:35% 30%}
 .artist .ph .emb{position:absolute;inset:0;margin:auto;width:60px;height:60px}
 .artist .ph .emb .i{stroke:#F2EDE3} .artist .ph .emb .g{stroke:#B08A3E}
 .artist .tx{padding:14px;display:grid;gap:4px;align-content:start}
