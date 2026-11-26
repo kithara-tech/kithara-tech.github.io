@@ -226,6 +226,7 @@ html[data-mode="dark"] .seg button[aria-pressed="true"]{box-shadow:inset 0 -2px 
 .artist{display:grid;grid-template-columns:110px 1fr;background:var(--card);border:1px solid var(--line);border-radius:4px;overflow:hidden}
 .artist .ph{position:relative;background:#0F0E0A;min-height:146px}
 .artist .ph img{width:100%;height:100%;object-fit:cover;display:block;aspect-ratio:3/4}
+.artist .ph img.foco-dir{object-position:35% 30%}
 .artist .ph .emb{position:absolute;inset:0;margin:auto;width:60px;height:60px}
 .artist .ph .emb .i{stroke:#F2EDE3} .artist .ph .emb .g{stroke:#B08A3E}
 .artist .tx{padding:14px;display:grid;gap:4px;align-content:start}
@@ -468,17 +469,20 @@ details[open]{padding-bottom:10px}
   .reels{grid-template-columns:repeat(5,1fr)}
 }
 
-/* ---------- 12. Musas na coluna do cabeçalho (só desktop) ----------
-   Relevos do Sarcófago das Musas (Louvre) e o mosaico de Mnemósine; créditos em
-   assets/img/musas/CREDITOS.md. Abaixo de 1024px a seção é uma coluna só e a
-   imagem empurraria o conteúdo ~400px para baixo em cada seção: fica escondida.
-   Com display:none e loading="lazy", o navegador nem baixa o arquivo. */
-.muse-img{display:none}
+/* ---------- 12. Musas na coluna do cabeçalho ----------
+   Arte própria (assets/img/musas/musas.svg): um <symbol> por musa, 240x420 (4:7),
+   usado com <svg><use href>. O traço é currentColor e o fundo e o nome usam
+   var(--card) e var(--goldtext), que o <use> herda da página; por isso a mesma
+   arte serve aos temas claro e escuro sem duas versões. Abaixo de 1024px a musa
+   vira um retrato pequeno à direita do título (terceira coluna do .sechead);
+   no desktop ocupa a coluna sticky do cabeçalho. */
+.sechead:has(> .muse-img){grid-template-columns:auto 1fr auto}
+.sechead .muse-img{display:block;width:clamp(68px,18vw,104px);height:auto;aspect-ratio:240 / 420;
+  margin:4px 6px 0 4px;color:var(--gold);overflow:hidden}
 @media (min-width:1024px){
-  .sechead .muse-img{display:block;grid-column:1 / -1;justify-self:start;margin:22px 0 0 2px;
-    height:clamp(220px,calc(100vh - var(--bar) - 380px),360px);width:auto;aspect-ratio:480 / 840;object-fit:cover;
-    border-radius:2px;outline:1px solid var(--gold);outline-offset:5px;filter:sepia(.12) saturate(.95)}
-  html[data-mode="dark"] .sechead .muse-img{filter:sepia(.3) brightness(.82) contrast(1.05)}
+  .sechead:has(> .muse-img){grid-template-columns:auto 1fr}
+  .sechead .muse-img{grid-column:1 / -1;justify-self:start;margin:22px 0 0 2px;
+    height:clamp(220px,calc(100vh - var(--bar) - 380px),360px);width:auto}
 }
 
 /* ---------- 13. /tecnologia/ · zona music tech (body.zona-tech) ----------
@@ -558,8 +562,6 @@ html:not([data-mode="dark"]) .zona-tech main > .sec .tag::before{color:var(--gol
 .duo figure{margin:0;display:grid;gap:8px}
 .duo img{display:block;width:100%;height:auto;aspect-ratio:4 / 5;object-fit:cover;object-position:50% 25%;border-radius:2px;outline:1px solid var(--gold);outline-offset:4px}
 .duo figcaption{font:700 11px/1.3 var(--display);letter-spacing:.18em;text-transform:uppercase;color:var(--goldtext);margin-top:4px}
-.kfoot .credit{margin:18px auto 0;max-width:62ch;font:400 12px/1.6 var(--body);color:var(--ondeep-muted)}
-.kfoot .credit a{color:var(--gold2)}
 
 /* /pablo/: topo com foto. Celular: foto de ponta a ponta que se dissolve no
    fundo, com o nome subindo sobre ela. Desktop: texto | retrato emoldurado. */
@@ -581,3 +583,7 @@ html:not([data-mode="dark"]) .zona-tech main > .sec .tag::before{color:var(--gol
   .ap-hero--foto .cta{max-width:520px}
   .duo{max-width:620px}
 }
+
+/* faixa de fotos do case na home */
+.strip{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin:14px 0 16px;text-decoration:none}
+.strip img{width:100%;height:auto;aspect-ratio:3/4;object-fit:cover;border-radius:2px;border:1px solid var(--line);display:block}

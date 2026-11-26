@@ -1,0 +1,193 @@
+<svg xmlns="http://www.w3.org/2000/svg">
+<!-- Musas da Kithara: arte original, line art em ouro (currentColor). -->
+<symbol id="terpsicore" viewBox="0 0 240 420"><rect width="240" height="420" style="fill:var(--card,#FBF9F5)"/>
+<g fill="none" stroke="currentColor" stroke-linecap="square">
+<rect x="5" y="5" width="230" height="410" stroke-width="1.6"/>
+<rect x="11" y="11" width="218" height="398" stroke-width=".8"/>
+<path d="M21.0 35H36.0V21H24.0V31H32.0V25H28.0V28M39.0 35H54.0V21H42.0V31H50.0V25H46.0V28M57.0 35H72.0V21H60.0V31H68.0V25H64.0V28M75.0 35H90.0V21H78.0V31H86.0V25H82.0V28M93.0 35H108.0V21H96.0V31H104.0V25H100.0V28M111.0 35H126.0V21H114.0V31H122.0V25H118.0V28M129.0 35H144.0V21H132.0V31H140.0V25H136.0V28M147.0 35H162.0V21H150.0V31H158.0V25H154.0V28M165.0 35H180.0V21H168.0V31H176.0V25H172.0V28M183.0 35H198.0V21H186.0V31H194.0V25H190.0V28M201.0 35H216.0V21H204.0V31H212.0V25H208.0V28" stroke-width="1.4"/><path d="M21.0 397H36.0V383H24.0V393H32.0V387H28.0V390M39.0 397H54.0V383H42.0V393H50.0V387H46.0V390M57.0 397H72.0V383H60.0V393H68.0V387H64.0V390M75.0 397H90.0V383H78.0V393H86.0V387H82.0V390M93.0 397H108.0V383H96.0V393H104.0V387H100.0V390M111.0 397H126.0V383H114.0V393H122.0V387H118.0V390M129.0 397H144.0V383H132.0V393H140.0V387H136.0V390M147.0 397H162.0V383H150.0V393H158.0V387H154.0V390M165.0 397H180.0V383H168.0V393H176.0V387H172.0V390M183.0 397H198.0V383H186.0V393H194.0V387H190.0V390M201.0 397H216.0V383H204.0V393H212.0V387H208.0V390" stroke-width="1.4"/>
+<circle cx="120" cy="178" r="88" stroke-width="2"/>
+<circle cx="120" cy="178" r="82" stroke-width=".8"/>
+<path d="M60 334H104M136 334H180" stroke-width="1"/>
+</g>
+<circle cx="120" cy="334" r="2.6" fill="currentColor"/><circle cx="112" cy="334" r="1.4" fill="currentColor"/><circle cx="128" cy="334" r="1.4" fill="currentColor"/>
+<text x="120" y="312" text-anchor="middle" style="fill:var(--goldtext,#7A5D25)" font-family="Cinzel,'Trajan Pro',Georgia,serif" font-weight="700" font-size="21" letter-spacing="2.5">TERPSÍCORE</text>
+<text x="120" y="360" text-anchor="middle" style="fill:var(--goldtext,#7A5D25)" font-family="'Cormorant Garamond',Georgia,serif" font-style="italic" font-weight="600" font-size="17">a dança</text><g fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><g transform="rotate(-10 120 178)">
+<path d="M90 206A30 24 0 0 0 150 206Z"/>
+<path d="M100 216Q120 210 140 216M106 224Q120 220 134 224" stroke-width="1.1"/>
+<path d="M97 206C89 182 85 158 91 138C94 128 89 120 81 122"/><path d="M143 206C151 182 155 158 149 138C146 128 151 120 159 122"/>
+<path d="M88 142H152" stroke-width="3.4"/>
+<path d="M108 142V206M114 142V206M120 142V206M126 142V206M132 142V206" stroke-width="1.1"/>
+</g>
+<path d="M74 234C92 218 104 250 124 238C142 226 152 246 168 232" stroke-width="1.8"/>
+<path d="M82 246C98 234 108 258 126 248C142 238 150 254 162 246" stroke-width="1"/>
+</g></symbol>
+<symbol id="talia" viewBox="0 0 240 420"><rect width="240" height="420" style="fill:var(--card,#FBF9F5)"/>
+<g fill="none" stroke="currentColor" stroke-linecap="square">
+<rect x="5" y="5" width="230" height="410" stroke-width="1.6"/>
+<rect x="11" y="11" width="218" height="398" stroke-width=".8"/>
+<path d="M21.0 35H36.0V21H24.0V31H32.0V25H28.0V28M39.0 35H54.0V21H42.0V31H50.0V25H46.0V28M57.0 35H72.0V21H60.0V31H68.0V25H64.0V28M75.0 35H90.0V21H78.0V31H86.0V25H82.0V28M93.0 35H108.0V21H96.0V31H104.0V25H100.0V28M111.0 35H126.0V21H114.0V31H122.0V25H118.0V28M129.0 35H144.0V21H132.0V31H140.0V25H136.0V28M147.0 35H162.0V21H150.0V31H158.0V25H154.0V28M165.0 35H180.0V21H168.0V31H176.0V25H172.0V28M183.0 35H198.0V21H186.0V31H194.0V25H190.0V28M201.0 35H216.0V21H204.0V31H212.0V25H208.0V28" stroke-width="1.4"/><path d="M21.0 397H36.0V383H24.0V393H32.0V387H28.0V390M39.0 397H54.0V383H42.0V393H50.0V387H46.0V390M57.0 397H72.0V383H60.0V393H68.0V387H64.0V390M75.0 397H90.0V383H78.0V393H86.0V387H82.0V390M93.0 397H108.0V383H96.0V393H104.0V387H100.0V390M111.0 397H126.0V383H114.0V393H122.0V387H118.0V390M129.0 397H144.0V383H132.0V393H140.0V387H136.0V390M147.0 397H162.0V383H150.0V393H158.0V387H154.0V390M165.0 397H180.0V383H168.0V393H176.0V387H172.0V390M183.0 397H198.0V383H186.0V393H194.0V387H190.0V390M201.0 397H216.0V383H204.0V393H212.0V387H208.0V390" stroke-width="1.4"/>
+<circle cx="120" cy="178" r="88" stroke-width="2"/>
+<circle cx="120" cy="178" r="82" stroke-width=".8"/>
+<path d="M60 334H104M136 334H180" stroke-width="1"/>
+</g>
+<circle cx="120" cy="334" r="2.6" fill="currentColor"/><circle cx="112" cy="334" r="1.4" fill="currentColor"/><circle cx="128" cy="334" r="1.4" fill="currentColor"/>
+<text x="120" y="312" text-anchor="middle" style="fill:var(--goldtext,#7A5D25)" font-family="Cinzel,'Trajan Pro',Georgia,serif" font-weight="700" font-size="21" letter-spacing="2.5">TÁLIA</text>
+<text x="120" y="360" text-anchor="middle" style="fill:var(--goldtext,#7A5D25)" font-family="'Cormorant Garamond',Georgia,serif" font-style="italic" font-weight="600" font-size="17">a comédia</text><g fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round">
+<path d="M82 132C82 110 158 110 158 132C162 168 150 214 120 226C90 214 78 168 82 132Z"/>
+<path d="M94 142C100 132 110 132 114 140M126 140C130 132 140 132 146 142" stroke-width="2"/>
+<path d="M96 154C100 146 110 146 112 154C108 159 100 159 96 154ZM128 154C130 146 140 146 144 154C140 159 132 159 128 154Z" fill="currentColor"/>
+<path d="M120 156L115 178Q120 182 125 178" stroke-width="2"/>
+<path d="M96 186Q120 222 144 186Q120 198 96 186Z" fill="currentColor"/>
+<path d="M90 178Q94 186 98 184M150 178Q146 186 142 184" stroke-width="1.6"/>
+<path d="M88 124C96 112 110 108 120 110C130 108 144 112 152 124" stroke-width="1.4"/>
+<path d="M92 116q-6-8 2-12q6 6-2 12ZM106 110q-4-9 4-11q4 7-4 11ZM134 110q4-9-4-11q-4 7 4 11ZM148 116q6-8-2-12q-6 6 2 12Z" fill="currentColor" stroke-width="1"/>
+<path d="M82 136C68 146 66 170 74 186M158 136C172 146 174 170 166 186" stroke-width="1.4"/>
+</g></symbol>
+<symbol id="urania" viewBox="0 0 240 420"><rect width="240" height="420" style="fill:var(--card,#FBF9F5)"/>
+<g fill="none" stroke="currentColor" stroke-linecap="square">
+<rect x="5" y="5" width="230" height="410" stroke-width="1.6"/>
+<rect x="11" y="11" width="218" height="398" stroke-width=".8"/>
+<path d="M21.0 35H36.0V21H24.0V31H32.0V25H28.0V28M39.0 35H54.0V21H42.0V31H50.0V25H46.0V28M57.0 35H72.0V21H60.0V31H68.0V25H64.0V28M75.0 35H90.0V21H78.0V31H86.0V25H82.0V28M93.0 35H108.0V21H96.0V31H104.0V25H100.0V28M111.0 35H126.0V21H114.0V31H122.0V25H118.0V28M129.0 35H144.0V21H132.0V31H140.0V25H136.0V28M147.0 35H162.0V21H150.0V31H158.0V25H154.0V28M165.0 35H180.0V21H168.0V31H176.0V25H172.0V28M183.0 35H198.0V21H186.0V31H194.0V25H190.0V28M201.0 35H216.0V21H204.0V31H212.0V25H208.0V28" stroke-width="1.4"/><path d="M21.0 397H36.0V383H24.0V393H32.0V387H28.0V390M39.0 397H54.0V383H42.0V393H50.0V387H46.0V390M57.0 397H72.0V383H60.0V393H68.0V387H64.0V390M75.0 397H90.0V383H78.0V393H86.0V387H82.0V390M93.0 397H108.0V383H96.0V393H104.0V387H100.0V390M111.0 397H126.0V383H114.0V393H122.0V387H118.0V390M129.0 397H144.0V383H132.0V393H140.0V387H136.0V390M147.0 397H162.0V383H150.0V393H158.0V387H154.0V390M165.0 397H180.0V383H168.0V393H176.0V387H172.0V390M183.0 397H198.0V383H186.0V393H194.0V387H190.0V390M201.0 397H216.0V383H204.0V393H212.0V387H208.0V390" stroke-width="1.4"/>
+<circle cx="120" cy="178" r="88" stroke-width="2"/>
+<circle cx="120" cy="178" r="82" stroke-width=".8"/>
+<path d="M60 334H104M136 334H180" stroke-width="1"/>
+</g>
+<circle cx="120" cy="334" r="2.6" fill="currentColor"/><circle cx="112" cy="334" r="1.4" fill="currentColor"/><circle cx="128" cy="334" r="1.4" fill="currentColor"/>
+<text x="120" y="312" text-anchor="middle" style="fill:var(--goldtext,#7A5D25)" font-family="Cinzel,'Trajan Pro',Georgia,serif" font-weight="700" font-size="21" letter-spacing="2.5">URÂNIA</text>
+<text x="120" y="360" text-anchor="middle" style="fill:var(--goldtext,#7A5D25)" font-family="'Cormorant Garamond',Georgia,serif" font-style="italic" font-weight="600" font-size="17">os astros</text><g fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><g transform="rotate(-18 120 172)">
+<circle cx="120" cy="172" r="44"/>
+<ellipse cx="120" cy="172" rx="20" ry="44" stroke-width="1.4"/>
+<path d="M120 128V216" stroke-width="1.4"/>
+<ellipse cx="120" cy="172" rx="44" ry="10" stroke-width="1.4"/>
+<path d="M84 148Q120 158 156 148M84 196Q120 186 156 196" stroke-width="1.2"/>
+</g>
+<path d="M104 222L100 232H140L136 222M96 236H144" stroke-width="2"/>
+<path d="M172 238L150 206" stroke-width="2.2"/>
+</g><path d="M78 119Q78 126 85 126Q78 126 78 133Q78 126 71 126Q78 126 78 119Z" fill="currentColor" stroke="none"/><path d="M162 113Q162 118 167 118Q162 118 162 123Q162 118 157 118Q162 118 162 113Z" fill="currentColor" stroke="none"/><path d="M176 150Q176 156 182 156Q176 156 176 162Q176 156 170 156Q176 156 176 150Z" fill="currentColor" stroke="none"/><path d="M66 172Q66 176 70 176Q66 176 66 180Q66 176 62 176Q66 176 66 172Z" fill="currentColor" stroke="none"/><path d="M94 104.5Q94 108 97.5 108Q94 108 94 111.5Q94 108 90.5 108Q94 108 94 104.5Z" fill="currentColor" stroke="none"/><path d="M150 236.5Q150 240 153.5 240Q150 240 150 243.5Q150 240 146.5 240Q150 240 150 236.5Z" fill="currentColor" stroke="none"/><path d="M70 209Q70 214 75 214Q70 214 70 219Q70 214 65 214Q70 214 70 209Z" fill="currentColor" stroke="none"/></symbol>
+<symbol id="euterpe" viewBox="0 0 240 420"><rect width="240" height="420" style="fill:var(--card,#FBF9F5)"/>
+<g fill="none" stroke="currentColor" stroke-linecap="square">
+<rect x="5" y="5" width="230" height="410" stroke-width="1.6"/>
+<rect x="11" y="11" width="218" height="398" stroke-width=".8"/>
+<path d="M21.0 35H36.0V21H24.0V31H32.0V25H28.0V28M39.0 35H54.0V21H42.0V31H50.0V25H46.0V28M57.0 35H72.0V21H60.0V31H68.0V25H64.0V28M75.0 35H90.0V21H78.0V31H86.0V25H82.0V28M93.0 35H108.0V21H96.0V31H104.0V25H100.0V28M111.0 35H126.0V21H114.0V31H122.0V25H118.0V28M129.0 35H144.0V21H132.0V31H140.0V25H136.0V28M147.0 35H162.0V21H150.0V31H158.0V25H154.0V28M165.0 35H180.0V21H168.0V31H176.0V25H172.0V28M183.0 35H198.0V21H186.0V31H194.0V25H190.0V28M201.0 35H216.0V21H204.0V31H212.0V25H208.0V28" stroke-width="1.4"/><path d="M21.0 397H36.0V383H24.0V393H32.0V387H28.0V390M39.0 397H54.0V383H42.0V393H50.0V387H46.0V390M57.0 397H72.0V383H60.0V393H68.0V387H64.0V390M75.0 397H90.0V383H78.0V393H86.0V387H82.0V390M93.0 397H108.0V383H96.0V393H104.0V387H100.0V390M111.0 397H126.0V383H114.0V393H122.0V387H118.0V390M129.0 397H144.0V383H132.0V393H140.0V387H136.0V390M147.0 397H162.0V383H150.0V393H158.0V387H154.0V390M165.0 397H180.0V383H168.0V393H176.0V387H172.0V390M183.0 397H198.0V383H186.0V393H194.0V387H190.0V390M201.0 397H216.0V383H204.0V393H212.0V387H208.0V390" stroke-width="1.4"/>
+<circle cx="120" cy="178" r="88" stroke-width="2"/>
+<circle cx="120" cy="178" r="82" stroke-width=".8"/>
+<path d="M60 334H104M136 334H180" stroke-width="1"/>
+</g>
+<circle cx="120" cy="334" r="2.6" fill="currentColor"/><circle cx="112" cy="334" r="1.4" fill="currentColor"/><circle cx="128" cy="334" r="1.4" fill="currentColor"/>
+<text x="120" y="312" text-anchor="middle" style="fill:var(--goldtext,#7A5D25)" font-family="Cinzel,'Trajan Pro',Georgia,serif" font-weight="700" font-size="21" letter-spacing="2.5">EUTERPE</text>
+<text x="120" y="360" text-anchor="middle" style="fill:var(--goldtext,#7A5D25)" font-family="'Cormorant Garamond',Georgia,serif" font-style="italic" font-weight="600" font-size="17">a música</text><g fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M114 244L90 140" stroke-width="9"/><path d="M114 244L90 140" stroke-width="4.4" style="stroke:var(--card,#FBF9F5)"/><path d="M126 244L150 140" stroke-width="9"/><path d="M126 244L150 140" stroke-width="4.4" style="stroke:var(--card,#FBF9F5)"/>
+<path d="M84 142L80 126H100L96 142ZM144 142L140 126H160L156 142Z" stroke-width="2"/>
+<path d="M109 230L119 230M121 230L131 230" stroke-width="2"/>
+<circle cx="104" cy="196" r="2.4" fill="currentColor" stroke="none"/><circle cx="100" cy="180" r="2.4" fill="currentColor" stroke="none"/><circle cx="96" cy="164" r="2.4" fill="currentColor" stroke="none"/>
+<circle cx="136" cy="196" r="2.4" fill="currentColor" stroke="none"/><circle cx="140" cy="180" r="2.4" fill="currentColor" stroke="none"/><circle cx="144" cy="164" r="2.4" fill="currentColor" stroke="none"/>
+<path d="M112 246Q120 256 128 246L126 252Q120 258 114 252Z" fill="currentColor" stroke-width="1"/>
+</g></symbol>
+<symbol id="polimnia" viewBox="0 0 240 420"><rect width="240" height="420" style="fill:var(--card,#FBF9F5)"/>
+<g fill="none" stroke="currentColor" stroke-linecap="square">
+<rect x="5" y="5" width="230" height="410" stroke-width="1.6"/>
+<rect x="11" y="11" width="218" height="398" stroke-width=".8"/>
+<path d="M21.0 35H36.0V21H24.0V31H32.0V25H28.0V28M39.0 35H54.0V21H42.0V31H50.0V25H46.0V28M57.0 35H72.0V21H60.0V31H68.0V25H64.0V28M75.0 35H90.0V21H78.0V31H86.0V25H82.0V28M93.0 35H108.0V21H96.0V31H104.0V25H100.0V28M111.0 35H126.0V21H114.0V31H122.0V25H118.0V28M129.0 35H144.0V21H132.0V31H140.0V25H136.0V28M147.0 35H162.0V21H150.0V31H158.0V25H154.0V28M165.0 35H180.0V21H168.0V31H176.0V25H172.0V28M183.0 35H198.0V21H186.0V31H194.0V25H190.0V28M201.0 35H216.0V21H204.0V31H212.0V25H208.0V28" stroke-width="1.4"/><path d="M21.0 397H36.0V383H24.0V393H32.0V387H28.0V390M39.0 397H54.0V383H42.0V393H50.0V387H46.0V390M57.0 397H72.0V383H60.0V393H68.0V387H64.0V390M75.0 397H90.0V383H78.0V393H86.0V387H82.0V390M93.0 397H108.0V383H96.0V393H104.0V387H100.0V390M111.0 397H126.0V383H114.0V393H122.0V387H118.0V390M129.0 397H144.0V383H132.0V393H140.0V387H136.0V390M147.0 397H162.0V383H150.0V393H158.0V387H154.0V390M165.0 397H180.0V383H168.0V393H176.0V387H172.0V390M183.0 397H198.0V383H186.0V393H194.0V387H190.0V390M201.0 397H216.0V383H204.0V393H212.0V387H208.0V390" stroke-width="1.4"/>
+<circle cx="120" cy="178" r="88" stroke-width="2"/>
+<circle cx="120" cy="178" r="82" stroke-width=".8"/>
+<path d="M60 334H104M136 334H180" stroke-width="1"/>
+</g>
+<circle cx="120" cy="334" r="2.6" fill="currentColor"/><circle cx="112" cy="334" r="1.4" fill="currentColor"/><circle cx="128" cy="334" r="1.4" fill="currentColor"/>
+<text x="120" y="312" text-anchor="middle" style="fill:var(--goldtext,#7A5D25)" font-family="Cinzel,'Trajan Pro',Georgia,serif" font-weight="700" font-size="21" letter-spacing="2.5">POLÍMNIA</text>
+<text x="120" y="360" text-anchor="middle" style="fill:var(--goldtext,#7A5D25)" font-family="'Cormorant Garamond',Georgia,serif" font-style="italic" font-weight="600" font-size="17">o canto sagrado</text><g fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round">
+<path d="M128 134L139 158L145 169Q143 173 138 172Q139 176 141 178Q138 180 140 182Q141 186 137 188Q137 196 130 200Q120 204 112 198" stroke-width="2.2"/>
+<path d="M125 156Q130 159 135 156" stroke-width="1.6"/>
+<path d="M114 198L116 228" stroke-width="2"/>
+<path d="M146 140C140 118 116 110 98 122C80 134 76 164 80 196C83 220 78 240 70 254" stroke-width="2.6"/>
+<path d="M146 140Q136 131 128 134" stroke-width="2.2"/>
+<path d="M70 254Q100 246 120 256Q138 248 160 254" stroke-width="2.2"/>
+<path d="M92 132C86 156 86 192 92 222M104 124C100 146 100 170 104 194" stroke-width="1"/>
+<path d="M141 230L143 186Q144 180 148 181Q151 182 150 188L149 230" stroke-width="1.9"/>
+<path d="M118 214C130 208 150 214 166 226C160 236 160 246 164 254" stroke-width="2.2"/>
+<path d="M126 222C136 220 148 224 156 232M130 234C138 232 146 236 150 242" stroke-width="1"/>
+</g></symbol>
+<symbol id="mnemosine" viewBox="0 0 240 420"><rect width="240" height="420" style="fill:var(--card,#FBF9F5)"/>
+<g fill="none" stroke="currentColor" stroke-linecap="square">
+<rect x="5" y="5" width="230" height="410" stroke-width="1.6"/>
+<rect x="11" y="11" width="218" height="398" stroke-width=".8"/>
+<path d="M21.0 35H36.0V21H24.0V31H32.0V25H28.0V28M39.0 35H54.0V21H42.0V31H50.0V25H46.0V28M57.0 35H72.0V21H60.0V31H68.0V25H64.0V28M75.0 35H90.0V21H78.0V31H86.0V25H82.0V28M93.0 35H108.0V21H96.0V31H104.0V25H100.0V28M111.0 35H126.0V21H114.0V31H122.0V25H118.0V28M129.0 35H144.0V21H132.0V31H140.0V25H136.0V28M147.0 35H162.0V21H150.0V31H158.0V25H154.0V28M165.0 35H180.0V21H168.0V31H176.0V25H172.0V28M183.0 35H198.0V21H186.0V31H194.0V25H190.0V28M201.0 35H216.0V21H204.0V31H212.0V25H208.0V28" stroke-width="1.4"/><path d="M21.0 397H36.0V383H24.0V393H32.0V387H28.0V390M39.0 397H54.0V383H42.0V393H50.0V387H46.0V390M57.0 397H72.0V383H60.0V393H68.0V387H64.0V390M75.0 397H90.0V383H78.0V393H86.0V387H82.0V390M93.0 397H108.0V383H96.0V393H104.0V387H100.0V390M111.0 397H126.0V383H114.0V393H122.0V387H118.0V390M129.0 397H144.0V383H132.0V393H140.0V387H136.0V390M147.0 397H162.0V383H150.0V393H158.0V387H154.0V390M165.0 397H180.0V383H168.0V393H176.0V387H172.0V390M183.0 397H198.0V383H186.0V393H194.0V387H190.0V390M201.0 397H216.0V383H204.0V393H212.0V387H208.0V390" stroke-width="1.4"/>
+<circle cx="120" cy="178" r="88" stroke-width="2"/>
+<circle cx="120" cy="178" r="82" stroke-width=".8"/>
+<path d="M60 334H104M136 334H180" stroke-width="1"/>
+</g>
+<circle cx="120" cy="334" r="2.6" fill="currentColor"/><circle cx="112" cy="334" r="1.4" fill="currentColor"/><circle cx="128" cy="334" r="1.4" fill="currentColor"/>
+<text x="120" y="312" text-anchor="middle" style="fill:var(--goldtext,#7A5D25)" font-family="Cinzel,'Trajan Pro',Georgia,serif" font-weight="700" font-size="21" letter-spacing="2.5">MNEMÓSINE</text>
+<text x="120" y="360" text-anchor="middle" style="fill:var(--goldtext,#7A5D25)" font-family="'Cormorant Garamond',Georgia,serif" font-style="italic" font-weight="600" font-size="17">a memória</text><g fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round">
+<path d="M80 214C80 194 140 194 140 214C140 228 80 228 80 214Z"/>
+<path d="M136 204L162 198Q172 197 170 206L138 220" stroke-width="2.4"/>
+<circle cx="110" cy="205" r="4" stroke-width="1.6"/>
+<circle cx="72" cy="208" r="7" stroke-width="2"/>
+<path d="M98 228L94 238H126L122 228" stroke-width="2"/>
+<path d="M166 196C154 180 158 158 166 138C172 158 182 176 170 196Z" fill="currentColor" stroke-width="1.6"/>
+<path d="M167 192C163 182 165 170 168 162C171 172 175 182 170 192Z" style="fill:var(--card,#FBF9F5)" stroke="none"/>
+<path d="M88.0 148.0L88.2 148.6L88.2 149.2L88.0 149.9L87.6 150.5L87.0 151.1L86.2 151.5L85.3 151.7L84.3 151.6L83.3 151.3L82.4 150.6L81.6 149.7L81.0 148.6L80.8 147.3L80.9 146.0L81.3 144.6L82.2 143.4L83.3 142.3L84.8 141.6L86.4 141.3L88.2 141.3L89.9 141.9L91.5 142.9L92.8 144.3L93.7 146.0L94.2 148.0L94.2 150.1L93.7 152.2L92.6 154.2L91.0 155.8L88.9 157.0L86.6 157.7L84.1 157.8L81.6 157.3L79.3 156.1L77.3 154.3L75.8 152.0L74.8 149.4L74.6 146.6L75.1 143.7L76.3 140.9L78.2 138.6L80.7 136.7L83.6 135.5L86.8 135.0L90.1 135.4L93.2 136.6L96.0 138.6L98.3 141.3L99.8 144.5L100.5 148.0L100.3 151.7L99.1 155.2L97.1 158.4L94.3 161.1L90.9 163.0L87.0 164.0L83.0 164.0L79.0 162.9L75.3 160.9L72.2 158.0" stroke-width="1.5"/>
+<path d="M103 148C112 160 76 178 72 201" stroke-width="1.5"/>
+</g></symbol>
+<symbol id="clio" viewBox="0 0 240 420"><rect width="240" height="420" style="fill:var(--card,#FBF9F5)"/>
+<g fill="none" stroke="currentColor" stroke-linecap="square">
+<rect x="5" y="5" width="230" height="410" stroke-width="1.6"/>
+<rect x="11" y="11" width="218" height="398" stroke-width=".8"/>
+<path d="M21.0 35H36.0V21H24.0V31H32.0V25H28.0V28M39.0 35H54.0V21H42.0V31H50.0V25H46.0V28M57.0 35H72.0V21H60.0V31H68.0V25H64.0V28M75.0 35H90.0V21H78.0V31H86.0V25H82.0V28M93.0 35H108.0V21H96.0V31H104.0V25H100.0V28M111.0 35H126.0V21H114.0V31H122.0V25H118.0V28M129.0 35H144.0V21H132.0V31H140.0V25H136.0V28M147.0 35H162.0V21H150.0V31H158.0V25H154.0V28M165.0 35H180.0V21H168.0V31H176.0V25H172.0V28M183.0 35H198.0V21H186.0V31H194.0V25H190.0V28M201.0 35H216.0V21H204.0V31H212.0V25H208.0V28" stroke-width="1.4"/><path d="M21.0 397H36.0V383H24.0V393H32.0V387H28.0V390M39.0 397H54.0V383H42.0V393H50.0V387H46.0V390M57.0 397H72.0V383H60.0V393H68.0V387H64.0V390M75.0 397H90.0V383H78.0V393H86.0V387H82.0V390M93.0 397H108.0V383H96.0V393H104.0V387H100.0V390M111.0 397H126.0V383H114.0V393H122.0V387H118.0V390M129.0 397H144.0V383H132.0V393H140.0V387H136.0V390M147.0 397H162.0V383H150.0V393H158.0V387H154.0V390M165.0 397H180.0V383H168.0V393H176.0V387H172.0V390M183.0 397H198.0V383H186.0V393H194.0V387H190.0V390M201.0 397H216.0V383H204.0V393H212.0V387H208.0V390" stroke-width="1.4"/>
+<circle cx="120" cy="178" r="88" stroke-width="2"/>
+<circle cx="120" cy="178" r="82" stroke-width=".8"/>
+<path d="M60 334H104M136 334H180" stroke-width="1"/>
+</g>
+<circle cx="120" cy="334" r="2.6" fill="currentColor"/><circle cx="112" cy="334" r="1.4" fill="currentColor"/><circle cx="128" cy="334" r="1.4" fill="currentColor"/>
+<text x="120" y="312" text-anchor="middle" style="fill:var(--goldtext,#7A5D25)" font-family="Cinzel,'Trajan Pro',Georgia,serif" font-weight="700" font-size="21" letter-spacing="2.5">CLIO</text>
+<text x="120" y="360" text-anchor="middle" style="fill:var(--goldtext,#7A5D25)" font-family="'Cormorant Garamond',Georgia,serif" font-style="italic" font-weight="600" font-size="17">a história</text><g fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><g transform="rotate(-8 120 178)">
+<path d="M82 146H158M82 210H158"/>
+<path d="M76 140V216" stroke-width="10"/><path d="M76 140V216" stroke-width="5" style="stroke:var(--card,#FBF9F5)"/>
+<path d="M164 140V216" stroke-width="10"/><path d="M164 140V216" stroke-width="5" style="stroke:var(--card,#FBF9F5)"/>
+<path d="M76 132V140M76 216V224M164 132V140M164 216V224" stroke-width="3"/>
+<path d="M92 160H148M92 170H144M92 180H148M92 190H138M92 200H128" stroke-width="1.3"/>
+</g>
+<path d="M88 250Q120 236 152 250" fill="none" stroke="currentColor" stroke-width="1.4"/>
+<path d="M96 246q-2-8 6-10q2 8-6 10ZM110 241q-1-8 7-9q1 8-7 9ZM130 241q1-8-7-9q-1 8 7 9ZM144 246q2-8-6-10q-2 8 6 10Z" fill="currentColor"/>
+</g></symbol>
+<symbol id="erato" viewBox="0 0 240 420"><rect width="240" height="420" style="fill:var(--card,#FBF9F5)"/>
+<g fill="none" stroke="currentColor" stroke-linecap="square">
+<rect x="5" y="5" width="230" height="410" stroke-width="1.6"/>
+<rect x="11" y="11" width="218" height="398" stroke-width=".8"/>
+<path d="M21.0 35H36.0V21H24.0V31H32.0V25H28.0V28M39.0 35H54.0V21H42.0V31H50.0V25H46.0V28M57.0 35H72.0V21H60.0V31H68.0V25H64.0V28M75.0 35H90.0V21H78.0V31H86.0V25H82.0V28M93.0 35H108.0V21H96.0V31H104.0V25H100.0V28M111.0 35H126.0V21H114.0V31H122.0V25H118.0V28M129.0 35H144.0V21H132.0V31H140.0V25H136.0V28M147.0 35H162.0V21H150.0V31H158.0V25H154.0V28M165.0 35H180.0V21H168.0V31H176.0V25H172.0V28M183.0 35H198.0V21H186.0V31H194.0V25H190.0V28M201.0 35H216.0V21H204.0V31H212.0V25H208.0V28" stroke-width="1.4"/><path d="M21.0 397H36.0V383H24.0V393H32.0V387H28.0V390M39.0 397H54.0V383H42.0V393H50.0V387H46.0V390M57.0 397H72.0V383H60.0V393H68.0V387H64.0V390M75.0 397H90.0V383H78.0V393H86.0V387H82.0V390M93.0 397H108.0V383H96.0V393H104.0V387H100.0V390M111.0 397H126.0V383H114.0V393H122.0V387H118.0V390M129.0 397H144.0V383H132.0V393H140.0V387H136.0V390M147.0 397H162.0V383H150.0V393H158.0V387H154.0V390M165.0 397H180.0V383H168.0V393H176.0V387H172.0V390M183.0 397H198.0V383H186.0V393H194.0V387H190.0V390M201.0 397H216.0V383H204.0V393H212.0V387H208.0V390" stroke-width="1.4"/>
+<circle cx="120" cy="178" r="88" stroke-width="2"/>
+<circle cx="120" cy="178" r="82" stroke-width=".8"/>
+<path d="M60 334H104M136 334H180" stroke-width="1"/>
+</g>
+<circle cx="120" cy="334" r="2.6" fill="currentColor"/><circle cx="112" cy="334" r="1.4" fill="currentColor"/><circle cx="128" cy="334" r="1.4" fill="currentColor"/>
+<text x="120" y="312" text-anchor="middle" style="fill:var(--goldtext,#7A5D25)" font-family="Cinzel,'Trajan Pro',Georgia,serif" font-weight="700" font-size="21" letter-spacing="2.5">ÉRATO</text>
+<text x="120" y="360" text-anchor="middle" style="fill:var(--goldtext,#7A5D25)" font-family="'Cormorant Garamond',Georgia,serif" font-style="italic" font-weight="600" font-size="17">a poesia lírica</text><g fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round">
+<path d="M86 202H154L146 238H94Z"/>
+<path d="M98 214H142" stroke-width="1.2"/>
+<path d="M92 202C82 178 82 150 92 132C96 124 92 116 84 118"/>
+<path d="M148 202C158 178 158 150 148 132C144 124 148 116 156 118"/>
+<circle cx="84" cy="118" r="4" stroke-width="1.6"/><circle cx="156" cy="118" r="4" stroke-width="1.6"/>
+<path d="M88 138H152" stroke-width="3.6"/>
+<path d="M100 140V202M106.7 140V202M113.3 140V202M120 140V202M126.7 140V202M133.3 140V202M140 140V202" stroke-width="1.1"/>
+<path d="M112 228q8-6 16 0q-8 6-16 0Z" fill="currentColor" stroke-width="1"/>
+</g></symbol>
+<symbol id="caliope" viewBox="0 0 240 420"><rect width="240" height="420" style="fill:var(--card,#FBF9F5)"/>
+<g fill="none" stroke="currentColor" stroke-linecap="square">
+<rect x="5" y="5" width="230" height="410" stroke-width="1.6"/>
+<rect x="11" y="11" width="218" height="398" stroke-width=".8"/>
+<path d="M21.0 35H36.0V21H24.0V31H32.0V25H28.0V28M39.0 35H54.0V21H42.0V31H50.0V25H46.0V28M57.0 35H72.0V21H60.0V31H68.0V25H64.0V28M75.0 35H90.0V21H78.0V31H86.0V25H82.0V28M93.0 35H108.0V21H96.0V31H104.0V25H100.0V28M111.0 35H126.0V21H114.0V31H122.0V25H118.0V28M129.0 35H144.0V21H132.0V31H140.0V25H136.0V28M147.0 35H162.0V21H150.0V31H158.0V25H154.0V28M165.0 35H180.0V21H168.0V31H176.0V25H172.0V28M183.0 35H198.0V21H186.0V31H194.0V25H190.0V28M201.0 35H216.0V21H204.0V31H212.0V25H208.0V28" stroke-width="1.4"/><path d="M21.0 397H36.0V383H24.0V393H32.0V387H28.0V390M39.0 397H54.0V383H42.0V393H50.0V387H46.0V390M57.0 397H72.0V383H60.0V393H68.0V387H64.0V390M75.0 397H90.0V383H78.0V393H86.0V387H82.0V390M93.0 397H108.0V383H96.0V393H104.0V387H100.0V390M111.0 397H126.0V383H114.0V393H122.0V387H118.0V390M129.0 397H144.0V383H132.0V393H140.0V387H136.0V390M147.0 397H162.0V383H150.0V393H158.0V387H154.0V390M165.0 397H180.0V383H168.0V393H176.0V387H172.0V390M183.0 397H198.0V383H186.0V393H194.0V387H190.0V390M201.0 397H216.0V383H204.0V393H212.0V387H208.0V390" stroke-width="1.4"/>
+<circle cx="120" cy="178" r="88" stroke-width="2"/>
+<circle cx="120" cy="178" r="82" stroke-width=".8"/>
+<path d="M60 334H104M136 334H180" stroke-width="1"/>
+</g>
+<circle cx="120" cy="334" r="2.6" fill="currentColor"/><circle cx="112" cy="334" r="1.4" fill="currentColor"/><circle cx="128" cy="334" r="1.4" fill="currentColor"/>
+<text x="120" y="312" text-anchor="middle" style="fill:var(--goldtext,#7A5D25)" font-family="Cinzel,'Trajan Pro',Georgia,serif" font-weight="700" font-size="21" letter-spacing="2.5">CALÍOPE</text>
+<text x="120" y="360" text-anchor="middle" style="fill:var(--goldtext,#7A5D25)" font-family="'Cormorant Garamond',Georgia,serif" font-style="italic" font-weight="600" font-size="17">a poesia épica</text><g fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><g transform="rotate(-6 120 180)">
+<rect x="76" y="140" width="42" height="80" rx="3"/><rect x="122" y="140" width="42" height="80" rx="3"/>
+<rect x="82" y="146" width="30" height="68" stroke-width="1.2"/><rect x="128" y="146" width="30" height="68" stroke-width="1.2"/>
+<path d="M118 156H122M118 204H122" stroke-width="3"/>
+<path d="M88 160H106M88 170H104M88 180H106M88 190H100M134 160H152M134 170H148M134 180H152" stroke-width="1.2"/>
+</g>
+<path d="M164 112L120 238" stroke-width="3.2"/>
+<path d="M120 238L117 250L124 241Z" fill="currentColor" stroke-width="1"/>
+<path d="M160 108L170 112L166 122L156 118Z" fill="currentColor" stroke-width="1"/>
+</g></symbol>
+</svg>
