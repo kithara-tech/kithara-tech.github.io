@@ -487,7 +487,7 @@ details[open]{padding-bottom:10px}
    cinco linhas no topo das seções. Tudo em CSS/SVG; nada depende de JS.
    O topo (.phead) é sempre a "tela" escura; no tema escuro a página inteira
    fica em "Bronze noturno", mais escuro que o Bronze. Contraste: texto
-   #F2EDE3 e #B1A897 sobre #0D0C09 dão 17:1 e 8,4:1; ouro #D9B56A dá 10:1. */
+   #F2EDE3 e #B1A897 sobre #0D0C09 dão 16,8:1 e 8,3:1; ouro #D9B56A dá 10:1. */
 .zona-tech .phead,html[data-mode="dark"] body.zona-tech{
   --bg:#0D0C09; --bg2:#15130E; --card:#14120D; --soft:#1E1910;
   --ink:#F2EDE3; --muted:#B1A897; --line:#2F2A21;
