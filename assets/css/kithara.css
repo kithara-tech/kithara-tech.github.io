@@ -583,3 +583,7 @@ html:not([data-mode="dark"]) .zona-tech main > .sec .tag::before{color:var(--gol
   .ap-hero--foto .cta{max-width:520px}
   .duo{max-width:620px}
 }
+
+/* faixa de fotos do case na home */
+.strip{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin:14px 0 16px;text-decoration:none}
+.strip img{width:100%;height:auto;aspect-ratio:3/4;object-fit:cover;border-radius:2px;border:1px solid var(--line);display:block}
