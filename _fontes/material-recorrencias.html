@@ -1,0 +1,476 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<script>(function(){var m=null;try{m=localStorage.getItem("kth-mode")}catch(e){}if(m!=="dark"&&m!=="light"){m=(window.matchMedia&&matchMedia("(prefers-color-scheme: dark)").matches)?"dark":"light"}document.documentElement.setAttribute("data-mode",m)})();</script>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700;900&family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500;1,600&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Recorrências Lineares · Trilha de estudo · Kithara</title>
+
+
+<script>
+window.MathJax = { tex: { inlineMath: [['$','$']], displayMath: [['$$','$$']] }, svg: { fontCache: 'global' } };
+</script>
+<script async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-svg.min.js"></script>
+<style>
+:root{
+  --bg:#f7f5f0; --card:#ffffff; --ink:#1d1b18; --muted:#6b665d; --line:#e4dfd4;
+  --accent:#b4441f; --accent-soft:#f6e3da; --ok:#2f6b4f; --ok-soft:#e1efe7;
+}
+@media (prefers-color-scheme: dark){
+  :root{ --bg:#16150f; --card:#201e17; --ink:#efe9dc; --muted:#a39c8e; --line:#36322a;
+         --accent:#ef8a5f; --accent-soft:#3a2419; --ok:#7cc39d; --ok-soft:#1c3026; }
+}
+*{box-sizing:border-box}
+html,body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.6 Inter,system-ui,sans-serif}
+header{padding:20px 18px 6px;max-width:760px;margin:0 auto}
+.kicker{font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--accent);font-weight:600}
+h1{font-family:Fraunces,Georgia,serif;font-size:30px;line-height:1.15;margin:4px 0 6px}
+h2{font-family:Fraunces,Georgia,serif;font-size:22px;margin:4px 0 10px}
+h3{font-size:16px;margin:18px 0 6px}
+p{margin:8px 0}
+.sub{color:var(--muted);margin:0}
+nav.tabs{position:sticky;top:0;z-index:5;background:var(--bg);border-bottom:1px solid var(--line)}
+.tabrow{display:flex;gap:6px;overflow-x:auto;padding:10px 14px;max-width:760px;margin:0 auto;scrollbar-width:none}
+.tabrow::-webkit-scrollbar{display:none}
+.tab{flex:0 0 auto;border:1px solid var(--line);background:var(--card);color:var(--ink);
+  padding:8px 14px;border-radius:999px;font:500 14px Inter,sans-serif;cursor:pointer}
+.tab[aria-selected="true"]{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+main{max-width:760px;margin:0 auto;padding:16px 14px 60px}
+section.view{display:none}
+section.view.on{display:block}
+.card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:16px;margin:12px 0}
+.btn{display:inline-block;background:var(--accent);color:#fff;text-decoration:none;
+  padding:10px 16px;border-radius:10px;font-weight:600;font-size:15px;border:0;cursor:pointer}
+.btn.ghost{background:transparent;color:var(--accent);border:1px solid var(--accent)}
+.steps{counter-reset:s;list-style:none;padding:0;margin:0}
+.steps li{counter-increment:s;position:relative;padding:0 0 14px 40px}
+.steps li::before{content:counter(s);position:absolute;left:0;top:0;width:28px;height:28px;border-radius:50%;
+  background:var(--accent-soft);color:var(--accent);font-weight:700;display:grid;place-items:center;font-size:14px}
+.chips{display:flex;gap:6px;overflow-x:auto;padding:2px 0 8px;scrollbar-width:none}
+.chips::-webkit-scrollbar{display:none}
+.chip{flex:0 0 auto;border:1px solid var(--line);background:transparent;color:var(--muted);
+  padding:6px 12px;border-radius:8px;font:500 13px Inter,sans-serif;cursor:pointer}
+.chip[aria-selected="true"]{border-color:var(--accent);color:var(--accent);background:var(--accent-soft)}
+.sub-view{display:none}.sub-view.on{display:block}
+.box{border-left:3px solid var(--accent);background:var(--accent-soft);padding:10px 12px;border-radius:0 10px 10px 0;margin:12px 0}
+.box.ok{border-color:var(--ok);background:var(--ok-soft)}
+.math-wrap{overflow-x:auto;padding:2px 0}
+details{border:1px solid var(--line);border-radius:10px;padding:10px 12px;margin:10px 0;background:var(--card)}
+summary{cursor:pointer;font-weight:600}
+.check{display:flex;gap:10px;align-items:flex-start;padding:8px 0;border-top:1px solid var(--line)}
+.check:first-child{border-top:0}
+.check input{margin-top:5px;width:18px;height:18px;accent-color:var(--accent)}
+.vid-num{font-size:12px;color:var(--muted);text-transform:uppercase;letter-spacing:.06em}
+table{border-collapse:collapse;width:100%;font-size:14px}
+td,th{border-bottom:1px solid var(--line);padding:8px 6px;text-align:left;vertical-align:top}
+.nextrow{display:flex;justify-content:space-between;gap:10px;margin-top:16px}
+</style>
+<style id="kithara-skin">
+html:root:root[data-mode="light"]{--k-bg:#F4F0E8;--k-card:#FBF9F5;--k-ink:#1C1A17;--k-line:#D6CEBF;--k-gold:#8A6A2C;--k-goldtext:#8A6A2C;--k-deep:#1C1A17;--k-ondeep:#F4F0E8;--bg:#F4F0E8;--card:#FBF9F5;--ink:#1C1A17;--muted:#5F584E;--line:#D6CEBF;--accent:#8A6A2C;--accent-soft:#EFE4CC;--ok:#3E5A2E;--ok-soft:#E6EAD9;color-scheme:light}
+html:root:root[data-mode="dark"]{--k-bg:#17150F;--k-card:#1F1C16;--k-ink:#F2EDE3;--k-line:#35322C;--k-gold:#B08A3E;--k-goldtext:#C9A35A;--k-deep:#0F0E0A;--k-ondeep:#F2EDE3;--bg:#17150F;--card:#1F1C16;--ink:#F2EDE3;--muted:#A79F92;--line:#35322C;--accent:#C9A35A;--accent-soft:#2C2618;--ok:#B9C99A;--ok-soft:#20261A;color-scheme:dark}
+html[data-mode="light"] body{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='400'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.008 .02' numOctaves='4' seed='7'/%3E%3CfeColorMatrix values='0 0 0 0 .55 0 0 0 0 .52 0 0 0 0 .47 0 0 0 1.1 -.55'/%3E%3C/filter%3E%3Crect width='400' height='400' filter='url(%23n)' opacity='.35'/%3E%3C/svg%3E")}
+
+.kbar{position:sticky;top:0;z-index:40;background:color-mix(in srgb,var(--k-bg) 94%,transparent);backdrop-filter:blur(8px);border-bottom:1px solid var(--k-line);font-family:Inter,system-ui,sans-serif}
+.kbar .in{max-width:900px;margin:0 auto;display:flex;align-items:center;gap:10px;padding:8px 16px}
+.kbar .emb{width:34px;height:34px;flex:0 0 auto}
+.kbar .emb .i{stroke:var(--k-ink)} .kbar .emb .g{stroke:var(--k-gold)}
+.kbar .nm{display:grid;line-height:1.15;color:var(--k-ink)}
+.kbar .nm b{font:700 11px Cinzel,Georgia,serif;letter-spacing:.3em;color:var(--k-goldtext)}
+.kbar .nm span{font:600 14px "Cormorant Garamond",Georgia,serif}
+.kbar .home{margin-left:auto;font:700 10px Cinzel,Georgia,serif;letter-spacing:.16em;text-decoration:none;border:1px solid var(--k-line);padding:9px 11px;border-radius:999px;background:var(--k-card);color:var(--k-ink);white-space:nowrap}
+.kbar .mode{flex:0 0 auto;width:38px;height:38px;border-radius:50%;border:1px solid var(--k-gold);background:var(--k-deep);color:var(--k-ondeep);display:grid;place-items:center;cursor:pointer;padding:0}
+.kbar .mode svg{width:16px;height:16px}
+.kmeander{height:14px;background-repeat:repeat-x;background-size:28px 14px;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='36' height='18' viewBox='0 0 36 18'%3E%3Cpath d='M0 17H30V1H6V13H22V5H14V9' fill='none' stroke='%23b08a3e' stroke-width='2'/%3E%3C/svg%3E")}
+
+.kbar{position:relative!important} h1{font-family:Cinzel,Georgia,serif!important;font-weight:700!important;letter-spacing:.02em} h2{font-family:"Cormorant Garamond",Georgia,serif!important;font-weight:700!important;font-size:26px!important} .kicker{font-family:Cinzel,Georgia,serif;letter-spacing:.2em} html[data-mode="dark"] .btn:not(.ghost){color:#17150F} .card,details{border-radius:4px!important} .btn{border-radius:2px!important}
+</style>
+</head>
+<body>
+<header class="kbar"><div class="in">
+<svg class="emb" viewBox="0 0 100 100" aria-hidden="true"><g fill="none" stroke-linecap="round" stroke-linejoin="round">
+<circle class="g" cx="50" cy="50" r="46" stroke-width="3"/>
+<path class="i" d="M36 74 C26 60 25 42 31 28 M64 74 C74 60 75 42 69 28" stroke-width="5"/>
+<path class="g" d="M26 30 H74" stroke-width="5"/><path class="i" d="M33 76 H67" stroke-width="5"/>
+<path class="i" d="M44 33 V73 M50 33 V73 M56 33 V73" stroke-width="2.6"/></g></svg>
+<div class="nm"><b>ΚΙΘΑΡΑ</b><span>Materiais · Estudo</span></div>
+<a class="home" href="https://claude.ai/artifact/GsCCcF8oeWUEb3uuTE5xst">SITE</a>
+<button class="mode" id="mode" type="button" aria-label="Alternar tema"></button>
+</div></header>
+<div class="kmeander" aria-hidden="true"></div>
+
+<header>
+  <div class="kicker">PIC · Matemática</div>
+  <h1>Recorrências lineares</h1>
+  <p class="sub">Ciclo 7 · Grupo 3 — teoria, roteiro e material dos Encontros 1 e 2.</p>
+</header>
+
+<nav class="tabs"><div class="tabrow" role="tablist">
+  <button class="tab" data-v="inicio" aria-selected="true">Início</button>
+  <button class="tab" data-v="roteiro">Roteiro</button>
+  <button class="tab" data-v="videos">Material</button>
+  <button class="tab" data-v="teoria">Teoria</button>
+  <button class="tab" data-v="steiner">Steiner</button>
+</div></nav>
+
+<main>
+<!-- INÍCIO -->
+<section class="view on" id="v-inicio">
+  <div class="card">
+    <h2>Por onde começar</h2>
+    <p>Uma recorrência define cada termo de uma sequência a partir dos anteriores. Este material acompanha os dois encontros do Ciclo 7:</p>
+    <div class="box"><strong>Encontro 1:</strong> recorrências lineares de 1ª ordem, como $T_{n+1} = aT_n + b$ e $T_{n+1} = f(n)T_n + g(n)$.</div>
+    <div class="box"><strong>Encontro 2:</strong> recorrências lineares de 2ª ordem com coeficientes constantes, como $T_{n+2} = aT_{n+1} + bT_n + c$.</div>
+    <p>Siga o roteiro: ele alterna leitura e um teste rápido para você saber se pode avançar. Os exemplos daqui são diferentes dos exercícios da lista, para não estragar a aula.</p>
+    <p style="margin-top:14px"><button class="btn" data-go="roteiro">Abrir o roteiro</button></p>
+  </div>
+  <div class="card">
+    <h3 style="margin-top:0">O que você vai saber fazer</h3>
+    <ul style="margin:6px 0;padding-left:20px">
+      <li>Resolver qualquer recorrência $T_{n+1} = aT_n + b$</li>
+      <li>Calcular somas e produtos telescópicos</li>
+      <li>Transformar $T_{n+1} = f(n)T_n + g(n)$ numa soma, com a substituição certa</li>
+      <li>Usar a equação característica em recorrências de 2ª ordem</li>
+      <li>Montar a recorrência de um problema de contagem</li>
+    </ul>
+  </div>
+</section>
+
+<!-- ROTEIRO -->
+<section class="view" id="v-roteiro">
+  <h2>Roteiro de estudo</h2>
+  <p class="sub">Marque cada etapa ao terminar. Só avance quando acertar o teste sem olhar a resposta.</p>
+
+  <div class="kicker" style="margin:18px 0 4px">Encontro 1 · 1ª ordem</div>
+
+  <div class="card">
+    <div class="vid-num">Etapa 1</div>
+    <h3 style="margin-top:2px">Sequências, PA e PG</h3>
+    <div class="check"><input type="checkbox" data-k="e1a"><span>Leia <a href="#" data-go="teoria" data-sub="t1">Teoria · 1</a></span></div>
+    <details><summary>Teste</summary>
+      <p>A sequência $T_{n+1} = T_n \cdot 3$ fica bem definida? O que falta?</p>
+      <p><strong>Resposta:</strong> falta um termo. Com $T_1 = 2$, por exemplo, ela é a PG $2, 6, 18, \dots$, e $T_n = 2\cdot 3^{n-1}$.</p>
+    </details>
+  </div>
+
+  <div class="card">
+    <div class="vid-num">Etapa 2</div>
+    <h3 style="margin-top:2px">1ª ordem, coeficientes constantes</h3>
+    <div class="check"><input type="checkbox" data-k="e2a"><span>Leia <a href="#" data-go="teoria" data-sub="t2">Teoria · 2</a> e refaça o exemplo no papel</span></div>
+    <details><summary>Teste: Torre de Hanói</summary>
+      <p>O número mínimo de movimentos para $n$ discos satisfaz $h_1=1$ e $h_{n+1} = 2h_n+1$. Ache $h_n$.</p>
+      <p><strong>Resposta:</strong> $a=2$, $b=1$: $h_n = 2^{n-1} + \dfrac{2^{n-1}-1}{2-1} = 2^n - 1$. Pelo atalho do ponto fixo: $h_{n+1}+1 = 2(h_n+1)$.</p>
+    </details>
+  </div>
+
+  <div class="card">
+    <div class="vid-num">Etapa 3</div>
+    <h3 style="margin-top:2px">Somas e produtos telescópicos</h3>
+    <div class="check"><input type="checkbox" data-k="e2t"><span>Assista o <a href="#" data-go="videos">vídeo de soma telescópica</a></span></div>
+    <div class="check"><input type="checkbox" data-k="e2u"><span>Leia <a href="#" data-go="teoria" data-sub="t7">Teoria · 3</a></span></div>
+    <details><summary>Teste</summary>
+      <p>Calcule $\displaystyle\sum_{k=1}^{n} \frac{2k+1}{k^2(k+1)^2}$.</p>
+      <p><strong>Resposta:</strong> $\dfrac{2k+1}{k^2(k+1)^2} = \dfrac{1}{k^2} - \dfrac{1}{(k+1)^2}$, então a soma vale $1 - \dfrac{1}{(n+1)^2}$.</p>
+    </details>
+    <details><summary>Desafio</summary>
+      <p>Calcule $\displaystyle\prod_{k=2}^{n} \frac{k^3-1}{k^3+1}$.</p>
+      <p><strong>Resposta:</strong> fatore $k^3 - 1 = (k-1)(k^2+k+1)$ e $k^3 + 1 = (k+1)(k^2-k+1)$. Repare que $k^2 + k + 1 = (k+1)^2 - (k+1) + 1$, então essa parte também telescopa. Resultado: $\dfrac{2(n^2+n+1)}{3n(n+1)}$.</p>
+    </details>
+  </div>
+
+  <div class="card">
+    <div class="vid-num">Etapa 4</div>
+    <h3 style="margin-top:2px">1ª ordem, coeficientes não constantes</h3>
+    <div class="check"><input type="checkbox" data-k="e3a"><span>Leia <a href="#" data-go="teoria" data-sub="t3">Teoria · 4</a></span></div>
+    <details><summary>Teste</summary>
+      <p>Resolva $T_{n+1} = 2T_n + 2^n$, com $T_1 = 1$.</p>
+      <p><strong>Resposta:</strong> $S_n = 2^{n-1}$. Com $R_n = T_n/2^{n-1}$, fica $R_{n+1} = R_n + 1$, então $R_n = n$ e $T_n = n\cdot 2^{n-1}$.</p>
+    </details>
+  </div>
+
+  <div class="card">
+    <div class="vid-num">Etapa 5 · bônus</div>
+    <h3 style="margin-top:2px">Steiner</h3>
+    <div class="check"><input type="checkbox" data-k="e4b"><span>Assista o <a href="#" data-go="videos">vídeo da pizza de Steiner</a> e leia a aba <a href="#" data-go="steiner">Steiner</a></span></div>
+  </div>
+
+  <div class="kicker" style="margin:22px 0 4px">Encontro 2 · 2ª ordem</div>
+
+  <div class="card">
+    <div class="vid-num">Etapa 6</div>
+    <h3 style="margin-top:2px">Homogênea: equação característica</h3>
+    <div class="check"><input type="checkbox" data-k="e5a"><span>Leia <a href="#" data-go="teoria" data-sub="t4">Teoria · 5</a></span></div>
+    <details><summary>Teste</summary>
+      <p>Resolva $T_{n+2} = T_{n+1} + 2T_n$, com $T_0 = 0$ e $T_1 = 3$.</p>
+      <p><strong>Resposta:</strong> $x^2 = x + 2$ tem raízes $2$ e $-1$. De $C_1 + C_2 = 0$ e $2C_1 - C_2 = 3$ sai $C_1 = 1$, $C_2 = -1$: $T_n = 2^n - (-1)^n$.</p>
+    </details>
+  </div>
+
+  <div class="card">
+    <div class="vid-num">Etapa 7</div>
+    <h3 style="margin-top:2px">Não homogênea: o truque das diferenças</h3>
+    <div class="check"><input type="checkbox" data-k="e6a"><span>Leia <a href="#" data-go="teoria" data-sub="t5">Teoria · 6</a></span></div>
+    <details><summary>Teste</summary>
+      <p>Resolva $T_{n+2} = 3T_{n+1} - 2T_n + 1$, com $T_0 = 0$ e $T_1 = 1$.</p>
+      <p><strong>Resposta:</strong> $R_n = T_n - T_{n-1}$ satisfaz $R_{n+2} = 3R_{n+1} - 2R_n$, com raízes $1$ e $2$. Como $R_1 = 1$ e $R_2 = T_2 - T_1 = 3$, sai $R_n = 2^n - 1$. Somando: $T_n = 2^{n+1} - n - 2$.</p>
+    </details>
+  </div>
+
+  <div class="card">
+    <div class="vid-num">Etapa 8</div>
+    <h3 style="margin-top:2px">Modelar um problema</h3>
+    <div class="check"><input type="checkbox" data-k="e7a"><span>Leia <a href="#" data-go="teoria" data-sub="t6">Teoria · 7</a></span></div>
+    <details><summary>Teste: dominós</summary>
+      <p>De quantas formas dá para cobrir um tabuleiro $2\times n$ com dominós $1\times 2$?</p>
+      <p><strong>Resposta:</strong> olhe a coluna da esquerda: ou um dominó em pé (sobra $2\times(n-1)$) ou dois deitados (sobra $2\times(n-2)$). Então $t_{n+2}=t_{n+1}+t_n$, com $t_1=1$ e $t_2=2$: é Fibonacci deslocada.</p>
+    </details>
+  </div>
+</section>
+
+<!-- MATERIAL -->
+<section class="view" id="v-videos">
+  <h2>Material</h2>
+  <p class="sub">Vídeos e os textos de consulta indicados no roteiro.</p>
+  <div class="card">
+    <div class="vid-num">Playlist 1</div>
+    <h3 style="margin-top:2px">Recorrências: base</h3>
+    <p style="margin-top:12px"><a class="btn" href="https://www.youtube.com/watch?v=E_5uj38F8jM&list=PLYMD22oJpAr3_9HzvOVlk1rcWeX5CkCVd" target="_blank" rel="noopener">Abrir no YouTube</a></p>
+  </div>
+  <div class="card">
+    <div class="vid-num">Playlist 2</div>
+    <h3 style="margin-top:2px">Recorrências: aprofundamento</h3>
+    <p style="margin-top:12px"><a class="btn" href="https://www.youtube.com/watch?v=S9zDoNAr3d4&list=PLrVGp617x0hAttp3LQVBBF2td1uHjfhbr" target="_blank" rel="noopener">Abrir no YouTube</a></p>
+  </div>
+  <div class="card">
+    <div class="vid-num">Vídeo · Encontro 1</div>
+    <h3 style="margin-top:2px">Soma e produto telescópicos</h3>
+    <p class="sub">Use na etapa 3 do roteiro.</p>
+    <p style="margin-top:12px"><a class="btn" href="https://www.youtube.com/watch?v=cwJjKnbwORU" target="_blank" rel="noopener">Abrir no YouTube</a></p>
+  </div>
+  <div class="card">
+    <div class="vid-num">Bônus</div>
+    <h3 style="margin-top:2px">A pizza de Steiner</h3>
+    <p class="sub">Assista depois de tentar o Exercício 7 do Encontro 1.</p>
+    <p style="margin-top:12px"><a class="btn" href="https://www.youtube.com/watch?v=6DA1XGeqwpQ" target="_blank" rel="noopener">Abrir no YouTube</a></p>
+  </div>
+  <div class="card">
+    <div class="vid-num">Textos · Portal da OBMEP</div>
+    <h3 style="margin-top:2px">Material teórico (F. S. Benevides)</h3>
+    <p><a href="https://cdnportaldaobmep.impa.br/portaldaobmep/uploads/material_teorico/89ypthqd7aosg.pdf" target="_blank" rel="noopener">Recorrências – Parte 1</a> · Encontro 1</p>
+    <p><a href="https://cdnportaldaobmep.impa.br/portaldaobmep/uploads/material_teorico/647s36qnyv40k.pdf" target="_blank" rel="noopener">Recorrências – Parte 2</a> · Encontro 1</p>
+    <p><a href="https://cdnportaldaobmep.impa.br/portaldaobmep/uploads/material_teorico/dfq4if99zy0ws.pdf" target="_blank" rel="noopener">Recorrências – Parte 3</a> · Encontro 2</p>
+  </div>
+  <div class="box ok">Dica: pause o vídeo antes de cada resolução e tente sozinho por 2 minutos. Assistir sem tentar rende bem menos.</div>
+</section>
+
+<!-- TEORIA -->
+<section class="view" id="v-teoria">
+  <h2>Teoria resumida</h2>
+  <div class="chips" role="tablist">
+    <button class="chip" data-s="t1" aria-selected="true">1 · PA e PG</button>
+    <button class="chip" data-s="t2">2 · 1ª ordem</button>
+    <button class="chip" data-s="t7">3 · Telescópicas</button>
+    <button class="chip" data-s="t3">4 · Coef. não constantes</button>
+    <button class="chip" data-s="t4">5 · 2ª ordem</button>
+    <button class="chip" data-s="t5">6 · 2ª não homogênea</button>
+    <button class="chip" data-s="t6">7 · Modelando</button>
+  </div>
+
+  <div class="sub-view on card" id="s-t1">
+    <div class="vid-num">Encontro 1</div>
+    <h3 style="margin-top:2px">Sequências e recorrências</h3>
+    <p>Uma sequência pode ser dada listando os termos, por uma fórmula para o $n$-ésimo termo, ou por uma <strong>recorrência</strong>: uma regra que calcula um termo a partir dos anteriores.</p>
+    <p>Os dois exemplos mais simples você já conhece:</p>
+    <div class="math-wrap">$$\text{PA: } T_{n+1} = T_n + r \qquad\qquad \text{PG: } T_{n+1} = T_n\, q$$</div>
+    <div class="box">A regra sozinha não basta: é preciso dar um termo (por exemplo $T_1$). Com $T_1 = 4$, a PA fica $4,\ 4+r,\ 4+2r,\dots$</div>
+  </div>
+
+  <div class="sub-view card" id="s-t2">
+    <div class="vid-num">Encontro 1</div>
+    <h3 style="margin-top:2px">1ª ordem, coeficientes constantes</h3>
+    <div class="math-wrap">$$T_{n+1} = aT_n + b,\qquad n\geqslant 1.$$</div>
+    <table>
+      <tr><th>Caso</th><th>Solução</th></tr>
+      <tr><td>$a = 1$ (PA)</td><td>$T_n = T_1 + b(n-1)$</td></tr>
+      <tr><td>$b = 0$ (PG)</td><td>$T_n = T_1\,a^{n-1}$</td></tr>
+      <tr><td>$a \neq 1$, $b\neq 0$</td><td>$T_n = T_1\,a^{n-1} + \dfrac{b\,(a^{n-1}-1)}{a-1}$</td></tr>
+    </table>
+    <h3>De onde vem a fórmula</h3>
+    <p>Abra a recorrência algumas vezes: $T_3 = a^2T_1 + ab + b$, $T_4 = a^3T_1 + a^2b + ab + b$. O que sobra é uma PG $b + ab + \dots + a^{n-2}b$.</p>
+    <h3>Exemplo</h3>
+    <p>$T_{n+1} = 3T_n + 2$, $T_1 = 1$: $T_n = 3^{n-1} + \dfrac{2(3^{n-1}-1)}{2} = 2\cdot 3^{n-1} - 1$. Conferindo: $T_2 = 5$. ✓</p>
+    <div class="box ok"><strong>Atalho do ponto fixo.</strong> Ache $c$ com $c = ac + b$ (aqui $c=-1$). Então $T_{n+1} - c = a(T_n - c)$ é uma PG. No exemplo: $T_n + 1 = 2\cdot 3^{n-1}$.</div>
+  </div>
+
+  <div class="sub-view card" id="s-t7">
+    <div class="vid-num">Encontro 1 · ferramenta</div>
+    <h3 style="margin-top:2px">Soma e produto telescópicos</h3>
+    <p>O nome vem da luneta de abrir e fechar: os termos do meio se cancelam e a expressão inteira "fecha" em dois pedaços.</p>
+    <h3>Soma telescópica</h3>
+    <div class="math-wrap">$$\sum_{k=1}^{n}\,(a_{k+1} - a_k) = a_{n+1} - a_1.$$</div>
+    <p>Escreva por extenso para ver: $(a_2 - a_1) + (a_3 - a_2) + \dots + (a_{n+1} - a_n)$. Cada termo aparece uma vez com $+$ e uma vez com $-$, menos o primeiro e o último.</p>
+    <div class="box"><strong>O trabalho de verdade</strong> é descobrir como escrever cada parcela como uma diferença $a_{k+1} - a_k$. Três truques comuns: frações parciais, fatoriais e racionalização.</div>
+    <p><strong>Frações parciais.</strong> Como $\dfrac{1}{k(k+1)} = \dfrac1k - \dfrac{1}{k+1}$:</p>
+    <div class="math-wrap">$$\frac{1}{1\cdot2} + \frac{1}{2\cdot3} + \dots + \frac{1}{n(n+1)} = 1 - \frac{1}{n+1}.$$</div>
+    <p><strong>Fatoriais.</strong> Como $k\cdot k! = (k+1)! - k!$:</p>
+    <div class="math-wrap">$$1\cdot1! + 2\cdot2! + \dots + n\cdot n! = (n+1)! - 1.$$</div>
+    <p><strong>Racionalização.</strong> Como $\dfrac{1}{\sqrt{k}+\sqrt{k+1}} = \sqrt{k+1}-\sqrt{k}$, a soma de $k=1$ até $n$ vale $\sqrt{n+1} - 1$.</p>
+    <h3>Produto telescópico</h3>
+    <p>A mesma ideia com divisão:</p>
+    <div class="math-wrap">$$\prod_{k=1}^{n}\frac{a_{k+1}}{a_k} = \frac{a_2}{a_1}\cdot\frac{a_3}{a_2}\cdots\frac{a_{n+1}}{a_n} = \frac{a_{n+1}}{a_1}.$$</div>
+    <p><strong>Exemplo.</strong> Fatore $1 - \frac{1}{k^2} = \frac{k-1}{k}\cdot\frac{k+1}{k}$ e separe os dois produtos:</p>
+    <div class="math-wrap">$$\prod_{k=2}^{n}\left(1 - \frac{1}{k^2}\right) = \underbrace{\frac12\cdot\frac23\cdots\frac{n-1}{n}}_{1/n}\cdot\underbrace{\frac32\cdot\frac43\cdots\frac{n+1}{n}}_{(n+1)/2} = \frac{n+1}{2n}.$$</div>
+    <h3>Ligação com recorrências</h3>
+    <p>Isso é exatamente o que acontece na aba 4: em $T_{n+1} = T_n + g(n)$, somar as equações é uma soma telescópica; em $T_{n+1} = f(n)T_n$, multiplicar é um produto telescópico.</p>
+    <div class="box ok">Confira sempre com $n = 2$: $\left(1-\frac14\right) = \frac34$ e $\frac{3}{4}$. ✓</div>
+  </div>
+
+  <div class="sub-view card" id="s-t3">
+    <div class="vid-num">Encontro 1</div>
+    <h3 style="margin-top:2px">1ª ordem, coeficientes não constantes</h3>
+    <div class="math-wrap">$$T_{n+1} = f(n)\,T_n + g(n).$$</div>
+    <p><strong>Se $f(n) = 1$:</strong> some as equações (soma telescópica, aba 3): $T_n = T_1 + g(1) + \dots + g(n-1)$.</p>
+    <p><strong>Se $g(n) = 0$:</strong> multiplique (produto telescópico): $T_n = T_1\, f(1)\,f(2)\cdots f(n-1)$.</p>
+    <h3>Caso geral: virar uma soma</h3>
+    <p>A ideia é dividir pelo "fator acumulado" para cair no caso $f = 1$. Defina</p>
+    <div class="math-wrap">$$S_1 = 1,\quad S_n = f(1)f(2)\cdots f(n-1),\qquad R_n = \frac{T_n}{S_n}.$$</div>
+    <p>Dividindo a recorrência por $S_{n+1} = f(n)S_n$:</p>
+    <div class="math-wrap">$$R_{n+1} = R_n + \frac{g(n)}{S_{n+1}}.$$</div>
+    <p>Resolva essa soma e volte com $T_n = R_n S_n$.</p>
+    <h3>Exemplo</h3>
+    <p>$T_{n+1} = \dfrac{n}{n+1}\,T_n + 1$, $T_1 = 1$. O produto telescopa: $S_n = \frac12\cdot\frac23\cdots\frac{n-1}{n} = \frac1n$, então $R_n = nT_n$ e</p>
+    <div class="math-wrap">$$R_{n+1} = R_n + (n+1),\quad R_1 = 1 \;\Rightarrow\; R_n = \frac{n(n+1)}{2},\quad T_n = \frac{n+1}{2}.$$</div>
+    <div class="box ok">Confira: $T_2 = \frac12 + 1 = \frac32$. ✓</div>
+  </div>
+
+  <div class="sub-view card" id="s-t4">
+    <div class="vid-num">Encontro 2</div>
+    <h3 style="margin-top:2px">2ª ordem homogênea</h3>
+    <div class="math-wrap">$$T_{n+2} = aT_{n+1} + bT_n,\qquad n\geqslant 0.$$</div>
+    <p>Precisa de dois termos iniciais. Teste $T_n = r^n$ e divida por $r^n$: aparece a <strong>equação característica</strong></p>
+    <div class="math-wrap">$$x^2 = ax + b.$$</div>
+    <p>Aqui consideramos só raízes reais ($\Delta = a^2 + 4b \geqslant 0$).</p>
+    <table>
+      <tr><th>Raízes</th><th>Solução geral</th></tr>
+      <tr><td>$r_1 \neq r_2$</td><td>$T_n = C_1 r_1^n + C_2 r_2^n$</td></tr>
+      <tr><td>$r_1 = r_2 = r$</td><td>$T_n = C_1 r^n + C_2\, n\, r^n$</td></tr>
+    </table>
+    <p style="margin-top:10px">As constantes $C_1, C_2$ saem de um sistema com $T_0$ e $T_1$.</p>
+    <div class="box"><strong>Por que pode somar?</strong> Se duas sequências satisfazem a recorrência, qualquer combinação $C_1x_n + C_2y_n$ também satisfaz. Como dois termos iniciais definem tudo, duas soluções "independentes" bastam.</div>
+    <h3>Raízes distintas</h3>
+    <p>$T_{n+2} = 5T_{n+1} - 6T_n$, $T_0 = 1$, $T_1 = 4$. Raízes $2$ e $3$; de $C_1 + C_2 = 1$ e $2C_1 + 3C_2 = 4$: $T_n = 2\cdot 3^n - 2^n$.</p>
+    <h3>Raiz dupla</h3>
+    <p>$T_{n+2} = 4T_{n+1} - 4T_n$, $T_0 = 1$, $T_1 = 4$. Raiz dupla $2$: $T_n = (C_1 + C_2 n)2^n$, com $C_1 = 1$ e $C_2 = 1$: $T_n = (n+1)2^n$.</p>
+  </div>
+
+  <div class="sub-view card" id="s-t5">
+    <div class="vid-num">Encontro 2</div>
+    <h3 style="margin-top:2px">2ª ordem não homogênea</h3>
+    <div class="math-wrap">$$T_{n+2} = aT_{n+1} + bT_n + c,\qquad c\neq 0.$$</div>
+    <p>O $c$ atrapalha. Escreva a mesma recorrência um passo antes e subtraia: o $c$ some. Com</p>
+    <div class="math-wrap">$$R_n = T_n - T_{n-1}\quad\Rightarrow\quad R_{n+2} = aR_{n+1} + bR_n,$$</div>
+    <p>que é homogênea. Resolva para $R_n$ e some:</p>
+    <div class="math-wrap">$$T_n = T_0 + R_1 + R_2 + \dots + R_n.$$</div>
+    <h3>Exemplo</h3>
+    <p>$T_{n+2} = 5T_{n+1} - 6T_n + 2$, $T_0 = 0$, $T_1 = 1$. Então $T_2 = 7$, $R_1 = 1$, $R_2 = 6$, e $R_n = C_12^n + C_23^n$ dá $R_n = 4\cdot3^{n-1} - 3\cdot 2^{n-1}$. Somando as duas PGs:</p>
+    <div class="math-wrap">$$T_n = 2\cdot 3^n - 3\cdot 2^n + 1.$$</div>
+    <div class="box ok">Confira: $T_3 = 5\cdot 7 - 6 + 2 = 31$ e $54 - 24 + 1 = 31$. ✓</div>
+  </div>
+
+  <div class="sub-view card" id="s-t6">
+    <h3 style="margin-top:0">Modelando problemas</h3>
+    <p>Em olimpíada, quase nunca a recorrência vem pronta. O trabalho é achá-la.</p>
+    <ol style="padding-left:20px">
+      <li><strong>Calcule casos pequenos</strong> à mão ($n=1,2,3,4$).</li>
+      <li><strong>Olhe a última (ou a primeira) peça</strong>: de quantos jeitos o objeto pode terminar? Cada jeito reduz o problema a um tamanho menor.</li>
+      <li><strong>Escreva a recorrência</strong> e confira com os casos pequenos.</li>
+      <li><strong>Resolva</strong> com as ferramentas das abas anteriores. Às vezes nem precisa: a recorrência já responde o problema.</li>
+    </ol>
+    <div class="box ok">Exemplo: sequências binárias de tamanho $n$ sem dois 1 seguidos. Ou termina em 0 (antes vem qualquer sequência válida de tamanho $n-1$) ou termina em 01 (antes vem uma de tamanho $n-2$). Dá Fibonacci.</div>
+  </div>
+
+  <div class="nextrow">
+    <button class="btn ghost" id="prevS">← Anterior</button>
+    <button class="btn" id="nextS">Próximo →</button>
+  </div>
+</section>
+
+<!-- STEINER -->
+<section class="view" id="v-steiner">
+  <h2>Quem foi Steiner</h2>
+  <div class="card">
+    <div class="vid-num">Jakob Steiner · 1796–1863 · Suíça</div>
+    <h3 style="margin-top:2px">Aprendeu a escrever aos 14</h3>
+    <p>Filho de agricultores de uma vila suíça, Steiner trabalhava na fazenda da família e só aprendeu a escrever por volta dos 14 anos. Aos 18 saiu de casa, contra a vontade dos pais, para estudar na escola do educador Pestalozzi, que ensinava a pensar em vez de decorar.</p>
+    <p>Depois estudou em Heidelberg e em Berlim, onde se sustentava dando aulas particulares. Em 1834 a Universidade de Berlim criou uma cadeira de geometria para ele. Virou um dos maiores geômetras do século XIX.</p>
+    <div class="box">Steiner preferia resolver problemas com figuras e raciocínio puro, sem encher de contas. Muitos dos seus resultados vieram de olhar para um caso, depois para o próximo, e perceber o padrão. É exatamente o espírito de uma recorrência.</div>
+  </div>
+
+  <div class="card">
+    <h3 style="margin-top:0">O problema da pizza (1826)</h3>
+    <p>Num dos seus primeiros artigos, Steiner perguntou: em quantas regiões, no máximo, $n$ retas dividem o plano? Ou seja: quantos pedaços dá uma pizza com $n$ cortes retos?</p>
+    <p>Teste à mão: 0 cortes, 1 pedaço. 1 corte, 2. 2 cortes, 4. 3 cortes, 7 (e não 8!).</p>
+    <div class="box">Esse é o <strong>Exercício 7 do Encontro 1</strong>. A solução fica para a aula. Pergunta-chave: quando você faz um corte novo, quantas regiões novas ele cria?</div>
+    <details><summary>Desafio extra: e se for um bolo?</summary>
+      <p>Em quantas regiões, no máximo, $n$ planos dividem o espaço? Dica: o plano novo é cortado pelos anteriores em retas, e o número de regiões que ele cria é a resposta da pizza.</p>
+      <p><strong>Resposta:</strong> $1, 2, 4, 8, 15, \dots$ e, em geral, $S_n = \dfrac{n^3+5n+6}{6}$.</p>
+    </details>
+  </div>
+
+  <div class="card">
+    <h3 style="margin-top:0">Onde mais o nome aparece</h3>
+    <p><strong>Física:</strong> o teorema dos eixos paralelos, também chamado de teorema de Steiner, dá o momento de inércia em torno de qualquer eixo a partir do eixo pelo centro de massa: $I = I_{cm} + Md^2$.</p>
+    <p><strong>Combinatória:</strong> um sistema de Steiner de triplas é uma coleção de trios em que cada par de elementos aparece em exatamente um trio. O menor exemplo interessante tem 7 pontos e 7 trios (o plano de Fano).</p>
+    <p><strong>Otimização:</strong> a árvore de Steiner liga um conjunto de cidades com o menor comprimento total de estrada, podendo criar entroncamentos novos no meio. Nesses entroncamentos as estradas sempre se encontram a 120°.</p>
+    <p><strong>Geometria:</strong> o teorema de Steiner–Lehmus diz que um triângulo com duas bissetrizes internas iguais é isósceles. Parece fácil e é famoso por ser difícil de provar.</p>
+  </div>
+
+  <div class="box"><strong>Não confunda:</strong> Rudolf Steiner (1861–1925) foi um filósofo austríaco, criador da Pedagogia Waldorf. Ele estudou ciências em Viena, mas nenhum desses resultados é dele. É só o mesmo sobrenome.</div>
+</section>
+</main>
+
+<script>
+(function(){
+  const views=['inicio','roteiro','videos','teoria'];
+  const subs=['t1','t2','t7','t3','t4','t5','t6'];
+  function show(v){
+    document.querySelectorAll('.tab').forEach(t=>t.setAttribute('aria-selected',t.dataset.v===v));
+    document.querySelectorAll('section.view').forEach(s=>s.classList.toggle('on',s.id==='v-'+v));
+    window.scrollTo({top:0});
+  }
+  function showSub(s){
+    document.querySelectorAll('.chip').forEach(c=>{
+      const on=c.dataset.s===s; c.setAttribute('aria-selected',on);
+      if(on) c.scrollIntoView({inline:'center',block:'nearest'});
+    });
+    document.querySelectorAll('.sub-view').forEach(d=>d.classList.toggle('on',d.id==='s-'+s));
+    const i=subs.indexOf(s);
+    document.getElementById('prevS').style.visibility=i>0?'visible':'hidden';
+    document.getElementById('nextS').style.visibility=i<subs.length-1?'visible':'hidden';
+    cur=s;
+  }
+  let cur='t1';
+  document.querySelectorAll('.tab').forEach(t=>t.onclick=()=>show(t.dataset.v));
+  document.querySelectorAll('.chip').forEach(c=>c.onclick=()=>showSub(c.dataset.s));
+  document.querySelectorAll('[data-go]').forEach(a=>a.addEventListener('click',e=>{
+    e.preventDefault(); show(a.dataset.go); if(a.dataset.sub) showSub(a.dataset.sub);
+  }));
+  document.getElementById('prevS').onclick=()=>{const i=subs.indexOf(cur); if(i>0){showSub(subs[i-1]);window.scrollTo({top:0});}};
+  document.getElementById('nextS').onclick=()=>{const i=subs.indexOf(cur); if(i<subs.length-1){showSub(subs[i+1]);window.scrollTo({top:0});}};
+  showSub('t1');
+  // progresso do roteiro (só neste navegador)
+  let saved={}; try{saved=JSON.parse(localStorage.getItem('rec-prog')||'{}')}catch(e){}
+  document.querySelectorAll('input[data-k]').forEach(cb=>{
+    cb.checked=!!saved[cb.dataset.k];
+    cb.onchange=()=>{saved[cb.dataset.k]=cb.checked; try{localStorage.setItem('rec-prog',JSON.stringify(saved))}catch(e){}};
+  });
+})();
+</script>
+<script>(function(){var r=document.documentElement,b=document.getElementById("mode");if(!b)return;
+var sun='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg>';
+var moon='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg>';
+function p(){var d=r.getAttribute("data-mode")==="dark";b.innerHTML=d?sun:moon;b.setAttribute("aria-label",d?"Mudar para o tema claro (Musageta)":"Mudar para o tema escuro (Bronze)");}
+p();b.addEventListener("click",function(){var n=r.getAttribute("data-mode")==="dark"?"light":"dark";r.setAttribute("data-mode",n);try{localStorage.setItem("kth-mode",n)}catch(e){}p();if(window.onKthMode)window.onKthMode(n);});})();</script></body>
+</html>
