@@ -469,17 +469,18 @@ details[open]{padding-bottom:10px}
 }
 
 /* ---------- 12. Musas na coluna do cabeçalho ----------
-   Relevos do Sarcófago das Musas (Louvre) e o mosaico de Mnemósine; créditos em
-   assets/img/musas/CREDITOS.md. Abaixo de 1024px a imagem vira um retrato
-   pequeno à direita do título (terceira coluna do .sechead), para não empurrar o
-   conteúdo para baixo; no desktop ocupa a coluna sticky do cabeçalho. */
+   Arte própria (assets/img/musas/musas.svg): um <symbol> por musa, 240x420 (4:7),
+   usado com <svg><use href>. O traço é currentColor e o fundo e o nome usam
+   var(--card) e var(--goldtext), que o <use> herda da página; por isso a mesma
+   arte serve aos temas claro e escuro sem duas versões. Abaixo de 1024px a musa
+   vira um retrato pequeno à direita do título (terceira coluna do .sechead);
+   no desktop ocupa a coluna sticky do cabeçalho. */
 .sechead:has(> .muse-img){grid-template-columns:auto 1fr auto}
-.sechead .muse-img{display:block;width:clamp(68px,18vw,104px);height:auto;aspect-ratio:480 / 840;object-fit:cover;
-  margin:4px 6px 0 4px;border-radius:2px;outline:1px solid var(--gold);outline-offset:4px;filter:sepia(.12) saturate(.95)}
-html[data-mode="dark"] .sechead .muse-img{filter:sepia(.3) brightness(.82) contrast(1.05)}
+.sechead .muse-img{display:block;width:clamp(68px,18vw,104px);height:auto;aspect-ratio:240 / 420;
+  margin:4px 6px 0 4px;color:var(--gold);overflow:hidden}
 @media (min-width:1024px){
   .sechead:has(> .muse-img){grid-template-columns:auto 1fr}
-  .sechead .muse-img{grid-column:1 / -1;justify-self:start;margin:22px 0 0 2px;outline-offset:5px;
+  .sechead .muse-img{grid-column:1 / -1;justify-self:start;margin:22px 0 0 2px;
     height:clamp(220px,calc(100vh - var(--bar) - 380px),360px);width:auto}
 }
 
@@ -560,8 +561,6 @@ html:not([data-mode="dark"]) .zona-tech main > .sec .tag::before{color:var(--gol
 .duo figure{margin:0;display:grid;gap:8px}
 .duo img{display:block;width:100%;height:auto;aspect-ratio:4 / 5;object-fit:cover;object-position:50% 25%;border-radius:2px;outline:1px solid var(--gold);outline-offset:4px}
 .duo figcaption{font:700 11px/1.3 var(--display);letter-spacing:.18em;text-transform:uppercase;color:var(--goldtext);margin-top:4px}
-.kfoot .credit{margin:18px auto 0;max-width:62ch;font:400 12px/1.6 var(--body);color:var(--ondeep-muted)}
-.kfoot .credit a{color:var(--gold2)}
 
 /* /pablo/: topo com foto. Celular: foto de ponta a ponta que se dissolve no
    fundo, com o nome subindo sobre ela. Desktop: texto | retrato emoldurado. */
